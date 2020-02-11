@@ -1,0 +1,91 @@
+@import "base";
+
+*{
+  background-color: $bgcolor;
+  margin: 0;
+  padding: 0;
+}
+
+.kanban{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+
+  *{
+    background-color: $card_color;
+    border: 3px solid $card_color;
+    border-radius: 3px;
+  }
+
+  .col-3{
+    height: auto;
+    width: 100%;
+    max-height: 97vh;
+    margin: 0.5%;
+    overflow: auto;
+
+    .title{
+      text-align: center;
+      position: sticky;
+      top: 0;      
+    }
+
+    .footer{
+        position: sticky;
+        bottom: 0;      
+        font-size: 11pt;
+        color: darkolivegreen;
+    }
+
+    .footer:hover{
+      cursor: pointer;
+    }
+
+
+    .title , .footer{
+      padding-left: 1%;
+      font-weight: bold;
+    }
+  }
+}
+
+.card{
+  *{
+    background-color: white;
+    border-radius: 10px;
+    padding: 1%;
+    height: 15vh;
+    cursor: pointer;
+
+    /* No copy text */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+  }
+}
+
+
+
+/* Scroll Style */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
