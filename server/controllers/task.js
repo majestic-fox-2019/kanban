@@ -1,14 +1,30 @@
 const {Task} = require('../models')
-const {Category} = require('../models')
 
 class TaskController {
+
+  static list(req, res, next){
+
+    let taskProject = {
+      where: {
+        ProjectId: req.params.projectId
+      },
+      order: [['id', 'ASC']]
+    }
+    Task.findAll(taskProject)
+    .then(task => {
+      res.status(200).json(task)
+    })
+    .catch(error => {
+      next(error)
+    })
+  }
   
   static add(req, res, next){
     let addTask = {
       title: req.body.title,
       description: req.body.description,
-      CategoryId: req.params.categoryId,
-      UserId: req.user.id
+      category: req.body.category,
+      ProjectId: req.params.projectId,
     }
 
     Task.create(addTask)

@@ -67,8 +67,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     sequelize});
   User.associate = function(models) {
-    User.hasMany(models.Category)
-    User.hasMany(models.Task)
+    User.hasMany(models.Project)
   };
   return User;
 };

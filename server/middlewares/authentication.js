@@ -11,8 +11,6 @@ module.exports = (req, res, next) => {
     req.user = user
     next()
   } catch (error) {
-    // res.send(error) 
-    // console.log(error)
     next(error)
   }
 }

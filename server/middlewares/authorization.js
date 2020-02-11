@@ -1,9 +1,9 @@
 const {Task} = require('../models')
-const {Category} = require('../models')
+const {Project} = require('../models')
 const createError = require('http-errors')
 
-function CategoryAuthorize(req, res, next){
-  Category.findByPk(req.params.id)
+function ProjectAuthorize(req, res, next) {
+  Project.findByPk(req.params.id)
   .then(result => {
     if (!result) {
       throw createError(404, { message: 'Not Found' })
@@ -23,7 +23,7 @@ function TaskAuthorize(req, res, next){
   .then(result => {
     if (!result) {
       throw createError(404, { message: 'Not Found' })
-    } else if (result.UserId !== req.user.id || !req.user) {
+    } else if (result.ProjectId !== Number(req.params.projectId)) {
       throw createError(401, { message: 'Not Authorized' })
     } else {
       next()
@@ -35,6 +35,6 @@ function TaskAuthorize(req, res, next){
 }
 
 module.exports = {
-  CategoryAuthorize,
+  ProjectAuthorize,
   TaskAuthorize
 }

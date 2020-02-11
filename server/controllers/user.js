@@ -49,6 +49,47 @@ class UserController {
     })
   }
 
+  static onSignIn(req, res, next){
+    const client = new OAuth2Client(process.env.CLIENT_ID);
+    let payload = null
+
+    client.verifyIdToken({
+      idToken: req.body.googleToken,
+      audience: process.env.CLIENT_ID
+    })
+    .then(result => {
+      payload = result.getPayload()
+      return User.findOne({where: {email: payload.email}})
+    })
+    .then(user => {
+      if (user){
+        let data = {
+          id: user.id,
+          email: user.email
+        }
+        res.status(200).json({token: createToken(data)})
+      } else {
+        let data = {
+          email: payload.email
+        }
+        return User.create(data)
+      }
+    })
+    .then(result => {
+      return User.findOne({where: {email: result.email}})
+    })
+    .then(result => {
+      let obj = {
+        id: result.id,
+        email: result.email
+      }
+      res.status(200).json({token: createToken(obj)})
+    })
+    .catch(error => {
+      next(error)
+    })
+  }
+
   static update(req, res, next){
     let userId = {
       where: {

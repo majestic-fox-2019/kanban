@@ -34,13 +34,24 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    CategoryId: DataTypes.INTEGER,
-    UserId:DataTypes.INTEGER
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Category is empty"
+        },
+        notNull: {
+          msg: "Category is empty"
+        }
+      }
+    },
+    ProjectId: DataTypes.INTEGER,
   }, {sequelize});
 
   Task.associate = function(models) {
-    Task.belongsTo(models.Category)
-    Task.belongsTo(models.User)
+    Task.belongsTo(models.Project)
   };
   return Task;
 };

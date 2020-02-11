@@ -14,10 +14,10 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      CategoryId: {
-        type: Sequelize.INTEGER
+      category: {
+        type: Sequelize.STRING
       },
-      UserId: {
+      ProjectId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

@@ -9,7 +9,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
-app.use('/', IndexRouter)
+app.use('/api', IndexRouter)
 app.use(errorHandler)
 
 app.listen(PORT, () => {

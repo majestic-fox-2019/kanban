@@ -3,28 +3,28 @@ module.exports = (sequelize, DataTypes) => {
 
   const {Model} = sequelize.Sequelize
 
-  class Category extends Model {}
+  class Project extends Model {}
 
-  Category.init({
+  Project.init({
     title: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: {
           args: true,
-          msg: "Title is empty"
+          msg: "Title Project is empty"
         },
         notNull: {
-          msg: "Title is empty"
+          msg: "Title Project is empty"
         }
       }
     },
     UserId: DataTypes.INTEGER
   }, {sequelize});
-  Category.associate = function(models) {
-    // associations can be defined here
-    Category.hasMany(models.Task)
-    Category.belongsTo(models.User)
+
+  Project.associate = function(models) {
+    Project.belongsTo(models.User)
+    Project.hasMany(models.Task)
   };
-  return Category;
+  return Project;
 };

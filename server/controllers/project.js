@@ -1,12 +1,12 @@
-const {Category} = require('../models')
+const {Project} = require('../models')
 const {Task} = require('../models')
 
-class CategoryController {
+class ProjectController {
   
   static list(req, res, next){
-    Category.findAll({where: { UserId: req.user.id }, order: [['id', 'ASC']], include: Task})
-    .then(category => {
-      res.status(200).json(category)
+    Project.findAll({where: { UserId: req.user.id }, order: [['id', 'ASC']], include: Task})
+    .then(project => {
+      res.status(200).json(project)
     })
     .catch(error => {
       next(error)
@@ -14,12 +14,12 @@ class CategoryController {
   }
 
   static add(req, res, next){
-    let addCategory = {
+    let addProject = {
       title: req.body.title,
       UserId: req.user.id
     }
 
-    Category.create(addCategory)
+    Project.create(addProject)
     .then(result => {
       res.status(201).json(result)
     })
@@ -30,28 +30,28 @@ class CategoryController {
   }
 
   static update(req, res, next){
-    let CategoryId = {
+    let projectId = {
       where: {
         id: req.params.id
       }
     }
 
-    let updateCategory = {
+    let updateProject = {
       title: req.body.title
     }
 
-    Category.update(updateCategory, CategoryId)
+    Project.update(updateProject, projectId)
     .then(result => {
-      res.status(200).json(updateCategory)
+      res.status(200).json(updateProject)
     })
     .catch(error => {
       next(error)
     })
   }
 
-  static delete(req, res,next){
-    let taskLength = 0
-    let categoryId = {
+  static delete(req, res, next){
+    
+    let projectId = {
       where: {
         id: req.params.id
       }
@@ -59,14 +59,14 @@ class CategoryController {
 
     let taskId = {
       where: {
-        CategoryId: req.params.id
+        ProjectId: req.params.id
       }
     }
 
-    let categoryData = Category.findByPk(req.params.id)
-    let destroyCategory = Category.destroy(categoryId)
+    let projectData = Project.findByPk(req.params.id)
+    let destroyProject = Project.destroy(projectId)
     let destroyTask = Task.destroy(taskId)
-    Promise.all([categoryData, destroyCategory, destroyTask])
+    Promise.all([projectData, destroyProject, destroyTask])
     .then(result => {
       res.status(200).json(result[0])
     })
@@ -76,4 +76,4 @@ class CategoryController {
   }
 }
 
-module.exports = CategoryController
+module.exports = ProjectController
