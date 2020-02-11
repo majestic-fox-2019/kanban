@@ -1,196 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kanban Project</title>
-    <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
-    <div class="kanban">
-        <div class="col-3">
-            <div class="title">
-                Backlog
-            </div>
-            <div class="cards">
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        Lorem Ipsum
-                    </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Kanban Project</title>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <div class="kanban">
+            <div id="backlog" class="col-3">
+                <div class="title">
+                    Backlog
                 </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        Lorem Ipsum
-                    </div>
+                <div class="cards">
+                    <div class="card" v-for="task in tasks">
+                        <div class="card-title">{{ task.title }}</div>
+                        <div class="card-content" v-html="task.description">
+                            {{ task.description }}
+                        </div>
+                    </div>            
                 </div>
- 
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        askdjsakjdsak
-                    </div>
+                <div class="footer">
+                    <button v-on:click="addCard">Add a card...</button> 
                 </div>
+            </div>        
 
-        
-            </div>
-            <div class="footer">
-                <button>Add a card...</button> 
-            </div>
-        </div>        
+            <div id="product" class="col-3">
+                <div class="title">
+                    Product
+                </div>
+                <div class="cards">
+                    <div class="card" v-for="task in tasks">
+                        <div class="card-title">{{task.title}}</div>
+                        <div class="card-content" v-html="task.description">
+                            {{task.description}}
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <button v-on:click="addCard">Add a card...</button> 
+                </div>
+            </div>        
+            <div id="development" class="col-3">
+                <div class="title">
+                    Development
+                </div>
+                <div class="cards">
+                    <div class="card" v-for="task in tasks">
+                        <div class="card-title">{{ task.title }}</div>
+                        <div class="card-content" v-html="task.description">
+                            {{ task.description }}
+                        </div>
+                    </div>            
+                </div>
+                <div class="footer">
+                    <button v-on:click="addCard">Add a card...</button> 
+                </div>
+            </div>        
+            <div id="done" class="col-3">
+                <div class="title">
+                    Done
+                </div>
+                <div class="cards">
+                    <div class="card" v-for="task in tasks">
+                        <div class="card-title">{{ task.title }}</div>
+                        <div class="card-content" v-html="task.description">
+                            {{ task.description }}
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <button v-on:click="addCard">Add a card...</button> 
+                </div>
+            </div>        
 
-        <div class="col-3">
-            <div class="title">
-                Product
-            </div>
-            <div class="cards">
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        Lorem Ipsum
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        Lorem Ipsum
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        Lorem Ipsum
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        Lorem Ipsum
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Error molestiae odit illo doloribus similique esse inventore corrupti aliquid quisquam? Et labore aspernatur, modi esse sequi temporibus dolorum dolores commodi corporis.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam vel soluta nihil tempora quo praesentium nobis voluptates velit, ipsam repellat officia eos. Quo cum consequatur labore corrupti laboriosam quidem veritatis?
-                    </div>
-                </div>
- 
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        askdjsakjdsak
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        askdjsakjdsak
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        askdjsakjdsak
-                    </div>
-                </div>
-
-        
-            </div>
-            <div class="footer">
-                <button>Add a card...</button> 
-            </div>
-        </div>        
-        <div class="col-3">
-            <div class="title">
-                Development
-            </div>
-            <div class="cards">
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        Lorem Ipsum
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        Lorem Ipsum
-                    </div>
-                </div>
- 
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        askdjsakjdsak
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        askdjsakjdsak
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        askdjsakjdsak
-                    </div>
-                </div>
-
-        
-            </div>
-            <div class="footer">
-                <button>Add a card...</button> 
-            </div>
-        </div>        
-        <div class="col-3">
-            <div class="title">
-                Done
-            </div>
-            <div class="cards">
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        Lorem Ipsum
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        Lorem Ipsum
-                    </div>
-                </div>
- 
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        askdjsakjdsak
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        askdjsakjdsak
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Re-UI Suggested Members</div>
-                    <div class="card-content">
-                        askdjsakjdsak
-                    </div>
-                </div>
-
-        
-            </div>
-            <div class="footer">
-                <button>Add a card...</button> 
-            </div>
-        </div>        
-
-    </div>
-</body>
+        </div>
+    </body>
+    <script src="js/vue.js"></script>
+    <script src="js/main.js"></script>
 </html>
