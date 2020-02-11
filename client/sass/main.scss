@@ -1,9 +1,10 @@
 @import "base";
 
-*{
+body{
   background-color: $bgcolor;
   margin: 0;
   padding: 0;
+  // overflow: hidden;
 }
 
 .kanban{
@@ -11,30 +12,47 @@
   justify-content: space-evenly;
   align-items: flex-start;
 
-  *{
-    background-color: $card_color;
-    border: 3px solid $card_color;
-    border-radius: 3px;
-  }
-
   .col-3{
     height: auto;
     width: 100%;
-    max-height: 97vh;
+    // max-height: 80vh;
     margin: 0.5%;
-    overflow: auto;
+    // overflow: auto;
+    // background-color: $card_color;
+    // border: 3px solid $card_color;
+    // border-radius: 3px;
 
     .title{
       text-align: center;
-      position: sticky;
-      top: 0;      
+      font-size: 14pt;
+      color: lightslategray;
+      background-color: lightgray;
+      border-radius: 10px 10px 0 0;
+      border-bottom: 1px solid gray;
+      padding: 1%;
     }
 
     .footer{
-        position: sticky;
-        bottom: 0;      
-        font-size: 11pt;
-        color: darkolivegreen;
+      background-color: lightgray;
+      text-align: center;
+      font-size: 12pt;
+      border-radius: 0 0 10px 10px;
+      padding: 1%;
+      border-top: 1px solid gray;
+
+      button {
+        font-weight: bold;
+        color: lightslategray;
+        border: 1px solid grey;
+        border-radius: 5px;
+        padding: 3%;
+        min-width: 50%;
+        cursor: pointer;
+
+      }
+      button:hover{
+        background-color: lightgray
+      }
     }
 
     .footer:hover{
@@ -49,13 +67,33 @@
   }
 }
 
+.cards {
+  // border-radius: 10px 10px 0 0;
+  background-color: lightblue;
+  overflow: auto;
+  max-height: 86vh;
+  padding-bottom: 1%;
+}
+
 .card{
-  *{
-    background-color: white;
+    background-color: whitesmoke;
     border-radius: 10px;
     padding: 1%;
-    height: 15vh;
+    min-height: 15vh;
+    margin: 3%;
+    
     cursor: pointer;
+
+    .card-title{
+      text-align: center;
+      font-size: 14pt;
+      // margin-bottom: 5%; 
+    }
+
+    .card-content{
+      padding: 5%;
+      text-align: center;
+    }
 
     /* No copy text */
     -webkit-touch-callout: none; /* iOS Safari */
@@ -65,7 +103,6 @@
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
-  }
 }
 
 

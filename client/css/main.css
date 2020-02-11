@@ -1,4 +1,4 @@
-* {
+body {
   background-color: #2c3e50;
   margin: 0;
   padding: 0;
@@ -9,28 +9,39 @@
   justify-content: space-evenly;
   align-items: flex-start;
 }
-.kanban * {
-  background-color: #95a5a6;
-  border: 3px solid #95a5a6;
-  border-radius: 3px;
-}
 .kanban .col-3 {
   height: auto;
   width: 100%;
-  max-height: 97vh;
   margin: 0.5%;
-  overflow: auto;
 }
 .kanban .col-3 .title {
   text-align: center;
-  position: sticky;
-  top: 0;
+  font-size: 14pt;
+  color: lightslategray;
+  background-color: lightgray;
+  border-radius: 10px 10px 0 0;
+  border-bottom: 1px solid gray;
+  padding: 1%;
 }
 .kanban .col-3 .footer {
-  position: sticky;
-  bottom: 0;
-  font-size: 11pt;
-  color: darkolivegreen;
+  background-color: lightgray;
+  text-align: center;
+  font-size: 12pt;
+  border-radius: 0 0 10px 10px;
+  padding: 1%;
+  border-top: 1px solid gray;
+}
+.kanban .col-3 .footer button {
+  font-weight: bold;
+  color: lightslategray;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 3%;
+  min-width: 50%;
+  cursor: pointer;
+}
+.kanban .col-3 .footer button:hover {
+  background-color: lightgray;
 }
 .kanban .col-3 .footer:hover {
   cursor: pointer;
@@ -40,11 +51,19 @@
   font-weight: bold;
 }
 
-.card * {
-  background-color: white;
+.cards {
+  background-color: lightblue;
+  overflow: auto;
+  max-height: 86vh;
+  padding-bottom: 1%;
+}
+
+.card {
+  background-color: whitesmoke;
   border-radius: 10px;
   padding: 1%;
-  height: 15vh;
+  min-height: 15vh;
+  margin: 3%;
   cursor: pointer;
   /* No copy text */
   -webkit-touch-callout: none;
@@ -60,6 +79,14 @@
   user-select: none;
   /* Non-prefixed version, currently
      supported by Chrome, Opera and Firefox */
+}
+.card .card-title {
+  text-align: center;
+  font-size: 14pt;
+}
+.card .card-content {
+  padding: 5%;
+  text-align: center;
 }
 
 /* Scroll Style */
