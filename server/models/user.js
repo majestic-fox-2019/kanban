@@ -9,16 +9,59 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {}
 
   User.init({
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull : false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Name is empty"
+        },
+        notNull: {
+          msg: "Name is empty"
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Email is empty"
+        },
+        notNull: {
+          msg: "Name is empty"
+        },
+        isExist: (value => {
+          return User.count({ where: { email: value}})
+          .then(count => {
+            if (count != 0){
+              throw new Error('Email already exist.')
+            }
+          })
+        })
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Password is empty"
+        },
+        notNull: {
+          msg: "Password is empty"
+        }
+      }
+    }
   }, {
     hooks: {
       beforeCreate: (instance, options) => {
         instance.password = hashPassword(instance.password)
       },
       beforeUpdate: (instance, options) => {
-        console.log(instance)
         instance.password = hashPassword(instance.password)
       }
     },

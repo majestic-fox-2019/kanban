@@ -6,7 +6,19 @@ module.exports = (sequelize, DataTypes) => {
   class Category extends Model {}
 
   Category.init({
-    title: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Title is empty"
+        },
+        notNull: {
+          msg: "Title is empty"
+        }
+      }
+    },
     UserId: DataTypes.INTEGER
   }, {sequelize});
   Category.associate = function(models) {

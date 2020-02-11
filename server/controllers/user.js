@@ -29,7 +29,6 @@ class UserController {
       }
     })
     .catch(error => {
-      // res.status(401).json(error)
       next(error)
     })
   }
@@ -43,7 +42,7 @@ class UserController {
 
     User.create(userData)
     .then(user => {
-      res.status(200).json(user)
+      res.status(201).json(user)
     })
     .catch(error => {
       next(error)
@@ -57,10 +56,9 @@ class UserController {
       },
       individualHooks: true
     }
-    // console.log(req.user)
+    
     let userData = {
       name: req.body.name,
-      email: req.body.email,
       password: req.body.password
     }
 
@@ -69,7 +67,7 @@ class UserController {
       res.status(200).json(userData)
     })
     .catch(error => {
-
+      next(error)
     })
   }
 

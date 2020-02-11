@@ -6,8 +6,34 @@ module.exports = (sequelize, DataTypes) => {
   class Task extends Model {}
   
   Task.init({
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Title is empty"
+        },
+        notNull: {
+          args: true,
+          msg: "Title is empty"
+        }
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Description is empty"
+        },
+        notNull : {
+          args: true,
+          msg: "Description is empty"
+        }
+      }
+    },
     CategoryId: DataTypes.INTEGER,
     UserId:DataTypes.INTEGER
   }, {sequelize});

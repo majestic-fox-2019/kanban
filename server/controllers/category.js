@@ -21,9 +21,10 @@ class CategoryController {
 
     Category.create(addCategory)
     .then(result => {
-      res.status(200).json(result)
+      res.status(201).json(result)
     })
     .catch(error => {
+      console.log(error)
       next(error)
     })
   }
@@ -44,7 +45,7 @@ class CategoryController {
       res.status(200).json(updateCategory)
     })
     .catch(error => {
-      
+      next(error)
     })
   }
 
