@@ -39,19 +39,30 @@ let kanban = new Vue({
             })
             .catch(err => {
                 console.log(err);
-            })
-            
-            this.taskCategory[idxCategory-1].tasks.push({
-                title       : this.input_title,
-                description : this.input_description,
-                categoryId  : idxCategory
-            });
+            })            
         },
         updateTask: function(idxCategory) {
-            this.taskCategory[idxCategory-1].tasks[this.input_id-1] = {
-                "title"       : this.input_title,
-                "description" : this.input_description
-            }
+            let objEdit = {
+                title: this.input_title,
+                description: this.input_description,
+                UserId: 1,
+                ProjectId: idxCategory
+            };
+
+            fetch(`${this.backend_url}/tasks/${this.input_id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(objEdit)
+            })  
+            .then(res => {
+                console.log(res);
+                this.getTasks();
+            })
+            .catch(err => {
+                console.log(err);
+            })
         },
         resetModal: function() {
             this.input_category_id  = null;
