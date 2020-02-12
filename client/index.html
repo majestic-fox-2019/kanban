@@ -9,12 +9,12 @@
     </head>
     <body>
         <div class="kanban">
-            <div id="backlog" class="col-3">
+            <div :id="category.name" class="col-3" v-for="category in taskCategory">
                 <div class="title">
-                    Backlog
+                    {{category.name}}
                 </div>
                 <div class="cards">
-                    <div class="card" v-for="task in tasks">
+                    <div class="card" v-for="task in category.tasks">
                         <div class="card-title">{{ task.title }}</div>
                         <div class="card-content" v-html="task.description">
                             {{ task.description }}
@@ -22,59 +22,9 @@
                     </div>            
                 </div>
                 <div class="footer">
-                    <button v-on:click="addCard">Add a card...</button> 
+                    <button @click="addCard(category.id)">Add a card...</button> 
                 </div>
             </div>        
-
-            <div id="product" class="col-3">
-                <div class="title">
-                    Product
-                </div>
-                <div class="cards">
-                    <div class="card" v-for="task in tasks">
-                        <div class="card-title">{{task.title}}</div>
-                        <div class="card-content" v-html="task.description">
-                            {{task.description}}
-                        </div>
-                    </div>
-                </div>
-                <div class="footer">
-                    <button v-on:click="addCard">Add a card...</button> 
-                </div>
-            </div>        
-            <div id="development" class="col-3">
-                <div class="title">
-                    Development
-                </div>
-                <div class="cards">
-                    <div class="card" v-for="task in tasks">
-                        <div class="card-title">{{ task.title }}</div>
-                        <div class="card-content" v-html="task.description">
-                            {{ task.description }}
-                        </div>
-                    </div>            
-                </div>
-                <div class="footer">
-                    <button v-on:click="addCard">Add a card...</button> 
-                </div>
-            </div>        
-            <div id="done" class="col-3">
-                <div class="title">
-                    Done
-                </div>
-                <div class="cards">
-                    <div class="card" v-for="task in tasks">
-                        <div class="card-title">{{ task.title }}</div>
-                        <div class="card-content" v-html="task.description">
-                            {{ task.description }}
-                        </div>
-                    </div>
-                </div>
-                <div class="footer">
-                    <button v-on:click="addCard">Add a card...</button> 
-                </div>
-            </div>        
-
         </div>
     </body>
     <script src="js/vue.js"></script>

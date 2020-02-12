@@ -1,17 +1,11 @@
-let backlog = new Vue({
-    el: "#backlog",
+let kanban = new Vue({
+    el: ".kanban",
     data: {
-        tasks: [
-            {
-                title: "Memberi makan kucing",
-                description: "Memberi makan kucing hacktiv yang suka nyebar virus corona",
-                category: "backlog"
-            }
-        ]
+        "taskCategory": null
     },
     methods: {
-        addCard: function(event) {
-            this.tasks.push({
+        addCard: function(idxCategory) {
+            this.taskCategory[idxCategory-1].tasks.push({
                 title: 'Default Title',
                 description: `Default Description 
                 <br><br>
@@ -19,77 +13,15 @@ let backlog = new Vue({
                 category: "backlog"
             });
         }
+    },
+    beforeMount() {
+        fetch('http://localhost:3000/taskCategory')
+            .then(res => {
+                return res.json();  
+            })
+            .then(data => {
+                this.taskCategory = data
+            })
+            .catch(err => console.log(err));
     }
 });
-
-let product = new Vue({
-    el: "#product",
-    data: {
-        tasks: [
-            {
-                title: "Memberi makan buaya",
-                description: "Memberi makan pake ayam kfc",
-                category: "product"
-            }
-        ]
-    },
-    methods: {
-        addCard: function(event) {
-            this.tasks.push({
-                title: 'Default Title',
-                description: `Default Description 
-                <br><br>
-                *<small>click to update data</small>*`,
-                category: "backlog"
-            });
-        }
-    }
-})
-
-let development = new Vue({
-    el: "#development",
-    data: {
-        tasks: [
-            {
-                title: "Coding kanban dan Todo List",
-                description: "Lorem ipsum dolor sit amet jokoy donoloyo",
-                category: "development"
-            }
-        ]
-    },
-    methods: {
-        addCard: function(event) {
-            this.tasks.push({
-                title: 'Default Title',
-                description: `Default Description 
-                <br><br>
-                *<small>click to update data</small>*`,
-                category: "backlog"
-            });
-        }
-    }
-})
-
-let done = new Vue({
-    el: "#done",
-    data: {
-        tasks: [
-            {
-                title: "Coding kanban dan Todo List",
-                description: "Lorem ipsum dolor sit amet jokoy donoloyo",
-                category: "done"
-            }
-        ]
-    },
-    methods: {
-        addCard: function(event) {
-            this.tasks.push({
-                title: 'Default Title',
-                description: `Default Description 
-                <br><br>
-                *<small>click to update data</small>*`,
-                category: "backlog"
-            });
-        }
-    }    
-})
