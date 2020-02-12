@@ -51,10 +51,30 @@
               aria-describedby="emailHelp"
             />
           </div>
-          <div class="d-flex justify-content-end mt-3">
+          <div class="d-flex justify-content-end mt-2">
             <div class="btn btn-primary" v-on:click="addTaskProject(perProject.ProjectId)">Submit</div>
           </div>
+          <div class="d-flex justify-content-end mt-3">
+            <div
+              class="btn btn-danger"
+              v-b-modal="'modalDelete'+perProject.ProjectId"
+            >Delete Project</div>
+          </div>
         </div>
+      </div>
+    </b-modal>
+    <b-modal :id="'modalDelete'+perProject.ProjectId" hide-footer>
+      Please type in
+      <strong>{{perProject.Project.name}}</strong> before you proceed
+      <form>
+        <input type="text" v-model="confirmationDelete" />
+      </form>
+      <div class="d-flex">
+        <div
+          class="btn btn-danger"
+          @click="$bvModal.hide('modalDelete'+perProject.ProjectId)"
+          v-on:click="deleteThisProject"
+        >Delete</div>
       </div>
     </b-modal>
   </div>
@@ -62,6 +82,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 import {
   mdbDropdownItem,
   mdbModalHeader,
@@ -110,7 +131,8 @@ export default {
         .then(({ data }) => {
           // console.log(data, "<< ini yang baru dibuat");
           this.$emit("projectCreated");
-          this.$emit("nambahtask");
+          // this.$emit("nambahtask");
+          this.$socket.emit("tasknyaNambahya");
         })
         .catch(err => {
           console.log(err.response, "<<ini gagal buat task");
@@ -129,6 +151,7 @@ export default {
       })
         .then(({ data }) => {
           this.$emit("memberNambah");
+          this.$socket.emit("nambahMembernya");
         })
         .catch(err => {
           console.log(err.response, "ini gagal add member");
@@ -145,14 +168,37 @@ export default {
         .catch(err => {
           console.log(err.response, "<< ini err get todo project");
         });
+    },
+    deleteThisProject() {
+      // console.log(this.perProject, "<<<<");
+      if (this.perProject.Project.name == this.confirmationDelete) {
+        axios({
+          method: "delete",
+          url: `${this.baseUrl}/projects/${this.perProject.ProjectId}`,
+          headers: {
+            token: localStorage.getItem("token")
+          }
+        })
+          .then(({ data }) => {
+            this.$emit("projectDeleted");
+            this.$socket.emit("ada-project-didelete");
+          })
+          .catch(err => {
+            console.log(err.response, "<<gagal delete project");
+          });
+      } else {
+        Swal.fire("OOPS", "Data does not match", "error");
+      }
     }
   },
   data() {
     return {
-      baseUrl: "http://localhost:3000",
+      // baseUrl: "http://localhost:3000",
+      baseUrl: this.$baseUrl,
       members: null,
       task: "",
-      emailMember: ""
+      emailMember: "",
+      confirmationDelete: ""
     };
   },
   created() {

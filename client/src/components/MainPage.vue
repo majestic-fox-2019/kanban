@@ -9,16 +9,16 @@
             <mdb-dropdown-toggle slot="toggle" color="primary" class="px-3"></mdb-dropdown-toggle>
             <mdb-dropdown-menu>
               <Projects
-                @nambahtask="getAll"
                 @all-todo-project="tambahTodosOuter"
                 @memberNambah="getMyProjects"
-                @projectCreated="getMyProjects"
+                @projectCreated="getAll"
+                @projectDeleted="getAll"
                 v-for="one in projects"
                 :perProject="one"
                 :key="one.ProjectId"
               ></Projects>
               <div class="dropdown-divider"></div>
-              <mdb-dropdown-item>Separated link</mdb-dropdown-item>
+              <!-- <mdb-dropdown-item>Separated link</mdb-dropdown-item> -->
             </mdb-dropdown-menu>
           </mdb-dropdown>
         </div>
@@ -77,6 +77,7 @@ import {
   mdbInput,
   mdbModalTitle
 } from "mdbvue";
+
 import Projects from "./Projects";
 import draggable from "vuedraggable";
 import MainCard from "./MainCard";
@@ -113,8 +114,6 @@ export default {
         }
       })
         .then(({ data }) => {
-          // console.log(data, "<<<<");
-          // console.log(data, "<<<my project");
           this.projects = data;
         })
         .catch(err => {
@@ -141,6 +140,10 @@ export default {
         });
     },
     getMyTodos() {
+      this.backlog = [];
+      this.todo = [];
+      this.doing = [];
+      this.done = [];
       axios({
         url: `${this.baseUrl}/todos/all/mine`,
         headers: {
@@ -177,22 +180,52 @@ export default {
     },
     tambahTodosOuter(value) {
       // console.log(value, "<< ini di main page");
+      // console.log(value[0], "<ini valuenya");
+      // console.log(this.backlog, "<<ini yang di backlog");
       for (let j of value) {
         if (j.UserId.toString() !== localStorage.getItem("userId")) {
           if (j.status == "Backlog") {
-            this.backlog.push(j);
+            let udahAda;
+            for (let u of this.backlog) {
+              if (u.id == j.id) {
+                udahAda = true;
+              }
+            }
+            if (!udahAda) {
+              this.backlog.push(j);
+            }
           } else if (j.status == "To-do") {
-            this.todo.push(j);
+            let udahAdadiTodo;
+            for (let k of this.todo) {
+              if (k.id == j.id) {
+                udahAdadiTodo = true;
+              }
+            }
+            if (!udahAdadiTodo) {
+              this.todo.push(j);
+            }
           } else if (j.status == "Doing") {
-            this.doing.push(j);
+            let udahAdaDiDoing;
+            for (let l of this.doing) {
+              if (l.id == j.id) {
+                this.doing.push(j);
+              }
+            }
           } else if (j.status == "Done") {
-            this.done.push(j);
+            let udahAdadiDone;
+            for (let m of this.done) {
+              if (m.id == j.id) {
+                udahAdadiDone = true;
+              }
+            }
+            if (!udahAdadiDone) {
+              this.done.push(j);
+            }
           }
         }
       }
     },
     emitLogout() {
-      // console.log("ini emit logout di main page");
       this.$emit("logoutya");
     }
   },
@@ -203,7 +236,8 @@ export default {
       projects: null,
       create: false,
       projectName: "",
-      baseUrl: "http://localhost:3000",
+      // baseUrl: "http://localhost:3000",
+      baseUrl: this.$baseUrl,
       backlog: [],
       todo: [],
       doing: [],
@@ -213,6 +247,21 @@ export default {
   mounted() {
     this.getMyProjects();
     this.getMyTodos();
+    this.$socket.on("updated", () => {
+      this.getAll();
+    });
+    this.$socket.on("todoDeleted", () => {
+      this.getAll();
+    });
+    this.$socket.on("nambahlohMembernya", () => {
+      this.getAll();
+    });
+    this.$socket.on("sudahtertambahtasknya", () => {
+      this.getAll();
+    });
+    this.$socket.on("okeDeleted", () => {
+      this.getAll();
+    });
   }
 };
 </script>

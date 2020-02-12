@@ -27,6 +27,9 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(ToastPlugin)
 
+Vue.prototype.$socket = io.connect("http://localhost:3000")
+Vue.prototype.$baseUrl = "http://localhost:3000"
+
 new Vue({
     render: h => h(App)
 }).$mount('#app')

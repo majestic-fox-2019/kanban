@@ -21,7 +21,8 @@ export default {
         client_id:
           "733475019943-k1nirgu710kktvdbnd9ut50fqdj41pu5.apps.googleusercontent.com"
       },
-      baseUrl: "http://localhost:3000"
+      // baseUrl: "http://localhost:3000"
+      baseUrl: this.$baseUrl
     };
   },
   methods: {

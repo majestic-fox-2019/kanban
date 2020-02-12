@@ -20,12 +20,7 @@
                 <mdb-input label="Your password" v-model="password" icon="lock" type="password" />
               </div>
               <div class="text-center">
-                <mdb-btn
-                  class="buttonnya"
-                  type="submit"
-                  color="default"
-                  v-on:click.prevent="loginNow"
-                >Submit</mdb-btn>
+                <mdb-btn class="buttonnya" type="submit" color="default">Submit</mdb-btn>
               </div>
               <div class="d-flex mx-auto justify-content-around">
                 <gsignin @googleLogin="emitGoogleLogin"></gsignin>
@@ -51,12 +46,7 @@
                 />
               </div>
               <div class="text-center">
-                <mdb-btn
-                  class="buttonnya"
-                  type="submit"
-                  v-on:click.prevent="registerNow"
-                  color="default"
-                >Submit</mdb-btn>
+                <mdb-btn class="buttonnya" type="submit" color="default">Submit</mdb-btn>
               </div>
               <div class="d-flex mx-auto justify-content-end">
                 <h6>
@@ -98,7 +88,8 @@ export default {
       email: "",
       password: "",
       passwordConfirm: "",
-      baseURL: "http://localhost:3000",
+      // baseURL: "http://localhost:3000",
+      baseURL: this.$baseUrl,
       errorMSG: ""
     };
   },
@@ -163,19 +154,22 @@ export default {
           localStorage.setItem("token", data.token);
           localStorage.setItem("username", data.userFound.username);
           this.$emit("login");
+          // console.log(this.$socket, "ini object socketnta");
+          this.$socket.emit(
+            "logged in",
+            `${localStorage.getItem("username")} has logged in`
+          );
         })
         .catch(err => {
-          this.errorMSG = err.response.data;
+          // this.errorMSG = err.response.data;
+          console.log(err, "<<ini error di fungsi login");
         });
     },
     emitGoogleLogin() {
       this.$emit("login");
     }
   },
-  created() {
-    // this.$swal("Hellooo Vue!");
-    // Vue.swal("hellooo!");
-  }
+  created() {}
 };
 </script>
 

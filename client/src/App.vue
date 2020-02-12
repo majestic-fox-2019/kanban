@@ -34,7 +34,11 @@ export default {
   },
   created() {
     this.checkLogin();
-    // let socket = io.connect("http://localhost:3000")
+    //this.$socket = io.connect("http://localhost:3000");
+
+    this.$socket.on("login-server", function(value) {
+      // console.log(value);
+    });
   }
 };
 </script>

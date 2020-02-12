@@ -66,7 +66,8 @@ export default {
   },
   data() {
     return {
-      baseUrl: "http://localhost:3000",
+      // baseUrl: "http://localhost:3000",
+      baseUrl: this.$baseUrl,
       name: "",
       projectName: ""
     };
@@ -78,7 +79,6 @@ export default {
         method: "GET"
       })
         .then(({ data }) => {
-          //   console.log(data, "ini dari get member")
           this.name = data.username;
         })
         .catch(err => {
@@ -91,7 +91,6 @@ export default {
         method: "GET"
       })
         .then(({ data }) => {
-          //   console.log(data, "<< ini dari project id");
           this.projectName = data.name;
         })
         .catch(err => {
@@ -112,6 +111,7 @@ export default {
       })
         .then(({ data }) => {
           this.$emit("updateStatus");
+          this.$socket.emit("ada-status-update", "ada yang di update loh!");
         })
         .catch(err => {
           let errMSG = err.response.statusText;
@@ -139,6 +139,7 @@ export default {
             .then(({ data }) => {
               this.$emit("updateStatus");
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              this.$socket.emit("deleteTodo");
             })
             .catch(err => {
               // console.log(err.response, "<< ini gagal deletee");
@@ -157,7 +158,6 @@ export default {
     }
   },
   created() {
-    // console.log("ini minicard", this.task);
     this.getMemberById();
     this.getProjectById();
   }
