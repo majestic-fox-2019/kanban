@@ -20,8 +20,8 @@ class TaskController {
     const data = {
       title: req.body.title,
       description: req.body.description,
-      assigned_to: req.body.assigned_to,
-      status: req.body.status,
+      assigned_to: null,
+      status: 'backlog',
       ProjectId: req.params.projectId
     }
     Project.findOne({ where: { id: data.ProjectId } })
@@ -45,6 +45,7 @@ class TaskController {
 
   static deleteTask(req, res, next) {
     const id = req.params.id
+    console.log(id)
     Task.destroy({ where: { id: id } })
       .then(result => {
         res.status(200).json({
@@ -58,11 +59,20 @@ class TaskController {
   }
 
   static patchStatus(req, res, next) {
-    const status = {
-      status: req.body.status
-    }
     const id = req.params.id
-    Task.update(status, { where: { id: id } })
+    const update = {
+      status: req.body.status,
+      assigned_to: null
+    }
+    Task.findOne({ where: { id: id } })
+      .then(data => {
+        if (data.assigned_to == null) {
+          update.assigned_to = req.loggedIn.email
+        } else {
+          update.assigned_to = data.assigned_to
+        }
+        return Task.update(update, { where: { id: id } })
+      })
       .then(result => {
         res.status(200).json({
           result,

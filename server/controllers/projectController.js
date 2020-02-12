@@ -96,7 +96,7 @@ class ProjectController {
     const id = req.params.projectId
     Project.destroy({ where: { id: id } })
       .then(response => {
-        return UserProject.destroy({where: {ProjectId: id}})
+        return UserProject.destroy({ where: { ProjectId: id } })
       })
       .then(final => {
         return Task.destroy({ where: { ProjectId: id } })
@@ -149,6 +149,25 @@ class ProjectController {
       })
   }
 
+  static getInvitation(req, res, next) {
+    const id = req.loggedIn.id
+    console.log(id)
+    UserProject.findAll({
+      where: { UserId: id, status: 'pending' },
+      include: [{ model: Project, attributes: ['name'] }]
+    })
+      .then(results => {
+        if (results.length == 0) {
+          throw { code: 404, msg: 'You dont have any invitation yet' }
+        } else {
+          res.status(200).json(results)
+        }
+      })
+      .catch(err => {
+        next(err)
+      })
+  }
+
   static acceptInvitation(req, res, next) {
     const data = {
       UserId: req.loggedIn.id,
@@ -159,10 +178,7 @@ class ProjectController {
         if (!result) {
           throw { code: 404, msg: 'Project not found or has been deleted' }
         } else {
-          return UserProject.update(
-            { status: 'join' },
-            { where: data }
-          )
+          return UserProject.update({ status: 'join' }, { where: data })
         }
       })
       .then(response => {

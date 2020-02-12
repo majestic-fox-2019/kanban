@@ -83,10 +83,15 @@ export default {
       this.register = !this.register
     },
     registerUser() {
+      const registForm = {
+        name: this.form.name,
+        email: this.form.email,
+        password: this.form.password
+      }
       this.form.name = ''
       this.form.email = ''
       this.form.password = ''
-      return this.$emit('REGISTER', this.form)
+      return this.$emit('REGISTER', registForm)
     },
     login() {
       const loginForm = {

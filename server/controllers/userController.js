@@ -14,7 +14,7 @@ class UserController {
     User.create(form)
       .then(result => {
         const token = sign({ id: result.id, email: result.email })
-        res.status(201).json({ token: token })
+        res.status(201).json({ id: result.id, token: token })
       })
       .catch(err => {
         next(err)
@@ -37,7 +37,7 @@ class UserController {
             throw { code: 404, msg: 'Invalid email/password' }
           } else {
             const token = sign({ id: result.id, email: result.email })
-            res.status(200).json({ token: token })
+            res.status(200).json({ id: result.id, token: token })
           }
         }
       })
@@ -66,7 +66,7 @@ class UserController {
         if (result) {
           const token = sign({ id: result.id, email: result.email })
           res.status(200).json({
-            result: result,
+            id: result.id,
             token: token
           })
         } else {

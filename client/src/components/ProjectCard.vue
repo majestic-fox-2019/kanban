@@ -9,7 +9,10 @@
           @click.prevent="deleteProject(project.ProjectId)"
           >Delete Project</v-btn
         >
-        <v-btn text v-else @click.prevent="leaveProject(project.ProjectId)"
+        <v-btn
+          text
+          v-else
+          @click.prevent="leaveProject(project.ProjectId)"
           >Leave Project</v-btn
         >
       </v-card-actions>
@@ -43,8 +46,13 @@ export default {
   color: white !important;
   font-weight: 500;
   cursor: pointer;
+  background-color: #C62828;
+  border-radius: 5px;
+}
+.v-btn:hover {
+    background-color: #EF5350;
 }
 .v-card:hover {
-    box-shadow: 2px 5px 5px black;
+  box-shadow: 2px 5px 5px black;
 }
 </style>

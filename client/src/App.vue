@@ -83,7 +83,12 @@ export default {
         })
     },
     logout() {
-      Swal.fire('Thank you', 'Logout Sucess', 'success')
+      Swal.fire({
+        title: 'Thank you',
+        text: 'Logout Success',
+        icon: 'success',
+        timer: 1500
+      })
       this.isLogin = false
       this.allProjects.personal = []
       this.allProjects.other = []

@@ -88,6 +88,11 @@
             </v-col>
           </v-row>
         </div>
+
+        <Invitation
+          v-on:LOAD_PROJECT="loadProjects"
+          v-on:LEAVE_PROJECT="leaveProject"
+        ></Invitation>
       </v-container>
     </div>
 
@@ -102,6 +107,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import ProjectCard from './ProjectCard'
 import KanbanBoard from './KanbanBoard'
+import Invitation from './Invitation'
 
 const BASE_URL = 'http://localhost:3000'
 
@@ -119,7 +125,8 @@ export default {
   props: ['allProjects', 'home'],
   components: {
     ProjectCard,
-    KanbanBoard
+    KanbanBoard,
+    Invitation
   },
   methods: {
     createProject() {
@@ -145,6 +152,7 @@ export default {
           headers: { token: localStorage.getItem('token') }
         })
         .then(response => {
+          this.detailProject = null
           Swal.fire('Success', 'A project deleted', 'success')
           return this.$emit('FETCH_PROJECT')
         })
@@ -179,11 +187,15 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    loadProjects() {
+      return this.$emit('FETCH_PROJECT')
     }
   },
   watch: {
     home: function(val, old) {
       this.detailProject = null
+      this.projectId = null
     }
   }
 }

@@ -8,6 +8,7 @@ const {
 
 router.get('/', Authenticate, ProjectController.getUserProjects)
 router.get('/:projectId', Authenticate, ProjectController.getDetailProject)
+router.get('/user/invitations', Authenticate, ProjectController.getInvitation)
 router.post('/', Authenticate, ProjectController.createProject)
 router.delete(
   '/:projectId',

@@ -1,4 +1,5 @@
 module.exports = (err, req, res, next) => {
+  console.log(err)
   let code = null
   let errors = []
   if (err.code) {
