@@ -4,7 +4,7 @@ body{
   background-color: $bgcolor;
   // margin: 0;
   // padding: 0;
-  // overflow: hidden;
+  overflow: hidden;
 }
 
 .kanban{
@@ -12,11 +12,18 @@ body{
   justify-content: space-evenly;
   align-items: flex-start;
 
+  overflow: auto;
+
+  .col-3:nth-child(1){
+    margin-left: 25vw;
+  }
+
   .col-3{
     height: auto;
     width: 100%;
     // max-height: 80vh;
     margin-top: 0.5%;
+    margin-bottom: 2%;
     // overflow: auto;
     // background-color: $card_color;
     // border: 3px solid $card_color;
@@ -54,6 +61,7 @@ body{
       }
     }
 
+  
     .footer:hover{
       cursor: pointer;
     }
@@ -70,7 +78,7 @@ body{
   // border-radius: 10px 10px 0 0;
   background-color: lightblue;
   overflow: auto;
-  max-height: 75vh;
+  max-height: 72vh;
   padding-bottom: 1%;
 }
 

@@ -9,7 +9,7 @@ let kanban = new Vue({
     },
     methods: {
         getTasks: function(){
-            fetch(`${this.backend_url}/taskCategory`)
+            fetch(`${this.backend_url}/projects`)
             .then(res => {
                 return res.json();  
             })
@@ -19,6 +19,14 @@ let kanban = new Vue({
             .catch(err => console.log(err));
         },
         addTask: function(idxCategory) {
+            fetch(`${this.backend_url}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify()
+            })  
+            
             this.taskCategory[idxCategory-1].tasks.push({
                 title       : this.input_title,
                 description : this.input_description,
@@ -30,13 +38,6 @@ let kanban = new Vue({
                 "title"       : this.input_title,
                 "description" : this.input_description
             }
-            // fetch(`${this.backend_url}`, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify()
-            // })  
         },
         resetModal: function() {
             this.input_category_id  = null;
