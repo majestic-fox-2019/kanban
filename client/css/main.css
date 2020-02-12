@@ -1,7 +1,5 @@
 body {
   background-color: #2c3e50;
-  margin: 0;
-  padding: 0;
 }
 
 .kanban {
@@ -12,11 +10,11 @@ body {
 .kanban .col-3 {
   height: auto;
   width: 100%;
-  margin: 0.5%;
+  margin-top: 0.5%;
 }
 .kanban .col-3 .title {
   text-align: center;
-  font-size: 14pt;
+  font-size: 16pt;
   color: lightslategray;
   background-color: lightgray;
   border-radius: 10px 10px 0 0;
@@ -36,12 +34,12 @@ body {
   color: lightslategray;
   border: 1px solid grey;
   border-radius: 5px;
-  padding: 3%;
-  min-width: 50%;
+  padding: 1%;
   cursor: pointer;
+  min-width: 50%;
 }
 .kanban .col-3 .footer button:hover {
-  background-color: lightgray;
+  background-color: whitesmoke;
 }
 .kanban .col-3 .footer:hover {
   cursor: pointer;
@@ -54,7 +52,7 @@ body {
 .cards {
   background-color: lightblue;
   overflow: auto;
-  max-height: 86vh;
+  max-height: 75vh;
   padding-bottom: 1%;
 }
 
@@ -62,7 +60,7 @@ body {
   background-color: whitesmoke;
   border-radius: 10px;
   padding: 1%;
-  min-height: 15vh;
+  min-height: 10vh;
   margin: 3%;
   cursor: pointer;
   /* No copy text */
@@ -82,11 +80,11 @@ body {
 }
 .card .card-title {
   text-align: center;
-  font-size: 14pt;
+  font-size: 12pt;
 }
 .card .card-content {
-  padding: 5%;
   text-align: center;
+  font-size: 10pt;
 }
 
 /* Scroll Style */

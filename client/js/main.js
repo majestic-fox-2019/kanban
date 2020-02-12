@@ -1,21 +1,15 @@
 let kanban = new Vue({
     el: ".kanban",
     data: {
-        "taskCategory": null
+        "backend_url": "http://localhost:3000",
+        "taskCategory": null,
+        "input_category_id": "",
+        "input_title": "",
+        "input_description": ""
     },
     methods: {
-        addCard: function(idxCategory) {
-            this.taskCategory[idxCategory-1].tasks.push({
-                title: 'Default Title',
-                description: `Default Description 
-                <br><br>
-                *<small>click to update data</small>*`,
-                category: "backlog"
-            });
-        }
-    },
-    beforeMount() {
-        fetch('http://localhost:3000/taskCategory')
+        getTasks: function(){
+            fetch(`${this.backend_url}/taskCategory`)
             .then(res => {
                 return res.json();  
             })
@@ -23,5 +17,48 @@ let kanban = new Vue({
                 this.taskCategory = data
             })
             .catch(err => console.log(err));
+        },
+        addTask: function(idxCategory) {
+            this.taskCategory[idxCategory-1].tasks.push({
+                title       : this.input_title,
+                description : this.input_description,
+                categoryId  : idxCategory
+            });
+        },
+        updateTask: function(idxCategory) {
+            this.taskCategory[idxCategory-1].tasks[this.input_id-1] = {
+                "title"       : this.input_title,
+                "description" : this.input_description
+            }
+            // fetch(`${this.backend_url}`, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify()
+            // })  
+        },
+        resetModal: function() {
+            this.input_category_id  = null;
+            this.input_id           = null;
+            this.input_title        = "";
+            this.input_description  = "";
+        },
+        setModalValue: function(task){
+            this.input_category_id  = task.categoryId;
+            this.input_id           = task.id;
+            this.input_title        = task.title;
+            this.input_description  = task.description;
+        },
+        handleOk: function() {
+            if (this.input_id == undefined) {
+                this.addTask(this.input_category_id);
+            }else{
+                this.updateTask(this.input_category_id);
+            }
+        }
+    },
+    beforeMount() {
+        this.getTasks();
     }
 });

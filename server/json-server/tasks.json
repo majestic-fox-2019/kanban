@@ -5,13 +5,15 @@
             "name": "Backlog",
             "tasks": [
                 {
+                    "id": 1,
                     "title": "Memberi makan kucing",
                     "description": "Memberi makan kucing hacktiv yang suka nyebar virus corona",
                     "categoryId": 1
                 },
                 {
-                    "title": "Memberi makan kucing",
-                    "description": "Memberi makan kucing hacktiv yang suka nyebar virus corona",
+                    "id": 2,
+                    "title": "Memberi makan buaya",
+                    "description": "Memberi makan buaya hacktiv yang suka nyebar virus corona",
                     "categoryId": 1
                 }
             ]
@@ -21,8 +23,9 @@
             "name": "Product",
             "tasks": [
                 {
-                    "title": "Memberi makan kucing",
-                    "description": "Memberi makan kucing hacktiv yang suka nyebar virus corona",
+                    "id": 1,
+                    "title": "Memberi makan kambing",
+                    "description": "Memberi makan kambing hacktiv yang suka nyebar virus corona",
                     "categoryId": 2
                 }
             ]
@@ -32,6 +35,7 @@
             "name": "Development",
             "tasks": [
                 {
+                    "id": 1,
                     "title": "Memberi makan kucing",
                     "description": "Memberi makan kucing hacktiv yang suka nyebar virus corona",
                     "categoryId": 3
@@ -43,8 +47,9 @@
             "name": "Done",
             "tasks": [
                 {
-                    "title": "Memberi makan kucing",
-                    "description": "Memberi makan kucing hacktiv yang suka nyebar virus corona",
+                    "id": 1,
+                    "title": "Memberi makan biawak",
+                    "description": "Memberi makan biawak hacktiv yang suka nyebar virus corona",
                     "categoryId": 1
                 }
             ]
