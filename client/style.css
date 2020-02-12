@@ -1,0 +1,63 @@
+
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  display: flex;
+  justify-content: space-evenly;
+}
+.navbar li {
+  float: left;
+  margin: auto;
+  color: white;
+}
+.navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.navbar li h2 {
+  color: white;
+}
+
+.mainPage {
+  max-height: 90vh;
+  min-height: 90vh;
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  height: 70%;
+}
+.container h3 {
+  background-color: white;
+  opacity: 70%;
+  text-align: center;
+  font-weight: bold;
+}
+.container .gabungan {
+  overflow: auto;
+  height: 70vh;
+}
+.container .gabungan .card {
+  border: solid black 1px;
+  width: 15em;
+  margin-top: 10px;
+  text-align: center;
+  padding: 3px;
+  background-color: rgba(5, 5, 5, 0.66);
+  color: white;
+  border-radius: 10px;
+}
+.container .gabungan .card .container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/*# sourceMappingURL=style.css.map */
