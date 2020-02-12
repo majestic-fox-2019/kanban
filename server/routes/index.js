@@ -9,13 +9,11 @@ route.post('/login', userController.login)
 
 route.get('/tasks', taskController.getAll)
 route.get('/tasks/:id', taskController.getOne)
-// route.post('/tasks',authentication, taskController.adding)
-// route.delete('/tasks/:id',authentication, authorisation, taskController.deleting)
+route.post('/tasks',authentication, taskController.adding)
+route.delete('/tasks/:id',authentication, authorisation, taskController.deleting)
 // route.put('/tasks/:id',authentication, authorisation, taskController.updating)
 
-route.post('/tasks', taskController.adding)
-route.delete('/tasks/:id',taskController.deleting)
-route.put('/tasks/next/:id', taskController.updatingNext)
-route.put('/tasks/back/:id', taskController.updatingBack)
+route.put('/tasks/next/:id', authentication, authorisation, taskController.updatingNext)
+route.put('/tasks/back/:id', authentication, authorisation, taskController.updatingBack)
 
 module.exports = route

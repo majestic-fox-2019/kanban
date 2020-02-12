@@ -27,18 +27,19 @@ class ControllerTask {
 
   static adding(req, res, next) {
     console.log(req.body, "<<<<<")
+    console.log(req.user, "<<<<ini req user")
     let objTask = {
       title: req.body.title,
-      UserId: 3,
+      UserId: null,
       category: "Backlog",
       status : req.body.status,
       date: req.body.date
     }
-    // User.findOne({where: {email:req.user}})
-    // .then(user => {
-    //   objTask.UserId = user.id
-    //   return Task.create(objTask)
-    // })
+    User.findOne({where: {email:req.user}})
+    .then(user => {
+      objTask.UserId = user.id
+      return Task.create(objTask)
+    })
     Task.create(objTask)
     .then(task => {
       res.status(200).json(task)
