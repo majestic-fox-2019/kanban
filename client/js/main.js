@@ -19,13 +19,27 @@ let kanban = new Vue({
             .catch(err => console.log(err));
         },
         addTask: function(idxCategory) {
-            fetch(`${this.backend_url}`, {
+            let objAdd = {
+                title: this.input_title,
+                description: this.input_description,
+                UserId: 1,
+                ProjectId: idxCategory
+            };
+
+            fetch(`${this.backend_url}/tasks`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify()
+                body: JSON.stringify(objAdd)
             })  
+            .then(res => {
+                console.log(res);
+                this.getTasks();
+            })
+            .catch(err => {
+                console.log(err);
+            })
             
             this.taskCategory[idxCategory-1].tasks.push({
                 title       : this.input_title,

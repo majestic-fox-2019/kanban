@@ -6,8 +6,11 @@ class ProjectsController {
     static list(req, res, next) {
         Project
             .findAll({
-                order: [["createdAt", "asc"]],
-                include: ["Tasks"]
+                include: ["Tasks"],
+                order: [
+                    ["createdAt", "asc"],
+                    ["Tasks", "createdAt", "desc"]
+                ]
             })
             .then(projects => {
                 res.status(200).json(projects);
