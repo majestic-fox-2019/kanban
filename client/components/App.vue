@@ -38,10 +38,10 @@
     </div>
 </template>
 <script>
-    // import TaskCategory from './components/TaskCategory';
+    import TaskCategory from './TaskCategory.vue';
     export default {
         components : {
-            // 'task-category': TaskCategory
+            'task-category': TaskCategory
         },
         data: function(){
             return {
