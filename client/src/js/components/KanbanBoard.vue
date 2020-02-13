@@ -111,8 +111,6 @@ import Swal from 'sweetalert2'
 import TaskCard from './TaskCard'
 import draggable from 'vuedraggable'
 
-const BASE_URL = 'http://localhost:3000'
-
 export default {
   name: 'KanbanBoard',
   data() {
@@ -158,7 +156,7 @@ export default {
   methods: {
     fetchProjectTasks(id) {
       axios
-        .get(`${BASE_URL}/tasks/${id}`, {
+        .get(`${this.$BASE_URL}/tasks/${id}`, {
           headers: { token: localStorage.getItem('token') }
         })
         .then(({ data }) => {
@@ -182,13 +180,14 @@ export default {
         description: this.task.description
       }
       axios
-        .post(`${BASE_URL}/tasks/${id}`, form, {
+        .post(`${this.$BASE_URL}/tasks/${id}`, form, {
           headers: { token: localStorage.getItem('token') }
         })
         .then(result => {
           Swal.fire('Success', 'New task added', 'success')
           this.dialog2 = false
           this.fetchProjectTasks(id)
+          this.$socket.emit('changeTask', 'new task added')
         })
         .catch(({ response }) => {
           console.log(response)
@@ -196,11 +195,12 @@ export default {
     },
     deleteTask(val) {
       axios
-        .delete(`${BASE_URL}/tasks/${val}/${this.task.projectId}`, {
+        .delete(`${this.$BASE_URL}/tasks/${val}/${this.task.projectId}`, {
           headers: { token: localStorage.getItem('token') }
         })
         .then(resp => {
           this.fetchProjectTasks(this.task.projectId)
+          this.$socket.emit('changeTask', 'task deleted')
           Swal.fire('Success', 'Task deleted', 'success')
         })
         .catch(({ response }) => {
@@ -220,12 +220,13 @@ export default {
       }
       const id = this.task.projectId
       axios
-        .put(`${BASE_URL}/tasks/${this.editId}/${id}`, data, {
+        .put(`${this.$BASE_URL}/tasks/${this.editId}/${id}`, data, {
           headers: { token: localStorage.getItem('token') }
         })
         .then(result => {
           this.dialog2 = false
           this.fetchProjectTasks(id)
+          this.$socket.emit('changeTask', 'task edited')
           Swal.fire({
             title: 'Success',
             text: 'Task edited',
@@ -247,11 +248,13 @@ export default {
         email: this.email
       }
       axios
-        .post(`${BASE_URL}/projects/invite/${id}`, data, {
+        .post(`${this.$BASE_URL}/projects/invite/${id}`, data, {
           headers: { token: localStorage.getItem('token') }
         })
         .then(resp => {
           this.dialog = false
+          this.email = null
+          this.$socket.emit('newInvite', 'Invite member')
           Swal.fire({
             title: 'Success',
             text: 'User invited',
@@ -280,12 +283,13 @@ export default {
               if (todo.status !== el.status) {
                 axios
                   .patch(
-                    `${BASE_URL}/tasks/${todo.id}/${todo.ProjectId}`,
+                    `${this.$BASE_URL}/tasks/${todo.id}/${todo.ProjectId}`,
                     { status: el.status },
                     { headers: { token: localStorage.getItem('token') } }
                   )
                   .then(response => {
                     this.fetchProjectTasks(this.task.projectId)
+                    this.$socket.emit('changeTask', 'task moved')
                   })
                   .catch(({ response }) => {
                     if (response.data.code == 403) {
@@ -313,6 +317,12 @@ export default {
   },
   created() {
     this.fetchProjectTasks(this.project.id)
+  },
+  mounted() {
+    const projectId = this.project.id
+    this.$socket.on('taskChanged', msg => {
+      this.fetchProjectTasks(projectId)
+    })
   }
 }
 </script>

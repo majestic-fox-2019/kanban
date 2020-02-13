@@ -6,13 +6,13 @@
         <v-btn
           text
           v-if="project.Project.owner == userId"
-          @click.prevent="deleteProject(project.ProjectId)"
+          @click.stop="deleteProject(project.ProjectId)"
           >Delete Project</v-btn
         >
         <v-btn
           text
           v-else
-          @click.prevent="leaveProject(project.ProjectId)"
+          @click.stop="leaveProject(project.ProjectId)"
           >Leave Project</v-btn
         >
       </v-card-actions>

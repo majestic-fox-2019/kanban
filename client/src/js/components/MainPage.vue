@@ -92,6 +92,8 @@
         <Invitation
           v-on:LOAD_PROJECT="loadProjects"
           v-on:LEAVE_PROJECT="leaveProject"
+          v-on:FETCH_INVITATIONS="fetchInvitation"
+          :invitations="invitations"
         ></Invitation>
       </v-container>
     </div>
@@ -109,8 +111,6 @@ import ProjectCard from './ProjectCard'
 import KanbanBoard from './KanbanBoard'
 import Invitation from './Invitation'
 
-const BASE_URL = 'http://localhost:3000'
-
 export default {
   name: 'MainPage',
   data() {
@@ -119,7 +119,8 @@ export default {
       personal: true,
       projectName: null,
       projectId: null,
-      detailProject: null
+      detailProject: null,
+      invitations: []
     }
   },
   props: ['allProjects', 'home'],
@@ -134,7 +135,7 @@ export default {
         name: this.projectName
       }
       axios
-        .post(`${BASE_URL}/projects`, form, {
+        .post(`${this.$BASE_URL}/projects`, form, {
           headers: { token: localStorage.getItem('token') }
         })
         .then(({ data }) => {
@@ -147,42 +148,69 @@ export default {
         })
     },
     deleteProject(val) {
-      axios
-        .delete(`${BASE_URL}/projects/${val}`, {
-          headers: { token: localStorage.getItem('token') }
-        })
-        .then(response => {
-          this.detailProject = null
-          Swal.fire('Success', 'A project deleted', 'success')
-          return this.$emit('FETCH_PROJECT')
-        })
-        .catch(({ response }) => {
-          console.log(response)
-        })
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(result => {
+        if (result.value) {
+          axios
+            .delete(`${this.$BASE_URL}/projects/${val}`, {
+              headers: { token: localStorage.getItem('token') }
+            })
+            .then(response => {
+              this.detailProject = null
+              Swal.fire('Success', 'A project deleted', 'success')
+              return this.$emit('FETCH_PROJECT')
+            })
+            .catch(({ response }) => {
+              console.log(response)
+            })
+        }
+      })
     },
     leaveProject(val) {
-      axios
-        .delete(`${BASE_URL}/projects/leave/${val}`, {
-          headers: { token: localStorage.getItem('token') }
-        })
-        .then(response => {
-          Swal.fire('Success', 'A project deleted', 'success')
-          return this.$emit('FETCH_PROJECT')
-        })
-        .catch(({ response }) => {
-          console.log(response)
-        })
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(result => {
+        if (result.value) {
+          axios
+            .delete(`${this.$BASE_URL}/projects/leave/${val}`, {
+              headers: { token: localStorage.getItem('token') }
+            })
+            .then(response => {
+              this.detailProject = null
+              this.$socket.emit('acceptInvite', 'invitation accepted')
+              this.$socket.emit('changeTask', 'someone leave')
+              this.fetchInvitation()
+              Swal.fire('Success', 'A project deleted', 'success')
+              return this.$emit('FETCH_PROJECT')
+            })
+            .catch(({ response }) => {
+              console.log(response)
+            })
+        }
+      })
     },
     getDetail(val) {
       this.projectId = val
       localStorage.setItem('projectId', val)
       axios
-        .get(`${BASE_URL}/projects/${val}`, {
+        .get(`${this.$BASE_URL}/projects/${val}`, {
           headers: { token: localStorage.getItem('token') }
         })
         .then(({ data }) => {
           this.detailProject = data.data
-          console.log(this.detailProject)
         })
         .catch(err => {
           console.log(err)
@@ -190,6 +218,22 @@ export default {
     },
     loadProjects() {
       return this.$emit('FETCH_PROJECT')
+    },
+    fetchInvitation() {
+      axios
+        .get(`${this.$BASE_URL}/projects/user/invitations`, {
+          headers: { token: localStorage.getItem('token') }
+        })
+        .then(({ data }) => {
+          this.invitations = data
+        })
+        .catch(({ response }) => {
+          const error = response.data.err[0]
+          if (response.data.code == 404) {
+            this.invitations = []
+          }
+          console.log(error)
+        })
     }
   },
   watch: {
@@ -197,6 +241,17 @@ export default {
       this.detailProject = null
       this.projectId = null
     }
+  },
+  mounted() {
+    this.$socket.on('invitation', msg => {
+      this.fetchInvitation()
+    })
+    this.$socket.on('newDetail', msg => {
+      this.getDetail(this.projectId)
+    })
+  },
+  created() {
+    this.fetchInvitation()
   }
 }
 </script>

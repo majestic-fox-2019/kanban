@@ -20,6 +20,23 @@
         v-on:FETCH_PROJECT="fetchUserProjects"
       ></MainPage>
     </div>
+
+    <div id="errMsg">
+      <v-snackbar
+        v-model="snackbar"
+        :timeout="timeout"
+        color="red"
+        top
+        right
+        v-for="(err, i) in errors"
+        :key="i"
+      >
+        {{ err }}
+        <v-btn color="white" text @click="snackbar = false">
+          Close
+        </v-btn>
+      </v-snackbar>
+    </div>
   </v-app>
 </template>
 
@@ -29,8 +46,6 @@ import Swal from 'sweetalert2'
 import Navbar from './components/Navbar'
 import LandingPage from './components/LandingPage'
 import MainPage from './components/MainPage'
-
-const BASE_URL = 'http://localhost:3000'
 
 export default {
   name: 'App',
@@ -49,7 +64,10 @@ export default {
         personal: [],
         other: []
       },
-      home: false
+      home: false,
+      snackbar: true,
+      errors: [],
+      timeout: 5000
     }
   },
   methods: {
@@ -58,7 +76,7 @@ export default {
     },
     login(form) {
       axios
-        .post(`${BASE_URL}/users/login`, form)
+        .post(`${this.$BASE_URL}/users/login`, form)
         .then(({ data }) => {
           this.isLogin = true
           localStorage.setItem('token', data.token)
@@ -66,12 +84,14 @@ export default {
           Swal.fire('Welcome', 'Login success', 'success')
         })
         .catch(({ response }) => {
-          console.log(response)
+          response.data.err.forEach(el => {
+            this.errors.push(el)
+          })
         })
     },
     registerUser(form) {
       axios
-        .post(`${BASE_URL}/users/register`, form)
+        .post(`${this.$BASE_URL}/users/register`, form)
         .then(({ data }) => {
           this.isLogin = true
           localStorage.setItem('token', data.token)
@@ -79,27 +99,41 @@ export default {
           Swal.fire('Welcome', 'Registration success', 'success')
         })
         .catch(({ response }) => {
-          console.log(response)
+          response.data.err.forEach(el => {
+            this.errors.push(el)
+          })
         })
     },
     logout() {
       Swal.fire({
-        title: 'Thank you',
-        text: 'Logout Success',
-        icon: 'success',
-        timer: 1500
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Logout'
+      }).then(result => {
+        if (result.value) {
+          Swal.fire({
+            title: 'Thank you',
+            text: 'Logout Success',
+            icon: 'success',
+            timer: 1500
+          })
+          this.isLogin = false
+          this.allProjects.personal = []
+          this.allProjects.other = []
+          localStorage.clear()
+        }
       })
-      this.isLogin = false
-      this.allProjects.personal = []
-      this.allProjects.other = []
-      localStorage.clear()
     },
     backHome() {
       this.home = !this.home
     },
     fetchUserProjects() {
       axios
-        .get(`${BASE_URL}/projects`, {
+        .get(`${this.$BASE_URL}/projects`, {
           headers: { token: localStorage.getItem('token') }
         })
         .then(({ data }) => {
@@ -116,6 +150,11 @@ export default {
       if (val) {
         this.fetchUserProjects()
       }
+    },
+    errors(val) {
+      setTimeout(() => {
+        this.errors = []
+      }, 5000)
     }
   },
   created() {

@@ -33,44 +33,26 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-const BASE_URL = 'http://localhost:3000'
-
 export default {
   name: 'Invitation',
   data() {
-    return {
-      invitations: []
-    }
+    return {}
   },
+  props: ['invitations'],
   methods: {
-    fetchInvitation() {
-      axios
-        .get(`${BASE_URL}/projects/user/invitations`, {
-          headers: { token: localStorage.getItem('token') }
-        })
-        .then(({ data }) => {
-          this.invitations = data
-        })
-        .catch(({ response }) => {
-          const error = response.data.err[0]
-          if (response.data.code == 404) {
-            this.invitations = []
-          }
-          console.log(error)
-        })
-    },
     acceptInvite(id) {
       axios
         .patch(
-          `${BASE_URL}/projects/accept/${id}`,
+          `${this.$BASE_URL}/projects/accept/${id}`,
           {},
           {
             headers: { token: localStorage.getItem('token') }
           }
         )
         .then(resp => {
-          this.fetchInvitation()
+          this.$emit('FETCH_INVITATIONS')
           this.$emit('LOAD_PROJECT')
+          this.$socket.emit('acceptInvite', 'invitation accepted')
           Swal.fire('Yaay!!', 'Invitation accepted', 'success')
         })
         .catch(({ response }) => {
@@ -78,12 +60,9 @@ export default {
         })
     },
     declineInvite(val) {
-      this.fetchInvitation()
-      return this.$emit('LEAVE_PROJECT', val)
+      this.$emit('FETCH_INVITATIONS')
+      this.$emit('LEAVE_PROJECT', val)
     }
-  },
-  created() {
-    this.fetchInvitation()
   }
 }
 </script>

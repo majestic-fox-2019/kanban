@@ -20,8 +20,6 @@ module.exports = (err, req, res, next) => {
     errors.push('Internal server error')
   }
 
-  console.log(err)
-
   res.status(code).json({
     code: code,
     err: errors

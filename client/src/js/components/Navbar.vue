@@ -1,7 +1,9 @@
 <template>
   <div>
     <v-app-bar color="black accent-1" dark>
-      <v-toolbar-title><h3>Kanban</h3></v-toolbar-title>
+      <v-toolbar-title @click.prevent="backHome">
+        <h3>Kanban</h3>
+      </v-toolbar-title>
       <v-btn icon @click.prevent="backHome">
         <v-icon>mdi-home</v-icon>
       </v-btn>

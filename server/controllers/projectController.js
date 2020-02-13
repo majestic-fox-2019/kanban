@@ -151,7 +151,6 @@ class ProjectController {
 
   static getInvitation(req, res, next) {
     const id = req.loggedIn.id
-    console.log(id)
     UserProject.findAll({
       where: { UserId: id, status: 'pending' },
       include: [{ model: Project, attributes: ['name'] }]
@@ -199,8 +198,19 @@ class ProjectController {
     }
     UserProject.destroy({ where: data })
       .then(result => {
+        return Task.update(
+          { status: 'backlog', assigned_to: null },
+          {
+            where: {
+              assigned_to: req.loggedIn.email,
+              ProjectId: data.ProjectId
+            }
+          }
+        )
+      })
+      .then(final => {
         res.status(200).json({
-          result: result,
+          result: final,
           msg: 'You leave the project'
         })
       })

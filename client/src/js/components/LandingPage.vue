@@ -2,7 +2,7 @@
   <div>
     <v-row align="center">
       <v-col md="8" lg="8">
-        <v-img src="../assets/task.svg" aspect-ratio="1.5"></v-img>
+        <img src="../assets/task.svg" style="margin-top: 5vh; margin-left: 3vh;" />
       </v-col>
       <v-col md="4" lg="4">
         <h1>Welcome to Kanban</h1>
