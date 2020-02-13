@@ -2,9 +2,18 @@ const Task = require('../models').Task
 const User = require('../models').User
 class ControllerTask {
   static getAll (req, res, next) {
-    User.findAll({order: [["id", "asc"]],include:[Task]})
-    .then(users => {
-      res.status(200).json(users)
+    // User.findAll({order: [["id", "asc"]],include:[Task]})
+    // .then(users => {
+    //   res.status(200).json(users)
+    // })
+    // .catch(err => {
+    //   next(err)
+    // })
+    Task.findAll({
+      include: [User]
+    })
+    .then(tasks => {
+      res.status(200).json(tasks)
     })
     .catch(err => {
       next(err)

@@ -7,7 +7,7 @@ function authentication (req, res, next) {
     next()
     
   } catch (error) {
-    next({code: 401, message: "invalid token"})
+    next({code: 401, message: "please login or register first to do this task!"})
   }
 }
 
