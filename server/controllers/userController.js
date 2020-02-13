@@ -94,6 +94,9 @@ class ControlUser {
 
                 res.status(200).json({ userFromGoogle, token })
             })
+            .catch(err => {
+                next(err)
+            })
     }
 
     static facebook(req, res, next) {
@@ -117,7 +120,50 @@ class ControlUser {
             .catch(err => {
                 next(err)
             })
-
+    }
+    static twitter(req, res, next) {
+        modelUser.findOne({ where: { email: req.body.email } })
+            .then(user => {
+                if (user) {
+                    return user
+                } else {
+                    return modelUser.create({
+                        email: req.body.email,
+                        username: req.body.username,
+                        password: process.env.DEFAULT_PASSWORD
+                    })
+                }
+            })
+            .then(userTwitter => {
+                let token = generateToken({ id: userTwitter.id })
+                req.headers.token = token
+                res.status(201).json({ userTwitter, token })
+            })
+            .catch(err => {
+                next(err)
+            })
+    }
+    static github(req, res, next){
+        modelUser.findOne({ where: { email: req.body.email } })
+        .then(user => {
+            if (user) {
+                return user
+            } else {
+                return modelUser.create({
+                    email: req.body.email,
+                    username: req.body.username,
+                    password: process.env.DEFAULT_PASSWORD
+                })
+            }
+        })
+        .then(userGithub => {
+            let token = generateToken({ id: userGithub.id })
+            req.headers.token = token
+            res.status(201).json({ userGithub, token })
+        })
+        .catch(err => {
+            next(err)
+        })
     }
 }
 

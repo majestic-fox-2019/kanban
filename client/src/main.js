@@ -5,9 +5,11 @@ import { NavbarPlugin } from 'bootstrap-vue'
 import { ToastPlugin } from 'bootstrap-vue'
 import { VBModal } from 'bootstrap-vue'
 import { BCard } from 'bootstrap-vue'
-import VueDraggable from 'vue-draggable'
+// import VueDraggable from 'vue-draggable'
 import GSignInButton from "vue-google-signin-button";
-// import VueSweetalert2 from 'vue-sweetalert2';
+import * as firebase from "firebase";
+
+Vue.config.productionTip = false;
 
 
 import '@fortawesome/fontawesome-free/css/all.min.css'
@@ -19,13 +21,17 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 // Vue.use(VueSweetalert2);
 Vue.use(GSignInButton)
-Vue.use(VueDraggable)
+// Vue.use(VueDraggable)
 Vue.component('b-card', BCard)
 Vue.directive('b-modal', VBModal)
 Vue.use(NavbarPlugin)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(ToastPlugin)
+
+const firebaseConfig = require("./config/configFirebase")
+firebase.initializeApp(firebaseConfig)
+Vue.use(firebase)
 
 Vue.prototype.$socket = io.connect("http://localhost:3000")
 Vue.prototype.$baseUrl = "http://localhost:3000"

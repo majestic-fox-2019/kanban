@@ -2,17 +2,6 @@ const modelTodo = require("../models").Todo
 const modelProjectUser = require("../models").ProjectUser
 const modelUser = require("../models").User
 function forIndividualTodo(req, res, next) {
-    // modelTodo.findOne({ where: { id: req.params.id, UserId: req.payload.id } })
-    //     .then(todoFound => {
-    //         if (todoFound) {
-    //             next()
-    //         } else {
-    //             next({ code: 401, message: "Unauthorized" })
-    //         }
-    //     })
-    //     .catch(err => {
-    //         next(err)
-    //     })
     modelTodo.findOne({ where: { id: req.params.idTodo, UserId: req.payload.id } })
         .then(todoFound => {
             if (todoFound) {

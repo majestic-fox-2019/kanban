@@ -136,6 +136,8 @@ export default {
         })
         .catch(err => {
           console.log(err.response, "<<ini gagal buat task");
+          let messageError = err.response.data[0];
+          Swal.fire("Oops", messageError, "error");
         });
     },
     inviteMember(id) {
@@ -154,7 +156,8 @@ export default {
           this.$socket.emit("nambahMembernya");
         })
         .catch(err => {
-          console.log(err.response, "ini gagal add member");
+          // console.log(err.response, "ini gagal add member");
+          Swal.fire("Oops", "User with said email not found", "error");
         });
     },
     getAllTodoOfProjects() {
@@ -167,6 +170,7 @@ export default {
         })
         .catch(err => {
           console.log(err.response, "<< ini err get todo project");
+          Swal.fire("Oops", "Something went wrong", "error");
         });
     },
     deleteThisProject() {
@@ -185,6 +189,7 @@ export default {
           })
           .catch(err => {
             console.log(err.response, "<<gagal delete project");
+            Swal.fire("Oops", "Something went wrong", "error");
           });
       } else {
         Swal.fire("OOPS", "Data does not match", "error");

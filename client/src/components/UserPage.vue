@@ -30,6 +30,9 @@
                 </h6>
               </div>
             </form>
+            <mdb-btn class="btn-fb" icon="facebook-f" @click="facebook" fab size="lg">Facebook</mdb-btn>
+            <mdb-btn class="btn-tw" icon="twitter" fab size="lg" @click="twitter">Twitter</mdb-btn>
+            <mdb-btn class="btn-git" icon="github" fab size="lg" @click="github">Github</mdb-btn>
           </div>
           <div v-else>
             <form v-on:submit.prevent="registerNow">
@@ -63,6 +66,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 import Vue from "vue";
 import GSignInButton from "vue-google-signin-button";
 import gsignin from "./googleSignin";
@@ -70,7 +74,7 @@ import { ToastPlugin } from "bootstrap-vue";
 import axios from "axios";
 import { mdbInput, mdbBtn, mdbContainer, mdbAlert } from "mdbvue";
 import NavBar from "./Navbar";
-
+import Swal from "sweetalert2";
 export default {
   name: "UserPage",
   components: {
@@ -161,12 +165,111 @@ export default {
           );
         })
         .catch(err => {
-          // this.errorMSG = err.response.data;
+          this.errorMSG = err.response.data;
           console.log(err, "<<ini error di fungsi login");
         });
     },
     emitGoogleLogin() {
       this.$emit("login");
+    },
+    facebook() {
+      var provider = new firebase.auth.FacebookAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(result => {
+          // console.log("berubah yaaa");
+          // console.log(result.additionalUserInfo.profile, "<<");
+          axios({
+            method: "POST",
+            url: `${this.baseURL}/user/facebook`,
+            data: {
+              email: result.additionalUserInfo.profile.email,
+              username: result.additionalUserInfo.profile.name,
+              password: result.additionalUserInfo.profile.id
+            }
+          }).then(({ data }) => {
+            localStorage.setItem("userId", data.userFacebook.id);
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("username", data.userFacebook.username);
+            this.$emit("login");
+          });
+        })
+        .catch(err => {
+          // console.log(err, "<< errnya facebook");
+        });
+    },
+    twitter() {
+      var provider = new firebase.auth.TwitterAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(result => {
+          var token = result.credential.accessToken;
+          var secret = result.credential.secret;
+          var user = result.user;
+          // console.log(result.additionalUserInfo.username);
+          axios({
+            method: "POST",
+            url: `${this.baseURL}/user/twitter`,
+            data: {
+              email: result.additionalUserInfo.profile.email,
+              username: result.additionalUserInfo.username,
+              password: result.additionalUserInfo.username
+            }
+          }).then(({ data }) => {
+            localStorage.setItem("userId", data.userTwitter.id);
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("username", data.userTwitter.username);
+            this.$emit("login");
+          });
+        })
+        .catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          var email = error.email;
+          var credential = error.credential;
+          console.log(error);
+        });
+    },
+    github() {
+      var provider = new firebase.auth.GithubAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(result => {
+          // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          console.log(result, "<< ini punya github");
+          console.log(result.user.email, "<<< ini emailnya");
+          // ...
+          axios({
+            method: "POST",
+            url: `${this.baseURL}/user/github`,
+            data: {
+              email: result.user.email,
+              username: result.additionalUserInfo.username,
+              password: result.additionalUserInfo.username
+            }
+          }).then(({ data }) => {
+            localStorage.setItem("userId", data.userGithub.id);
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("username", data.userGithub.username);
+            this.$emit("login");
+          });
+        })
+        .catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+        });
     }
   },
   created() {}

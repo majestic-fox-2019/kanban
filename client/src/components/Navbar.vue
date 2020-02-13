@@ -20,6 +20,7 @@
   </mdb-navbar>
 </template>
 <script>
+import firebase from "firebase";
 import {
   mdbIcon,
   mdbBtn,
@@ -66,6 +67,16 @@ export default {
     },
     logout() {
       localStorage.clear();
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          // Sign-out successful.
+          this.$emit("logout");
+        })
+        .catch(function(error) {
+          // An error happened.
+        });
       this.$emit("logout");
     }
   },

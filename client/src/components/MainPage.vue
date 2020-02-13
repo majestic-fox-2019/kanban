@@ -62,6 +62,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 import {
   mdbDropdown,
   mdbDropdownItem,
@@ -117,7 +118,8 @@ export default {
           this.projects = data;
         })
         .catch(err => {
-          console.log(err.response);
+          // console.log(err.response);
+          Swal.fire("Oops", "Server Error", "error");
         });
     },
     newProject() {
@@ -136,7 +138,8 @@ export default {
           this.getMyProjects();
         })
         .catch(err => {
-          console.log(err.response, "<<<<");
+          // console.log(err.response, "<<<<");
+          Swal.fire("Oops", "Server Error", "error");
         });
     },
     getMyTodos() {
@@ -166,7 +169,8 @@ export default {
           }
         })
         .catch(err => {
-          console.log(err.response, "<< ini gagal fetch todo");
+          // console.log(err.response, "<< ini gagal fetch todo");
+          Swal.fire("Oops", "Server Error", "error");
         });
     },
     getAll() {
