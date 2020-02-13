@@ -26,7 +26,7 @@
                   <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Projects</a>
+                  <a class="nav-link" href="#">Add Project</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Users</a>
@@ -39,46 +39,9 @@
                 <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Login</button>
               </form>
             </div>
-        </nav>          
-        <div class="kanban">               
-            <b-modal 
-                id="modal" 
-                title="Task"
-                @hidden="resetModal"
-                @ok="handleOk"
-            >
-                <input type="hidden" v-model="input_category_id">
-                <div class="form-group">
-                <label>Title</label>
-                <input v-model="input_title" type="text" class="form-control" placeholder="Input Task's Title">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea v-model="input_description" class="form-control" placeholder="Input Task's Description"></textarea>
-                </div>  
-            </b-modal>
-            
-            <div :id="category.name" class="col-3" v-for="category in taskCategory">
-                <div class="title">
-                    {{category.name}}
-                </div>
-                <div class="cards">
-                    <div class="card" v-for="task in category.Tasks">
-                        <div v-b-modal.modal @click="setModalValue(task)">
-                            <div class="card-title">{{ task.title }}</div>
-                            <div class="card-content" v-html="task.description">
-                                {{ task.description }}
-                            </div>
-                        </div>
-                    </div>            
-                </div>
-                <div class="footer">
-                    <button v-b-modal.modal @click="setModalValue({categoryId: category.id})">Add a task</button> 
-                </div>
-            </div>        
-        </div>
+        </nav>      
+        <div class="app"></div>    
     </body>
-    <script src="js/vue.js"></script>
-    <script src="js/bootstrap-vue.js"></script>
+    <!-- <script src="js/vue.js"></script>
+    <script src="js/bootstrap-vue.js"></script> -->
     <script src="js/main.js"></script>
-</html>
