@@ -1,0 +1,25 @@
+{
+  "name": "kanban",
+  "version": "1.0.0",
+  "description": "aplikasi kanban",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "test": "testcommand"
+  },
+  "keywords": [
+    "kanban"
+  ],
+  "author": "erynrizky",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.7.3",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.18.1",
+    "sequelize": "^5.21.4"
+  }
+}
