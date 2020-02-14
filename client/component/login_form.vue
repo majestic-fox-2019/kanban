@@ -35,7 +35,7 @@ export default {
     return {
       email: "",
       password: "",
-      endpoint_login: "http://localhost:3000/login",
+      endpoint_login: "https://api-kanban.herokuapp.com/login",
       params: {
         client_id:
           "296527354511-ljb6felanads0etlm9rlt1qo7uodhal1.apps.googleusercontent.com"
@@ -53,7 +53,7 @@ export default {
       axios({
         method: "post",
         data: { id_token },
-        url: "http://localhost:3000/google-signin"
+        url: "https://api-kanban.herokuapp.com/google-signin"
       })
         .then(res => {
           localStorage.setItem("token", res.data.token);

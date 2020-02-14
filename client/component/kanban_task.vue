@@ -32,7 +32,7 @@ export default {
   data: function() {
     return {
       disable: true,
-      endpoint_task: "http://localhost:3000/task"
+      endpoint_task: "https://api-kanban.herokuapp.com/task"
     };
   },
   methods: {

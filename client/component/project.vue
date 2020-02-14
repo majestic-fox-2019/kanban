@@ -16,7 +16,7 @@ export default {
   props: ["project"],
   data: function() {
     return {
-      endpoint_task: "http://localhost:3000/category"
+      endpoint_task: "https://api-kanban.herokuapp.com/category"
     };
   },
   methods: {
