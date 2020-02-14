@@ -1,0 +1,133 @@
+body {
+  background: linear-gradient(to bottom, #076585, #fff);
+  height: 100vh;
+}
+
+#navbar-content h6 {
+  margin: auto;
+  font-family: Helvetica, sans-serif;
+}
+
+.container {
+  padding: 0;
+  max-width: 95vw;
+}
+
+.card-category {
+  background-color: rgba(255, 255, 255, 0);
+  margin: 10px;
+  width: 20em;
+  min-height: 5vh;
+  max-height: 80vh;
+}
+.card-category .card-header {
+  font-weight: bolder;
+  padding: 0;
+}
+
+.deleteImage {
+  margin-left: 10px !important;
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 30px;
+  max-height: 30px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.card-body-task {
+  border: 0.5px solid black;
+  width: 100%;
+  border-radius: 10px;
+  color: black;
+  text-align: center;
+  font-size: 16px;
+  transition: 0.3s;
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.card-body-task:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.card-body-task:hover {
+  background-color: #5b888a;
+  color: white;
+}
+
+.card-footer {
+  padding: 5px;
+}
+
+.task-belong {
+  font-size: 13px;
+  margin-bottom: 0;
+  margin-left: 10px;
+}
+
+.card-title {
+  margin: 0;
+  overflow: auto;
+  font-size: 15px;
+  font-weight: normal;
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.task-category {
+  font-weight: bold;
+  font-size: 17px;
+  padding: 3px;
+}
+
+.card-container {
+  overflow: auto;
+  scrollbar-width: none;
+  background-color: grey;
+}
+.card-container .scroll .card {
+  border-radius: 10px;
+  border: 0.1px solid black;
+  margin: 5px;
+  margin-bottom: 0px;
+}
+
+.card-container::-webkit-scrollbar {
+  width: 0px;
+}
+
+.myModal {
+  position: fixed;
+  background-color: rgba(66, 72, 68, 0.473);
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  z-index: 5;
+  top: 0;
+}
+
+.input-task {
+  border: 0;
+}
+
+#category-title {
+  color: white;
+  background-color: #2b3b69;
+}
+
+.google-login {
+  height: 50px;
+  cursor: pointer;
+}
+
+.input-task::placeholder {
+  font-size: 13px;
+}
+
+/*# sourceMappingURL=style.css.map */
