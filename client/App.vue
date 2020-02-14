@@ -140,20 +140,22 @@
                 }
             },
             handleChangeStatus: function(event, objData){
-                fetch(`${this.backend_url}/tasks/${objData.id}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ProjectId: event.target.value})
-                })  
-                .then(res => {
-                    console.log(res);
-                    this.getTasks();
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+                if(event.target.value) {
+                    fetch(`${this.backend_url}/tasks/${objData.id}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ProjectId: event.target.value})
+                    })  
+                    .then(res => {
+                        console.log(res);
+                        this.getTasks();
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+                }
             }
         },
         beforeMount() {

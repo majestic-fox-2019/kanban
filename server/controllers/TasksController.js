@@ -52,7 +52,8 @@ class TasksController {
             .update({ProjectId}, {
                 where: {
                     id: Number(req.params.id)
-                }
+                },
+                returning: true
             })
             .then(updatedTask => {
                 res.status(200).json(updatedTask[1][0] || "Data not found!");
