@@ -3,7 +3,7 @@
 ### Client Endpoint:
 
 ```
-https://kanban-v2.firebaseapp.com
+https://h8-kanban-v2.lieprojects.com/
 ```
 
 
@@ -42,6 +42,14 @@ DEFAULT_PASSWORD = < Your preferred default password >
 
 
 ### Additional Information:
+
+
+
+#### Third Party Sign Ins:
+
+- Google
+- Facebook
+- Github
 
 
 

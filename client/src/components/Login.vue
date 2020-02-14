@@ -104,12 +104,17 @@ export default {
 			.catch(function(error) {
 				const errorCode = error.code;
 				const errorMessage = error.message;
-				console.log(errorMessage);
 				const email = error.email;
 				const credential = error.credential;
+				Swal.fire(
+                'Oops..',
+                errorMessage,
+                'error'
+              )
 			});
 		},
 		fSign() {
+			let userEmail
 			const provider = new firebase.auth.FacebookAuthProvider();
 			firebase.auth().signInWithPopup(provider)
 			.then(function(result) {
@@ -117,20 +122,41 @@ export default {
 			const token = result.credential.accessToken;
 			// The signed-in user info.
 			const user = result.user;
-			console.log(user);
-			// ...
+			userEmail = user.email
+			return axios({
+				url: 'https://kanban-v2.herokuapp.com/gSignIn',
+				method: 'post',
+				data: {
+					email: user.email,
+					name: user.displayName
+				}
+			})
+			})
+			.then(({ data }) => {
+				Swal.fire(
+					'Login Successful!',
+					`Logged in as: ${userEmail}`,
+					'success'
+				)
+                localStorage.setItem('token', data.token)
+				localStorage.setItem('id', data.id) 
+                this.$emit('logged', true)
 			})
 			.catch(function(error) {
 			// Handle Errors here.
 			const errorCode = error.code;
 			const errorMessage = error.message;
-			console.log(errorMessage);
 			
 			// The email of the user's account used.
 			const email = error.email;
 			// The firebase.auth.AuthCredential type that was used.
 			const credential = error.credential;
 			// ...
+			Swal.fire(
+                'Oops..',
+                errorMessage,
+                'error'
+              )
 			});
 		},
 		gSign() {
@@ -165,9 +191,13 @@ export default {
 			.catch(function(error) {
 			const errorCode = error.code;
 			const errorMessage = error.message;
-				console.log(errorMessage)
 			const email = error.email;
 			const credential = error.credential;
+			Swal.fire(
+                'Oops..',
+                errorMessage,
+                'error'
+              )
 			});
 		},
         login () {
