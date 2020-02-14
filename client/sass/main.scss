@@ -14,20 +14,11 @@ body{
 
   overflow: auto;
 
-  .col-3:nth-child(1){
-    margin-left: 25vw;
-  }
-
   .col-3{
     height: auto;
     width: 100%;
-    // max-height: 80vh;
     margin-top: 0.5%;
     margin-bottom: 2%;
-    // overflow: auto;
-    // background-color: $card_color;
-    // border: 3px solid $card_color;
-    // border-radius: 3px;
 
     .title{
       text-align: center;

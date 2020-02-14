@@ -6,25 +6,12 @@
                 :dataModal="dataModal"
                 :handleOk="handleOk"
             >
-            </custom-modal>            
-            <div :id="category.name" class="col-3" v-for="category in taskCategory" :key="category.id">
-                <div class="title">
-                    {{category.name}}
-                </div>
-                <div class="cards">
-                    <div class="card" v-for="task in category.Tasks" :key="task.id">
-                        <div v-b-modal.modal @click="setModalValue(task)">
-                            <div class="card-title">{{ task.title }}</div>
-                            <div class="card-content" v-html="task.description">
-                                {{ task.description }}
-                            </div>
-                        </div>
-                    </div>            
-                </div>
-                <div class="footer">
-                    <button v-b-modal.modal @click="setModalValue({ProjectId: category.id})">Add a task</button> 
-                </div>
-            </div>        
+            </custom-modal>
+            <task-category
+                :taskCategory="taskCategory"
+                :setModalValue="setModalValue"
+            >
+            </task-category>               
         </div>
     </div>
 </template>
