@@ -38,7 +38,7 @@ export default {
   },
   data() {
     return {
-      host: "https://dawet-kanban.herokuapp.com",
+      host: "http://localhost:3000",
       toaster : null,
       email : '',
       page: {
