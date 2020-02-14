@@ -50,6 +50,7 @@ class taskController{
             }
         })
         .then(data=>{
+                req.io.emit("live")
                 res.status(200).json(isi)
             
         })
@@ -68,6 +69,7 @@ class taskController{
         .then(data=>{
             // res.send(data)
             if(data[0] != 0){
+                req.io.emit("live")
                 res.status(200).json(data[1][0])
             }
             else{

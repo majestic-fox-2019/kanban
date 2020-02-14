@@ -49,7 +49,7 @@
 <script>
 import cardContainer from './cardCategory'
 import axios from 'axios'
-const server = `http://localhost:3000`
+const server = `https://kanbatte.herokuapp.com`
 export default {
         
         props:['category','tasks'],
@@ -81,7 +81,7 @@ export default {
             .then(data=>{
                 console.log(data)
                 this.$parent.showList()
-                
+
             })
             .catch(err=>{
                 console.log(err)

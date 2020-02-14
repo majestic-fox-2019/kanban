@@ -23,7 +23,7 @@ import kanbanContainer from './components/kanbanContainer'
 import Swal from'sweetalert2'
 
 import axios from 'axios'
-const server ='http://localhost:3000'
+const server ='https://kanbatte.herokuapp.com'
 export default {
     data: function(){
         return{

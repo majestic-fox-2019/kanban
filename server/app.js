@@ -9,10 +9,11 @@ var io = require('socket.io')(server);
 const index = require('./routes/index')
 const errorHandling = require('./helper/erroHandling')
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
+
 app.use((req,res,next)=>{
     req.io=io
     next()
@@ -26,7 +27,9 @@ io.on('connection', function (socket) {
       console.log(data);
     });
   });
-
+// app.listen(PORT,()=>{
+//     console.log(`listening on ${PORT}`)
+// })
 server.listen(PORT,()=>{
     console.log(`listening on ${PORT}`)
 })

@@ -26,7 +26,7 @@
 </template>
 <script>
 import axios from 'axios'
-const server = `http://localhost:3000`
+const server = `https://kanbatte.herokuapp.com`
 export default {
     name:"name",
     props:['category','task','index'],

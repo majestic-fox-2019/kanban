@@ -35,7 +35,7 @@
 <script>
 import GoogleLogin from 'vue-google-login';
 import axios from 'axios'
-const server ='http://localhost:3000'
+const server ='https://kanbatte.herokuapp.com'
 export default {
     name:"login",
     props:['formShowLogin'],
@@ -49,7 +49,7 @@ export default {
                 password:null
         },
             params: {
-                client_id: "451357483219-1ei7qhem2qiren2pisjm5h2lu0v1l2ij.apps.googleusercontent.com"
+                client_id: "687687542092-3okhk3h2tvich2jiv42r4lvnj7uivefe.apps.googleusercontent.com"
             },
             renderParams: {
                 width: 150,
