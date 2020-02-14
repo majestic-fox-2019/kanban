@@ -1,0 +1,107 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.container-kanban {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  font-family: "Lato", sans-serif;
+}
+.container-kanban .sidebar-kanban {
+  top: 0;
+  bottom: 0;
+  width: 25%;
+  height: 100%;
+  background-color: #ABBDA3;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  color: whitesmoke;
+}
+.container-kanban .sidebar-kanban .text-kanban {
+  margin: 10px;
+}
+.container-kanban .sidebar-kanban .text-kanban h1 {
+  margin-bottom: 10px;
+  letter-spacing: 10px;
+}
+.container-kanban .sidebar-kanban .text-kanban p {
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 100;
+  font-family: "Rouge Script", cursive;
+}
+.container-kanban .sidebar-kanban .text-kanban a {
+  color: #525f5f;
+}
+.container-kanban .board {
+  top: 0;
+  left: 25%;
+  bottom: 0;
+  width: 85%;
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+  background-color: #ECF0F1;
+}
+.container-kanban .board .category {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #525f5f;
+  color: whitesmoke;
+  height: auto;
+  width: 15em;
+  text-align: center;
+  opacity: 90%;
+}
+.container-kanban .board .category .title {
+  margin: 10px;
+}
+.container-kanban .board .category .all-cards {
+  overflow: auto;
+}
+.container-kanban .board .category .task {
+  background-color: #C5D5D6;
+  margin: 5px;
+  padding: 5px;
+  color: black;
+  text-align: left;
+  border-radius: 10px;
+}
+.container-kanban .board .category .task p {
+  font-style: italic;
+}
+.container-kanban .board .category .task article {
+  font-size: 14px;
+}
+.container-kanban .board .category .task .action {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #7b9685;
+  margin: 5px;
+  cursor: pointer;
+}
+.container-kanban .board .category .footer {
+  cursor: pointer;
+  font-size: 12px;
+}
+
+p {
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,27 @@
+{
+  "name": "kanbanyes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "socket.io-client": "^2.3.0",
+    "vue": "^2.6.11",
+    "vue-google-login": "^2.0.3",
+    "vue-google-oauth": "^1.0.5",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-socket.io-extended": "^4.0.1"
+  },
+  "devDependencies": {
+    "@vue/component-compiler": "^4.2.0",
+    "parcel-bundler": "^1.12.4",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
