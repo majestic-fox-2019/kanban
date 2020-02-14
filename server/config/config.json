@@ -15,10 +15,10 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": "zhbroufterrhqd",
-    "password": "45aa2a7d74a03b97ddf3b69ef1dfbc0f4dda3d25489cdcd30bfe66ef216bdbb4",
-    "database": "dcuhtp017klqjl",
-    "host": "ec2-50-17-178-87.compute-1.amazonaws.com",
+    "username": "xxxxxxxxxx",
+    "password": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "database": "xxxxxxxxxx",
+    "host": "xxxxxxxxxxxxxx",
     "dialect": "postgres"
   }
 }

@@ -39,7 +39,7 @@ export default {
       // endpoint_login: "http://localhost:3000/login",
       params: {
         client_id:
-          "296527354511-ljb6felanads0etlm9rlt1qo7uodhal1.apps.googleusercontent.com"
+          "562480713482-1e3649b07bupnvsaqu41nkgeosfdsofg.apps.googleusercontent.com"
       },
       renderParams: {
         width: 250,
