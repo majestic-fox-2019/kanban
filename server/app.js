@@ -42,6 +42,14 @@ io.on("connection", function (socket) {
     socket.on("ada-project-didelete", function () {
         socket.broadcast.emit("okeDeleted")
     })
+    socket.on("joinRoom", function (room) {
+
+        socket.join(room)
+    })
+    socket.on("kirimPesan", function (obj) {
+        let idPerMessage = Date.now()
+        socket.broadcast.to(obj.id).emit("pesan-pesannya", { sender: obj.sender, pesan: obj.pesan, id: idPerMessage })
+    })
 })
 
 http.listen(port, function () {

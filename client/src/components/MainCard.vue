@@ -1,32 +1,19 @@
 <template>
-  <div class="col-3">
+  <div class="col-lg-3 col-sm-12">
     <mdb-container>
       <mdb-row>
         <mdb-col>
           <mdb-card wide>
             <mdb-view :gradient="bgnya" cascade>
               <h2 class="card-header-title mb-3">{{category}}</h2>
-              <!-- <p class="mb-0"><mdb-icon icon="calendar-alt" /> 26.07.2017</p> -->
             </mdb-view>
             <mdb-card-body class="text-center" cascade>
-              <!-- <draggable
-                group="category"
-                v-model="datas"
-                :list="datas"
-                :move="checkMove"
-                @start="drag=true"
-                @end="drag=false"
-              @change="log"-->
-              <!-- > -->
-              <!-- ini buat isiannya -->
               <MiniCard
                 @updateStatus="emitGetLagi"
                 v-for="onetask of datas"
                 :task="onetask"
                 :key="onetask.id"
               ></MiniCard>
-              <!-- finish -->
-              <!-- </draggable> -->
             </mdb-card-body>
           </mdb-card>
         </mdb-col>

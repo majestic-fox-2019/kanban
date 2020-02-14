@@ -59,6 +59,13 @@
               class="btn btn-danger"
               v-b-modal="'modalDelete'+perProject.ProjectId"
             >Delete Project</div>
+            <div>
+              <div
+                class="btn btn-primary"
+                v-on:click="openChatPini"
+                @click="$bvModal.hide('modal-detail'+perProject.ProjectId)"
+              >Open Chat</div>
+            </div>
           </div>
         </div>
       </div>
@@ -194,6 +201,9 @@ export default {
       } else {
         Swal.fire("OOPS", "Data does not match", "error");
       }
+    },
+    openChatPini() {
+      this.$emit("openChatYangIni", this.perProject);
     }
   },
   data() {
@@ -207,6 +217,7 @@ export default {
     };
   },
   created() {
+    // console.log("keubah gasih");
     this.getMembers();
     this.getAllTodoOfProjects();
     // console.log(this.perProject, "<< ini projects");

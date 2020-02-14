@@ -9,6 +9,7 @@
             <mdb-dropdown-toggle slot="toggle" color="primary" class="px-3"></mdb-dropdown-toggle>
             <mdb-dropdown-menu>
               <Projects
+                @openChatYangIni="ubahSelectedP"
                 @all-todo-project="tambahTodosOuter"
                 @memberNambah="getMyProjects"
                 @projectCreated="getAll"
@@ -57,10 +58,16 @@
 
       <!-- </draggable> -->
     </div>
+    <div class="d-flex justify-content-end mt-2">
+      <div class="col-8" v-if="selectedPid">
+        <chatRoom :chatRoomId="selectedPid"></chatRoom>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import chatRoom from "./chatRoom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import {
@@ -102,7 +109,8 @@ export default {
     mdbModalBody,
     mdbModalFooter,
     mdbInput,
-    mdbModalTitle
+    mdbModalTitle,
+    chatRoom
   },
   methods: {
     getMyProjects() {
@@ -183,9 +191,6 @@ export default {
       this.getMyTodos();
     },
     tambahTodosOuter(value) {
-      // console.log(value, "<< ini di main page");
-      // console.log(value[0], "<ini valuenya");
-      // console.log(this.backlog, "<<ini yang di backlog");
       for (let j of value) {
         if (j.UserId.toString() !== localStorage.getItem("userId")) {
           if (j.status == "Backlog") {
@@ -231,6 +236,9 @@ export default {
     },
     emitLogout() {
       this.$emit("logoutya");
+    },
+    ubahSelectedP(value) {
+      this.selectedPid = value;
     }
   },
   data() {
@@ -245,7 +253,8 @@ export default {
       backlog: [],
       todo: [],
       doing: [],
-      done: []
+      done: [],
+      selectedPid: null
     };
   },
   mounted() {
