@@ -37,34 +37,13 @@
       </v-col>
     </v-row>
 
-    <v-dialog v-model="dialog" max-width="290">
-      <v-card>
-        <v-card-title class="headline">Project Members</v-card-title>
-        <v-card-text>
-          <h3 v-for="(member, i) in project.members" :key="i">
-            {{ member.email }}
-          </h3>
-        </v-card-text>
-        <v-text-field
-          v-if="invite"
-          v-model="email"
-          type="text"
-          label="Title"
-          style="padding: 20px;"
-        ></v-text-field>
-        <v-btn color="green darken-1" text @click.prevent="dialog = false">
-          Close
-        </v-btn>
-        <v-btn
-          color="green darken-1"
-          text
-          @click.prevent="sendInvite"
-          v-if="invite"
-        >
-          Invite
-        </v-btn>
-      </v-card>
-    </v-dialog>
+    <ModalMember
+      :projectMembers="project.members"
+      :dialog="dialog"
+      :invite="invite"
+      @sendInvite="sendInvite"
+      @CLOSE_MODAL="dialog = false"
+    ></ModalMember>
 
     <v-dialog v-model="dialog2" max-width="320">
       <v-card>
@@ -110,6 +89,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import TaskCard from './TaskCard'
 import draggable from 'vuedraggable'
+import ModalMember from './ModalMember'
 
 export default {
   name: 'KanbanBoard',
@@ -119,7 +99,6 @@ export default {
       dialog2: false,
       editId: null,
       invite: false,
-      email: null,
       task: {
         title: null,
         description: null,
@@ -242,10 +221,10 @@ export default {
       this.dialog = true
       this.invite = true
     },
-    sendInvite() {
+    sendInvite(email) {
       const id = this.task.projectId
       const data = {
-        email: this.email
+        email: email
       }
       axios
         .post(`${this.$BASE_URL}/projects/invite/${id}`, data, {
@@ -271,7 +250,8 @@ export default {
   props: ['project'],
   components: {
     TaskCard,
-    draggable
+    draggable,
+    ModalMember
   },
   watch: {
     categories: {
@@ -288,7 +268,7 @@ export default {
                     { headers: { token: localStorage.getItem('token') } }
                   )
                   .then(response => {
-                    this.fetchProjectTasks(this.task.projectId)
+                    // this.fetchProjectTasks(this.task.projectId)
                     this.$socket.emit('changeTask', 'task moved')
                   })
                   .catch(({ response }) => {

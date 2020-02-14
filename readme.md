@@ -89,6 +89,58 @@ none
 }
 ```
 
+### POST /users/social
+
+---
+
+Login with social media account
+
+> #### Headers :
+
+```
+none
+```
+
+> #### Request Body :
+
+```
+firebase auth
+```
+
+> #### Success Reponse
+
+```
+200 : {
+    token : <your jwt token>
+}
+```
+
+### POST /users/github
+
+---
+
+Login with github account
+
+> #### Headers :
+
+```
+none
+```
+
+> #### Request Body :
+
+```
+firebase auth
+```
+
+> #### Success Reponse
+
+```
+200 : {
+    token : <your jwt token>
+}
+```
+
 ## Tasks Routes
 
 ### GET /tasks/:projectId

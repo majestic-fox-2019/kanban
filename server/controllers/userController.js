@@ -57,11 +57,43 @@ class UserController {
       .then(ticket => {
         payload = ticket.getPayload()
         data = {
+          name: payload.name,
           email: payload.email,
           password: process.env.DEFAULT_PASS
         }
         return User.findOne({ where: { email: payload.email } })
       })
+      .then(result => {
+        if (result) {
+          const token = sign({ id: result.id, email: result.email })
+          res.status(200).json({
+            id: result.id,
+            token: token
+          })
+        } else {
+          return User.create(data)
+        }
+      })
+      .then(data => {
+        const token = sign({ id: data.id, email: data.email })
+        res.status(200).json({
+          result: data,
+          token: token
+        })
+      })
+      .catch(err => {
+        next(err)
+      })
+  }
+
+  static fbSign(req, res, next) {
+    const data = {
+      name: req.body.name,
+      email: req.body.email,
+      password: process.env.DEFAULT_PASS
+    }
+    console.log(data)
+    User.findOne({ where: { email: data.email } })
       .then(result => {
         if (result) {
           const token = sign({ id: result.id, email: result.email })

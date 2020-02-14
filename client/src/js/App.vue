@@ -1,23 +1,26 @@
 <template>
   <v-app>
     <Navbar
-      v-on:LOGOUT="logout"
-      v-on:changeForm="changeForm"
-      v-on:BACK="backHome"
+      @LOGOUT="logout"
+      @changeForm="changeForm"
+      @BACK="backHome"
       :isLogin="isLogin"
     ></Navbar>
     <div id="landingpage" v-if="!isLogin">
       <LandingPage
         :changeForm="register"
-        v-on:LOGIN="login"
-        v-on:REGISTER="registerUser"
+        @LOGIN="login"
+        @REGISTER="registerUser"
+        @FB_SIGN="fbSign"
+        @GITHUB_SIGN="githubSign"
+        @hasLoggedIn="isLogin = true"
       ></LandingPage>
     </div>
     <div id="mainpage" v-else>
       <MainPage
         :allProjects="allProjects"
         :home="home"
-        v-on:FETCH_PROJECT="fetchUserProjects"
+        @FETCH_PROJECT="fetchUserProjects"
       ></MainPage>
     </div>
 
@@ -46,6 +49,7 @@ import Swal from 'sweetalert2'
 import Navbar from './components/Navbar'
 import LandingPage from './components/LandingPage'
 import MainPage from './components/MainPage'
+import firebase from 'firebase'
 
 export default {
   name: 'App',
@@ -127,6 +131,79 @@ export default {
           localStorage.clear()
         }
       })
+    },
+    fbSign() {
+      const provider = new firebase.auth.FacebookAuthProvider()
+
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(result => {
+          const token = result.credential.accessToken
+          const user = result.user
+          const regUser = {
+            name: user.displayName,
+            email: user.email
+          }
+          axios
+            .post(`${this.$BASE_URL}/users/social`, regUser)
+            .then(({ data }) => {
+              this.isLogin = true
+              localStorage.setItem('token', data.token)
+              localStorage.setItem('id', data.id)
+              Swal.fire('Welcome', 'Login success', 'success')
+            })
+            .catch(({ response }) => {
+              console.log(response)
+              response.data.err.forEach(el => {
+                this.errors.push(el)
+              })
+            })
+        })
+        .catch(error => {
+          const errorCode = error.code
+          const errorMessage = error.message
+          const email = error.email
+          const credential = error.credential
+          // this.error.push(errorMessage)
+          console.log(errorMessage)
+        })
+    },
+    githubSign() {
+      var provider = new firebase.auth.GithubAuthProvider()
+
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(result => {
+          var token = result.credential.accessToken
+          var user = result.user
+          const regUser = {
+            name: user.displayName,
+            email: user.email
+          }
+          axios
+            .post(`${this.$BASE_URL}/users/social`, regUser)
+            .then(({ data }) => {
+              this.isLogin = true
+              localStorage.setItem('token', data.token)
+              localStorage.setItem('id', data.id)
+              Swal.fire('Welcome', 'Login success', 'success')
+            })
+            .catch(({ response }) => {
+              console.log(response)
+              response.data.err.forEach(el => {
+                this.errors.push(el)
+              })
+            })
+        })
+        .catch(error => {
+          var errorCode = error.code
+          var errorMessage = error.message
+          var email = error.email
+          var credential = error.credential
+          console.log(errorMessage)
+        })
     },
     backHome() {
       this.home = !this.home
