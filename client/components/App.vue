@@ -19,7 +19,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="updateTaskFormTitle">Add Task</h5>
+          <h5 class="modal-title" id="updateTaskFormTitle">Update Task</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -28,11 +28,11 @@
         <div class="modal-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Task Title</label>
-              <input v-model="form.title" type="text" class="form-control" placeholder="Enter your porject">
+              <input v-model="form.title" type="text" class="form-control" placeholder="Enter your task title">
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Task Description</label>
-              <textarea v-model="form.description" type="textarea" class="form-control" placeholder="Enter your porject"></textarea>
+              <textarea v-model="form.description" type="text" class="form-control" placeholder="Enter your task description"></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -58,11 +58,11 @@
         <div class="modal-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Task Title</label>
-              <input v-model="form.title" type="text" class="form-control" placeholder="Enter your porject">
+              <input v-model="form.title" type="text" class="form-control" placeholder="Enter your project">
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Task Description</label>
-              <input v-model="form.description" type="text" class="form-control" placeholder="Enter your porject">
+              <textarea v-model="form.description" type="text" class="form-control" placeholder="Enter your task description"></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -96,7 +96,7 @@ export default {
   },
   data: function(){
     return {
-      baseUrl: `https://kanban-fancy.herokuapp.com/api`,
+      baseUrl: `https://kanban-fancy.herokuapp.com`,
       categories: {
         'Backlog':[],
         'Will Do': [],
@@ -120,7 +120,7 @@ export default {
   methods: {
     changeCategory: function(value){
       console.log(value)
-      axios.put(`${this.baseUrl}/projects/${this.projectId}/tasks/${value.taskcard.id}`, {
+      axios.put(`${this.baseUrl}/api/projects/${this.projectId}/tasks/${value.taskcard.id}`, {
         title: value.taskcard.title,
         description: value.taskcard.description,
         category: value.getCategoryStatus
@@ -148,7 +148,7 @@ export default {
     },
     addTask: function() {
       console.log(this.form)
-        axios.post(`${this.baseUrl}/projects/${this.projectId}/tasks`, {
+        axios.post(`${this.baseUrl}/api/projects/${this.projectId}/tasks`, {
             title: this.form.title,
             description: this.form.description,
             category: this.form.category
@@ -165,7 +165,7 @@ export default {
     },
     deleteTask: function(value) {
       console.log(value)
-        axios.delete(`${this.baseUrl}/projects/${this.projectId}/tasks/${value}`, {headers: {token: localStorage.token}})
+        axios.delete(`${this.baseUrl}/api/projects/${this.projectId}/tasks/${value}`, {headers: {token: localStorage.token}})
         .then(result => {
             this.showAllTask()
         })
@@ -174,7 +174,7 @@ export default {
         })
     },
     updateTask: function() {
-        axios.put(`${this.baseUrl}/projects/${this.projectId}/tasks/${this.taskId}`, {
+        axios.put(`${this.baseUrl}/api/projects/${this.projectId}/tasks/${this.taskId}`, {
             title: this.form.title,
             description: this.form.description
         }, {headers: {token: localStorage.token}})
@@ -195,7 +195,7 @@ export default {
       this.showAllTask()
     },
     addProject: function(form_title) {
-      axios.post(`${this.baseUrl}/projects`, {
+      axios.post(`${this.baseUrl}/api/projects`, {
           title: form_title
       }, {headers: {token: localStorage.token}})
       .then(project => {
@@ -207,7 +207,7 @@ export default {
       })
     },
     deleteProject: function(project_id) {
-        axios.delete(`${this.baseUrl}/projects/${project_id}`, {headers: {token: localStorage.token}})
+        axios.delete(`${this.baseUrl}/api/projects/${project_id}`, {headers: {token: localStorage.token}})
         .then(result => {
             this.showAllProjects()
         })
@@ -216,7 +216,7 @@ export default {
         })
     },
     updateProject: function(id, title) {
-        axios.put(`${this.baseUrl}/projects/${id}`, {
+        axios.put(`${this.baseUrl}/api/projects/${id}`, {
             title: title,
         }, {headers: {token: localStorage.token}})
         .then(task => {
@@ -233,7 +233,7 @@ export default {
             this.categories[key] = [];
           }
         }
-        axios.get(`${this.baseUrl}/projects/${this.projectId}/tasks`, {headers: {token: localStorage.token}})
+        axios.get(`${this.baseUrl}/api/projects/${this.projectId}/tasks`, {headers: {token: localStorage.token}})
         .then(foundTasks => {
             // this.tasks = foundTasks.data
             foundTasks.data.forEach(el => {
@@ -250,7 +250,7 @@ export default {
         });
     },
     showAllProjects: function() {
-        axios.get(`${this.baseUrl}/projects`, {headers: {token: localStorage.token}})
+        axios.get(`${this.baseUrl}/api/projects`, {headers: {token: localStorage.token}})
         .then(projects => {
           this.projects = projects.data
           this.allProjectPage = true
@@ -262,7 +262,7 @@ export default {
     },
     login: function(data) {
       console.log(data)
-        axios.post(`${this.baseUrl}/login`, {
+        axios.post(`${this.baseUrl}/api/login`, {
             email: data.email,
             password: data.password
         })
@@ -296,19 +296,25 @@ export default {
     register: function(data){
       console.log(data.email, 'masuk')
       // let registerData = 
-      axios.post(`${this.baseUrl}/register`, {
+      axios.post(`${this.baseUrl}/api/register`, {
         name: data.name,
         email: data.email,
         password: data.password
       })
       .then(user => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Successfully registered',
+            showConfirmButton: false,
+            timer: 1300
+        })
+        data.name = ''
+        data.email = ''
+        data.password = ''
         console.log( 'masuk then')
         this.loginPage = true
         this.allProjectPage = true
         this.navbar = true
-        data.name = ''
-        data.email = ''
-        data.password = ''
         // this.showAllProjects()
         
       })
@@ -328,15 +334,22 @@ export default {
       auth2.signOut().then(function () {
       console.log('User signed out.');
       });
+
       localStorage.removeItem('token')
       this.loginPage = true,
       this.allProjectPage = false,
       this.allTaskPage = false
+      Swal.fire({
+            icon: 'success',
+            title: 'Successfully logout',
+            showConfirmButton: false,
+            timer: 1300
+      })
     },
     onSuccess: function(id_token) {
       axios({
         method: "post",
-        url: `${this.baseUrl}/google`,
+        url: `${this.baseUrl}/api/google`,
         data: {
           googleToken: id_token
         }

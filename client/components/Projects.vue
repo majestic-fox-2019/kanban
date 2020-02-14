@@ -19,7 +19,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editProjectTitle">Add Project</h5>
+          <h5 class="modal-title" id="editProjectTitle">Edit Project</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -28,7 +28,7 @@
         <div class="modal-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Project Title</label>
-              <input v-model="titleData" type="text" class="form-control" placeholder="Enter your porject">
+              <input v-model="titleData" type="text" class="form-control" placeholder="Enter your project">
             </div>
         </div>
         <div class="modal-footer">
