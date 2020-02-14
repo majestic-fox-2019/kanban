@@ -22,7 +22,7 @@
 
 ------
 
-#### **Base URL :** `http://localhost:3000`
+#### **Base URL :** `https://learnkanban.herokuapp.com/`
 
 #### **Installation:**
 
