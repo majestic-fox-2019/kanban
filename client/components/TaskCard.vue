@@ -11,13 +11,25 @@
                         {{ task.description }}
                     </div>
                 </div>
+                <hr>
+                <div>
+                    <p class="h4 text-center">
+                        <b-icon icon="pencil" v-b-modal.modal @click="setModalValue(task)"></b-icon>
+                        <b-icon icon="trash" @click="setModalValue(task); handleDelete(task);"></b-icon>
+                    </p>
+                    <hr/>
+                    <div class="text-center">Status</div>
+                    <select class="form-control" style="width: 100%">
+                        <option>{{category.name}}</option>
+                    </select>
+                </div>
             </div>            
         </div>
     </div>
 </template>
 <script>
     export default {
-        props: ["category", "setModalValue"]
+        props: ["category", "setModalValue", "handleDelete"]
     }
 </script>
 <style>

@@ -10,6 +10,7 @@
             <task-category
                 :taskCategory="taskCategory"
                 :setModalValue="setModalValue"
+                :handleDelete="handleDelete"
             >
             </task-category>               
         </div>
@@ -97,6 +98,23 @@
                     this.addTask(objData);
                 }else{
                     this.updateTask(objData);
+                }
+            },
+            handleDelete: function(objData) {
+                if(confirm(`are you sure you want to delete ${objData.title}?`)) {
+                    fetch(`${this.backend_url}/tasks/${objData.id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })  
+                    .then(res => {
+                        console.log(res);
+                        this.getTasks();
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })  
                 }
             }
         },

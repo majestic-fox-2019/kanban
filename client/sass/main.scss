@@ -23,7 +23,7 @@ body{
     .title{
       text-align: center;
       font-size: 16pt;
-      color: lightslategray;
+      color: $bgcolor;
       background-color: lightgray;
       border-radius: 10px 10px 0 0;
       border-bottom: 1px solid gray;
@@ -44,19 +44,12 @@ body{
         border: 1px solid grey;
         border-radius: 5px;
         padding: 1%;
-        cursor: pointer;
         min-width: 50%;
       }
       button:hover{
         background-color: whitesmoke
       }
     }
-
-  
-    .footer:hover{
-      cursor: pointer;
-    }
-
 
     .title , .footer{
       padding-left: 1%;
@@ -79,7 +72,6 @@ body{
     padding: 1%;
     min-height: 10vh;
     margin: 3%;
-    cursor: pointer;
 
     .card-title{
       text-align: center;
@@ -100,6 +92,10 @@ body{
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
+}
+
+.card-title, .card-content, button, svg{
+  cursor: pointer;
 }
 
 
@@ -123,3 +119,4 @@ body{
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+

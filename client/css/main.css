@@ -18,7 +18,7 @@ body {
 .kanban .col-3 .title {
   text-align: center;
   font-size: 16pt;
-  color: lightslategray;
+  color: #2c3e50;
   background-color: lightgray;
   border-radius: 10px 10px 0 0;
   border-bottom: 1px solid gray;
@@ -38,14 +38,10 @@ body {
   border: 1px solid grey;
   border-radius: 5px;
   padding: 1%;
-  cursor: pointer;
   min-width: 50%;
 }
 .kanban .col-3 .footer button:hover {
   background-color: whitesmoke;
-}
-.kanban .col-3 .footer:hover {
-  cursor: pointer;
 }
 .kanban .col-3 .title, .kanban .col-3 .footer {
   padding-left: 1%;
@@ -65,7 +61,6 @@ body {
   padding: 1%;
   min-height: 10vh;
   margin: 3%;
-  cursor: pointer;
   /* No copy text */
   -webkit-touch-callout: none;
   /* iOS Safari */
@@ -88,6 +83,10 @@ body {
 .card .card-content {
   text-align: center;
   font-size: 10pt;
+}
+
+.card-title, .card-content, button, svg {
+  cursor: pointer;
 }
 
 /* Scroll Style */
