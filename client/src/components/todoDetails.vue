@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import axios from 'axios'
 export default {
   name: 'editAddTodo',
@@ -88,7 +89,7 @@ export default {
     update(){
       axios({
         method: 'patch',
-        url: `http://localhost:3000/todos/${this.todoDetail.id}`,
+        url: `https://shielded-escarpment-11569.herokuapp.com/todos/${this.todoDetail.id}`,
         data: {
           title: this.todoDetail.title,
           content: this.todoDetail.content
@@ -103,16 +104,33 @@ export default {
       });
     },
     hapus(){
-      axios({
-        method: 'delete',
-        url: `http://localhost:3000/todos/${this.todoDetail.id}`,
-      })
-      .then((result) => {
-        this.$socket.emit('updateStatus')
-        this.$emit('deleteSuccess')
-      }).catch((err) => {
-        
-      });
+      Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            axios({
+                method: 'delete',
+                url: `https://shielded-escarpment-11569.herokuapp.com/todos/${this.todoDetail.id}`,
+              })
+              .then((result) => {
+                this.$socket.emit('updateStatus')
+                this.$emit('deleteSuccess')
+              }).catch((err) => {
+                console.log(err);
+              });
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
     }
   },
   props: ['todoDetail']

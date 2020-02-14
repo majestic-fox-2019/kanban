@@ -34,7 +34,7 @@ Vue.use(IconsPlugin)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-Vue.prototype.$socket = io.connect('http://localhost:3000')
+Vue.prototype.$socket = io.connect('https://shielded-escarpment-11569.herokuapp.com')
 
 new Vue({
   render: h => h(App)

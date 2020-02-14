@@ -182,7 +182,7 @@ export default {
     createTodo() {
       axios({
         method: 'post',
-        url: 'http://localhost:3000/todos',
+        url: 'https://shielded-escarpment-11569.herokuapp.com/todos',
         data: {
           title: this.form.title,
           content: this.form.description,
@@ -201,7 +201,7 @@ export default {
     getAllTodo() {
       axios({
         method: 'get',
-        url: 'http://localhost:3000/todos'
+        url: 'https://shielded-escarpment-11569.herokuapp.com/todos'
       })
         .then(({ data }) => {
           this.progressCards[0].items = []
@@ -242,7 +242,7 @@ export default {
     changeStatus(status) {
       axios({
         method: 'patch',
-        url: `http://localhost:3000/todos/${this.todoDetailData.id}/status`,
+        url: `https://shielded-escarpment-11569.herokuapp.com/todos/${this.todoDetailData.id}/status`,
         data: {
           status: status
         }

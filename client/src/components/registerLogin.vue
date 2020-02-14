@@ -159,9 +159,11 @@ export default {
         })
         .then(data => {
           console.log('ini data register yang sudah update', data)
+          this.open1('Yey you have register successfully')
         })
         .catch(err => {
           console.log(err)
+          this.open4(err.message)
         })
     },
     login() {
@@ -181,6 +183,7 @@ export default {
         })
         .catch(err => {
           console.log(err)
+          this.open4(err.message)
         })
     },
     googleSignIn() {
@@ -345,6 +348,16 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    open1(messageToShow) {
+      this.$notify({
+        title: 'Success',
+        message: messageToShow,
+        type: 'success'
+      })
+    },
+    open4(errorMessage) {
+      this.$message.error(errorMessage)
     }
   }
 }

@@ -36,7 +36,7 @@ export default {
       // console.log('this is come from draggable', event.added.element)
       axios({
         method: 'patch',
-        url: `http://localhost:3000/todos/${event.added.element.id}/status`,
+        url: `https://shielded-escarpment-11569.herokuapp.com/todos/${event.added.element.id}/status`,
         data: {
           status: this.progressCard.status
         }
