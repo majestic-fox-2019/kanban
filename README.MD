@@ -22,14 +22,14 @@
 ​
 ------
 ​
-#### **Base URL :** `http://localhost:3000`
+#### **Base URL :** `https://k-kanban.firebaseapp.com`
 ​
 #### **Installation:**
 ​
 Clone this API from repository and install npm, then on `server` directory install the neccessary npm package
 ​
 ```
-$ git clone https://github.com/hafizulrifkihawari/kanban.git
+$ git clone https://github.com/Kev1ntan/kanban.git
 $ cd ../server
 $ npm install
 ```
@@ -51,12 +51,12 @@ $ npm run dev
 ```
 ​
 #### **User Routes:**
-| **Route**      | **HTTP** | **Description**                                     |
-| -------------- | -------- | --------------------------------------------------- |
-| /login         | POST     | Log in and get an access token based on credentials |
-| /register      | POST     | Sign up new user                                    |
-| /googlelogin   | POST     | Sign in OAuth Google Login                          |
-| /facebooklogin | POST     | Sign in OAuth facebook Login                        |
+| **Route**           | **HTTP** | **Description**                                     |
+| ------------------- | -------- | --------------------------------------------------- |
+| /user/login         | POST     | Log in and get an access token based on credentials |
+| /user/register      | POST     | Sign up new user                                    |
+| /user/googlelogin   | POST     | Sign in OAuth Google Login                          |
+| /user/facebooklogin | POST     | Sign in OAuth facebook Login                        |
 ​
 #### **Task Routes:**
 **login required**
@@ -64,9 +64,9 @@ $ npm run dev
 | ---------- | -------- | ------------------------------------------------------------ |
 | /tasks     | GET      | Show all task of every user                                  |
 | /tasks     | POST     | Create new task                                              |
-| /task/:id | PUT      | Change category of specified task *(authorization required)* |
-| /task/:id | PATCH    | Change category of specified task *(authorization required)* |
-| /task/:id | DELETE   | Delete task by id *(authorization required)*                 |
+| /task/:id  | PUT      | Change category of specified task *(authorization required)* |
+| /task/:id  | PATCH    | Change category of specified task *(authorization required)* |
+| /task/:id  | DELETE   | Delete task by id *(authorization required)*                 |
 ​
 #### **List of Errors:**
 | **Code** | **Name**              | **Description**                                |
