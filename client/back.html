@@ -1,0 +1,277 @@
+<div id="loginPage" v-if="show">
+  <div class="loginpanel">
+    <form action="" v-on:submit.prevent="loginUser">
+      <div class="txt">
+        <input id="user" type="text" v-model="lEmail" placeholder="Email" />
+        <label for="user" class="entypo-user"></label>
+      </div>
+      <div class="txt">
+        <input id="pwd" type="password" v-model="lPassword" placeholder="Password" />
+        <label for="pwd" class="entypo-lock"></label>
+      </div>
+      <center><p style="color: red;" v-show="errorLogin">email/password is wrong</p></center>
+      <div class="d-flex justify-content-around">
+        <button type="submit" class="loginBtn" >Login</button>
+        <span>
+          <a href="javascript:void(0)" class="entypo-user-add register">Register</a>
+        </span>
+      </div>
+    </form>
+    
+    <div class="hr">
+      <div></div>
+      <div>OR</div>
+      <div></div>
+    </div>
+    
+    <div class="social">
+      <a href="javascript:void(0)" class="facebook"></a>
+      <a href="javascript:void(0)" class="twitter"></a>
+      <a href="javascript:void(0)" class="googleplus"></a>
+    </div>
+  </div>
+</div>
+
+<div id="homePage" v-if="show">
+  <div class="container-head">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between align-items-center">
+      <a class="navbar-brand" href="#">K-Kanban</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+      </div>
+      <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="logout" type="submit">Logout</button>
+    </nav>
+  </div>
+  <div class="container-body d-flex justify-content-around">
+    <div class="d-flex justify-content-start card-column">
+      <div  v-for="category in categories">
+        <div class="d-flex flex-column bd-highlight mb-3 card-container">
+          <center><div class="category-bar" v-on:click='categoryBar(category.category)'>{{category.category}}</div></center>
+            <div v-if="category.category">
+              <div class="scroll">
+                <div class="card" v-for="task in category.tasks">
+                  <div class="card-body d-flex flex-column bd-highlight mb-3">
+                    <div class="card-email d-flex justify-content-between">
+                      <div>{{ task.date | dateFormat}}</div>
+                      <div>
+                        <div class="email-bg">{{task.email}}</div>
+                        <!-- <div><img class="editBtn" v-on:click="editTask(task.id)" src="./img/edit-logo.jpeg" alt=""></div> -->
+                      </div>
+                    </div>
+                    <p class="card-text">{{task.title}}</p>
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <button v-on:click="backStep(task.id)" v-if="category.category !== 'Backlog'" class="card-link backBtn">&#x2B05</button>
+                      </div>
+                      <img v-on:click="deleteTask(task.id)" class="card-link deleteBtn" src="./img/garbage-icon.png" alt="">
+                      <div>
+                        <button v-on:click="nextStep(taks.id)" v-if="category.category !== 'Done'"  class="card-link nextBtn">&#x27A1</button>
+                      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <input v-on:keyup.enter="addCard(category)" maxlength="255" v-model="category.title" class="input-card" placeholder="Add a card..." type="text">
+              <div v-show="textLength == 0">{{category.title | textLength}}/255</div>
+          </div>
+        </div>  
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+  var url = `http://localhost:3000`
+  var loginContainer = new Vue({
+    el : '#loginPage',
+    data: {
+      show: true,
+      errorLogin: false,
+      lEmail: '',
+      lPassword: '',
+    },
+    methods: {
+      loginUser: function(e) {
+        axios.post(`${url}/user/login`, {
+            email: this.lEmail,
+            password: this.lPassword
+        })
+          .then((response) =>{
+            localStorage.setItem('token', response.data)
+            this.show = false
+            categoryContainer.show = true
+            categoryContainer.load()
+          })
+          .catch((error)=> {
+            this.errorLogin = true
+          });
+      }
+    },
+    created(){
+      if(localStorage.token){
+        this.show = false
+      }
+    },
+    watch: {
+      show: function(){
+        this.lEmail = '',
+        this.lPassword = ''
+      }
+    }
+  })
+  
+  var categoryContainer = new Vue({
+    el: '#homePage',
+    data: {
+      textLength: 0,
+      show: false,
+      Backlog: true,
+      Product: true,
+      Developtment: true,
+      Done: true,
+      categories: [
+          {
+            category: 'Backlog'
+          },
+          {
+            category: 'Product'
+          },
+          {
+            category: 'Development'
+          },
+          {
+            category: 'Done'
+          }
+        ]
+    },
+    created(){
+      if(localStorage.token){
+        this.show = true
+        this.load()
+      }
+    },
+    filters: {
+      dateFormat: function (date) {
+        return moment(date).format("Do MMM YYYY")
+      },
+      textLength: function (text = 0) {
+        return text.length
+      }
+    },
+    watch: {
+      textLength: function (text) {
+        console.log(this.textLength)
+      }
+    },
+    methods: {
+      load: function(){
+        axios.get(`${url}/task`, {
+              headers: {token: localStorage.token}
+          })
+            .then((response)=> {
+              console.log(response)
+              categoryContainer.categories = response.data
+            })
+            .catch((error)=> {
+            });
+      },
+      categoryBar: function(category){
+        this.Product = false
+        // this.load()
+        if(this.category == false){
+          this.category = true
+        }else{
+          this.category = false
+        }
+      },
+      deleteTask: function(id){
+        let status = confirm("are you sure want to delete this task?")
+        if(status){
+          axios({
+            url: `${url}/task/${id}`,
+            method: "DELETE",
+            headers: {token: localStorage.token},
+          })
+          .then(deleted=>{
+            categoryContainer.load()
+          })
+          .catch(err=>{
+  
+          })
+        }else{
+          console.log('cancel')
+        }
+      },
+      addCard: function(category) {
+          axios({
+            url:`${url}/task`, 
+            method:'POST',
+            headers: {token: localStorage.token},
+            data:{
+              category: category.category,
+              title: category.title
+            }
+          })
+            .then((response)=> {
+              categoryContainer.load()
+            })
+            .catch((error)=> {
+              
+            }) 
+      },
+      backStep: function(id) {
+        let status = confirm("are you sure want to move this task?")
+        if(status){
+          axios({
+            url:`${url}/task/${id}`, 
+            method:'PUT',
+            headers: {token: localStorage.token},
+            data:{
+              move: 'back'
+            }
+          })
+            .then((response)=> {
+              categoryContainer.load()
+            })
+            .catch((error)=> {
+              swal("Oops!", "You Don't Have Access!", "warning")
+              console.log(`gagal update`)
+            }) 
+        }else{
+          console.log(`cancel update`)
+        }
+      },
+      nextStep: function(id) {
+        let status = confirm("are you sure want to move this task?")
+        if(status){
+          axios({
+            url:`${url}/task/${id}`, 
+            method:'PUT',
+            headers: {token: localStorage.token},
+            data:{
+              move: 'next'
+            }
+          })
+            .then((response)=> {
+              categoryContainer.load()
+            })
+            .catch((error)=> {
+              swal("Oops!", "You Don't Have Access!", "warning")
+              console.log(`gagal update`)
+            }) 
+        }else{
+          console.log(`cancel update`)
+        }
+      },
+      logout: function(e){
+        localStorage.clear()
+        this.show = false
+        loginContainer.show = true
+      }
+    }
+  })
+  </script>
