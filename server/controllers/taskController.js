@@ -5,11 +5,7 @@ class TaskController {
     const id = req.params.projectId
     Task.findAll({ where: { ProjectId: id } })
       .then(results => {
-        if (results.length == 0) {
-          throw { code: 404, msg: 'You dont have any task yet' }
-        } else {
-          res.status(200).json(results)
-        }
+        res.status(200).json(results)
       })
       .catch(err => {
         next(err)
