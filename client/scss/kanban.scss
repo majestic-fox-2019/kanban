@@ -1,0 +1,127 @@
+$color-gradient:#343a40;
+$card-width:18rem;
+body{ 
+  background: #34e89e; 
+  background: -webkit-linear-gradient(to bottom, #34e89e, #0f3443);
+  background: linear-gradient(to bottom, #34e89e, #0f3443);
+  font-family: 'Abel';
+}
+
+.btn{
+  box-shadow: 2px 2px grey;
+
+}
+
+.content::-webkit-scrollbar {
+  width: 0px; 
+}
+
+.container{
+  padding: 0;
+  padding-top: 0.5em;
+  max-width:95vw;
+  white-space: nowrap;
+  overflow-x: auto;
+  // scrollbar-width: none;
+  // -ms-overflow-style: none;
+  height:86vh;
+  .categories{ 
+    display: block;
+    position: relative; 
+    width: 100vw;
+    .category{
+      height:100%;
+      max-height:80vh;
+      width: 18rem;
+      box-shadow: 5px 5px grey;
+      margin-right: 1rem;
+      .board{
+        width: $card-width;
+        .card-body::-webkit-scrollbar {
+            width: 0px; 
+        }
+        .add{
+          float: right;
+          display: none;
+        }
+        .deletecategory{
+          float: left;
+          display: none;
+          width:2rem;
+          height:2em;
+          background: url('../assets/close_trash.svg');
+          background-repeat: no-repeat;
+        }
+        .deletecategory:hover{
+          cursor: pointer;
+          width: 2rem;
+          height: 2rem;
+          background-image: url('../assets/open_trash.svg');
+          background-repeat: no-repeat;
+        }
+        .card-body{
+          height:100%;
+          max-height:60vh;
+          overflow: hidden;
+          overflow-y: visible;
+          padding-top: 0.5rem !important;
+          padding-left: 0.2rem;
+          padding-right: 0.2rem;
+          scrollbar-width: none;
+          -ms-overflow-style: none; 
+          .item{   
+            .card{
+              background-color: white;
+              height:8rem;
+              width: 100%;
+              box-shadow: 0 4px 5px grey;
+              margin-top: 0.5rem !important;
+              .card-body{
+                .card-info{
+                  .image{
+                    img{
+                      height:38px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      
+    }
+  }
+}
+.item{
+  .card-body{
+    padding: 1rem;
+  }
+  
+  .card-body:hover{
+    cursor: grab;
+    background-color:#34e89e;
+  }
+}
+
+.board{
+  .card-title:hover .add {
+    display: block !important;
+  } 
+  .card-title:hover .deletecategory {
+    display: block !important;
+  } 
+}
+.action {
+  width:2rem;
+  background: url('../assets/close_trash.svg');
+  background-repeat: no-repeat;
+}
+.action:hover {
+  cursor: pointer;
+  background-image: url('../assets/open_trash.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+
