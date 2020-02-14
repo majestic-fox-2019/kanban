@@ -39,7 +39,8 @@ import addtodo from './components/AddTodo.vue'
 import todolist from './components/TodoList.vue'
 import edittodo from './components/EditTodo.vue'
 
-const baseURL = 'http://localhost:3000'
+// const baseURL = 'http://localhost:3000'
+const baseURL = 'https://kanban-km.herokuapp.com'
 
 export default {
     name: 'app',
@@ -88,7 +89,6 @@ export default {
             )
             localStorage.removeItem('token')
             localStorage.removeItem('email')
-            // window.location.href = 'http://localhost:1234'
             this.page = 'login'
         },
         addTodo() {

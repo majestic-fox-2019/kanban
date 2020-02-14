@@ -51,7 +51,8 @@ import Swal from 'sweetalert2'
 
 import todoitem from './TodoItem.vue'
 
-const baseURL = 'http://localhost:3000'
+// const baseURL = 'http://localhost:3000'
+const baseURL = 'https://kanban-km.herokuapp.com'
 
 export default {
     name: 'todolist',
@@ -87,7 +88,7 @@ export default {
           buttonLeft: '',
           buttonRight: '',
           item: null,
-          socket: io('localhost:3000'),
+          socket: io('https://kanban-km.herokuapp.com'),
         }
     },
     created(){

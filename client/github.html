@@ -23,7 +23,7 @@
                 const email = data.email
 
                 return axios({
-                    url: `http://localhost:3000/githubsigninOk`,
+                    url: `https://kanban-km.herokuapp.com/githubsigninOk`,
                     method: 'POST',
                     data: {
                         email: email
@@ -37,7 +37,7 @@
         .then(({ data }) => {
             localStorage.setItem('token', data.token)
             localStorage.setItem('email', data.email)
-            window.location.href = 'http://localhost:1234/index.html'
+            window.location.href = 'https://kanban-v1.firebaseapp.com/index.html'
         })
       }
     </script>
