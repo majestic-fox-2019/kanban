@@ -1,0 +1,6 @@
+.done, .todo, .doing, .backlog {
+  height: 700px;
+  overflow: scroll;
+}
+
+/*# sourceMappingURL=kanban-content.css.map */

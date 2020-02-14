@@ -1,0 +1,16 @@
+%property-shared {
+    height: 700px;
+    overflow: scroll;
+}
+.backlog {
+    @extend %property-shared;
+}
+.doing {
+    @extend %property-shared;
+}
+.todo {
+    @extend %property-shared;
+}
+.done {
+    @extend %property-shared;
+}
