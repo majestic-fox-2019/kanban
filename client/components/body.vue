@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="kanbans">
+    <div id="kanbans" >
       <div class="category" v-for="content in taskcategory" :key="content.id">
         <div class="kanban-column">
           <div class="text">{{ content.nameCategory }}</div>
@@ -18,23 +18,23 @@
               <div class="button-up updateModal">
                 <button class="button-update">
                   <div>
-                    <span
-                      @emit="updateModal(task.id)"
-                      type="button"
-                      class="btn btn-primary"
-                      data-toggle="modal"
-                      data-target="#upModal"
-                    >U</span>
+                    <p class="h2" style="color: white">
+              <b-icon icon="wrench" id="upIcon" v-b-modal.modal-1 @click="showUpdate(task) ">
+              </p>
                   </div>
                 </button>
-                <upModal :updateModal="{taskcategory, taskId}"></upModal>
+                <upModal :updateModal="{ taskcategory, taskId }"></upModal>
               </div>
             </div>
           </div>
         </div>
         <div>
           <form @submit.prevent="addData(content.nameCategory, content.id)">
-            <input class="addInput" v-model="title[content.nameCategory]" type="text" />
+            <input
+              class="addInput"
+              v-model="title[content.nameCategory]"
+              type="text"
+            />
             <button class="btn fourth" type="submit">add a card...</button>
           </form>
         </div>
@@ -52,12 +52,12 @@ export default {
   name: "kanbans",
   props: ["taskcategory", "title"],
   components: {
-    upModal
+    upModal,
   },
   data() {
     return {
       taskId: null,
-      title: null
+      // title: null
     };
   },
   methods: {
@@ -68,9 +68,25 @@ export default {
     addData(category, id) {
       this.taskId = id;
       this.$emit("addData", { data: { category, id } });
-    }
+    },
+
+  showUpdate(task){
+    // console.log(task);
+    
+    this.$emit('showUpdate', task)
   }
+  },
+
 };
 </script>
 <style>
+#upIcon {
+  width: 40%;
+  margin-left: 30px;
+  padding: 0%;
+  color: black
+}
+#upIcon:hover {
+  color: yellow;
+}
 </style>
