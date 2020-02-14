@@ -14,11 +14,6 @@
 import axios from "axios";
 export default {
   props: ["project"],
-  data: function() {
-    return {
-      endpoint_task: "https://api-kanban.herokuapp.com/category"
-    };
-  },
   methods: {
     getTask: function() {
       this.$emit("load-category", {project: this.project});

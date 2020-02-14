@@ -3,7 +3,7 @@
     <auth-page v-if="isLoggedIn" @login="isLoggedIn = !isLoggedIn"></auth-page>
     <user-page
       v-if="!isLoggedIn && !showKanban"
-      @logout="isLoggedIn = !isLoggedIn"
+      @logout="session"
       @load-category="load"
     ></user-page>
     <kanban-page
@@ -54,7 +54,14 @@ export default {
         data: data
       });
     },
+    signOut: function() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function() {
+        console.log("User signed out.");
+      });
+    },
     session: function() {
+      this.signOut();
       this.isLoggedIn = !this.isLoggedIn;
     },
     getCategory: function() {
