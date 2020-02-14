@@ -104,8 +104,12 @@ export default {
           }
           this.loginCheck();
         })
-        .catch(err => {
-          console.error(err);
+        .catch(() => {
+          this.$Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Email or Password wrong!",
+          });
         });
     },
     onReset(e) {

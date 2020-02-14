@@ -38,6 +38,7 @@
             <template v-slot:button-content>
               <em>User</em>
             </template>
+            <b-dropdown-item disabled>{{ loggedUsername }}</b-dropdown-item>
             <b-dropdown-item href="#" v-b-modal.add-task
               >Add Task</b-dropdown-item
             >
@@ -67,6 +68,11 @@ export default {
   components: {
     AddTask
   },
+  computed: {
+    loggedUsername() {
+      return localStorage.getItem("name");
+    }
+  },
   methods: {
     loginCheck() {
       if (!localStorage.getItem("access_token")) {
@@ -75,11 +81,11 @@ export default {
     },
     logout() {
       // eslint-disable-next-line
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function() {
-        console.log("User signed out.");
-      });
-      auth2.disconnect();
+      // var auth2 = gapi.auth2.getAuthInstance();
+      // auth2.signOut().then(function() {
+      //   console.log("User signed out.");
+      // });
+      // auth2.disconnect();
       if (localStorage.length !== 0) {
         localStorage.clear();
         this.loginCheck();
