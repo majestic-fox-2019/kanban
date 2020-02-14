@@ -45,7 +45,8 @@ class TaskController {
 
     let updateTask = {
       title: req.body.title,
-      description: req.body.description
+      description: req.body.description,
+      category: req.body.category
     }
 
     Task.update(updateTask, taskId)

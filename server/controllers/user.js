@@ -1,3 +1,8 @@
+if (process.env.NODE_ENV == 'development'){
+  require('dotenv').config()
+}
+
+const {OAuth2Client} = require('google-auth-library');
 const {User} = require('../models')
 const {checkPassword} = require('../helpers/bcrypt')
 const {createToken} = require('../helpers/jwt')
@@ -33,7 +38,10 @@ class UserController {
     })
   }
 
+  
+
   static register(req, res, next){
+    console.log('asda')
     let userData = {
       name: req.body.name,
       email: req.body.email,
@@ -50,6 +58,7 @@ class UserController {
   }
 
   static onSignIn(req, res, next){
+    console.log('masukkk')
     const client = new OAuth2Client(process.env.CLIENT_ID);
     let payload = null
 
@@ -70,7 +79,9 @@ class UserController {
         res.status(200).json({token: createToken(data)})
       } else {
         let data = {
-          email: payload.email
+          email: payload.email,
+          name: payload.name,
+          password: 'password'
         }
         return User.create(data)
       }

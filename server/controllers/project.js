@@ -4,7 +4,7 @@ const {Task} = require('../models')
 class ProjectController {
   
   static list(req, res, next){
-    Project.findAll({where: { UserId: req.user.id }, order: [['id', 'ASC']], include: Task})
+    Project.findAll({ where: {UserId:req.user.id}, order: [['id', 'ASC']], include: Task})
     .then(project => {
       res.status(200).json(project)
     })
