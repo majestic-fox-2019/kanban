@@ -2,6 +2,7 @@
     <div>        
         <div class="title">
             {{category.name}}
+            <b-icon icon="trash" @click="handleDeleteProject(category.id)"></b-icon>
         </div>
         <div class="cards">
             <div class="card" v-for="task in category.Tasks" :key="task.id">

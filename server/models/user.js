@@ -1,5 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
+  const {hashPassword} = require('./../helpers/authentication');
+
   const {Model} = sequelize.Sequelize;
   class User extends Model {}
 
@@ -7,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       validate: {
+        isExist: function(value) {
+          return User.count({ where: { email: value } })
+            .then(count => {
+              if (count != 0) {
+                throw new Error('Email is already exist.');
+              }
+          });
+        },
         notEmpty: {
           args: true,
           msg: "Email cannot be empty!"
@@ -27,6 +37,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }, {
+    hooks: {
+      beforeCreate(instance, options){
+        instance.password = hashPassword(instance.password);
+      }
+    },    
     sequelize
   })
 

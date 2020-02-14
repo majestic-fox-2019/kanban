@@ -1,12 +1,22 @@
 <template>
     <div>
-        <layout-header></layout-header>
-        <div class="kanban">               
-            <custom-modal 
+        <layout-header :backend_url="backend_url">
+
+        </layout-header>
+        <div
+            v-if="!isLogin"    
+        >   
+            <h1 class="text-center text-white">You need to login to access the feature!</h1>
+        </div>
+        <div 
+            v-if="isLogin"
+            class="kanban"
+        >               
+            <modal-task 
                 :dataModal="dataModal"
                 :handleOk="handleOk"
             >
-            </custom-modal>
+            </modal-task>
             <task-category
                 :taskCategory="taskCategory"
                 :setModalValue="setModalValue"
@@ -21,20 +31,23 @@
 <script>
     import Header from './components/Header.vue';
     import TaskCategory from './components/TaskCategory.vue';
-    import Modal from './components/Modal.vue';
+    import ModalTask from './components/ModalTask.vue';
+    // import ModalLogin from './components/ModalLogin.vue';
 
     export default {
         components : {
             'layout-header': Header,
-            'custom-modal': Modal,
+            'modal-task': ModalTask,
             'task-category': TaskCategory
+            // 'modal-login': ModalLogin
         },
         data: function(){
             return {
                 "backend_url"       : "http://localhost:3000",
                 "taskCategory"      : null,
                 "dataModal"         : {},
-                "arrCategoryNames"  : []
+                "arrCategoryNames"  : [],
+                "isLogin"           : localStorage.getItem("token")
             }
         },
         methods: {
