@@ -36,7 +36,7 @@
 
     <div class="overbox">
       <div class="material-button alt-2">
-        <span class="shape"></span>
+        <span @click="clear" class="shape"></span>
       </div>
 
       <div class="title">REGISTER</div>
@@ -217,6 +217,11 @@ export default {
     };
   },
   methods: {
+    clear() {
+      this.name = "";
+      this.email = "";
+      this.password = "";
+    },
     login() {
       axios({
         method: "post",
@@ -230,6 +235,7 @@ export default {
           localStorage.setItem("access_token", data.access_token);
           localStorage.setItem("userId", data.userId);
           this.$emit("login", false);
+          this.clear();
         })
         .catch(err => {
           console.log(err.response.data);
@@ -254,6 +260,7 @@ export default {
           localStorage.setItem("access_token", data.access_token);
           localStorage.setItem("userId", data.userId);
           this.$emit("login", false);
+          this.clear();
         })
         .catch(err => {
           console.log(err.response.data);
@@ -279,6 +286,7 @@ export default {
           localStorage.setItem("access_token", data.access_token);
           localStorage.setItem("userId", data.userId);
           this.$emit("login", false);
+          this.clear();
         })
         .catch(error => {
           console.log("Google OAuth Failed");
