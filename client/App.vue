@@ -1,0 +1,123 @@
+<template>
+    <div>
+        <layout-header></layout-header>
+        <div class="kanban">               
+            <custom-modal 
+                :dataModal="dataModal"
+                :handleOk="handleOk"
+            >
+            </custom-modal>            
+            <div :id="category.name" class="col-3" v-for="category in taskCategory" :key="category.id">
+                <div class="title">
+                    {{category.name}}
+                </div>
+                <div class="cards">
+                    <div class="card" v-for="task in category.Tasks" :key="task.id">
+                        <div v-b-modal.modal @click="setModalValue(task)">
+                            <div class="card-title">{{ task.title }}</div>
+                            <div class="card-content" v-html="task.description">
+                                {{ task.description }}
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                <div class="footer">
+                    <button v-b-modal.modal @click="setModalValue({ProjectId: category.id})">Add a task</button> 
+                </div>
+            </div>        
+        </div>
+    </div>
+</template>
+<script>
+    import Header from './components/Header.vue';
+    import TaskCategory from './components/TaskCategory.vue';
+    import Modal from './components/Modal.vue';
+
+    export default {
+        components : {
+            'layout-header': Header,
+            'custom-modal': Modal,
+            'task-category': TaskCategory
+        },
+        data: function(){
+            return {
+                "backend_url"       : "http://localhost:3000",
+                "taskCategory"      : null,
+                "dataModal"         : {}
+            }
+        },
+        methods: {
+            getTasks: function(){
+                fetch(`${this.backend_url}/projects`)
+                .then(res => {
+                    return res.json();  
+                })
+                .then(data => {
+                    this.taskCategory = data
+                })
+                .catch(err => console.log(err));
+            },
+            addTask: function(objData) {
+                const {ProjectId, id, title, description} = objData;
+                let objAdd = {title,description,UserId: 1,ProjectId};
+
+                fetch(`${this.backend_url}/tasks`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(objAdd)
+                })  
+                .then(res => {
+                    console.log(res);
+                    this.getTasks();
+                })
+                .catch(err => {
+                    console.log(err);
+                })            
+            },
+            updateTask: function(objData) {
+                const {ProjectId, id, title, description} = objData;
+                let objEdit = {title,description,UserId: 1,ProjectId};
+                fetch(`${this.backend_url}/tasks/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(objEdit)
+                })  
+                .then(res => {
+                    console.log(res);
+                    this.getTasks();
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+            },
+            resetModal: function() {
+                this.input_category_id  = null;
+                this.input_id           = null;
+                this.input_title        = "";
+                this.input_description  = "";
+            },
+            setModalValue: function(task){
+                console.log(task);
+                const {ProjectId, id, title, description} = task;
+                this.dataModal = {ProjectId, id, title, description};
+            },
+            handleOk: function(objData) {
+                if (objData.id == undefined) {
+                    this.addTask(objData);
+                }else{
+                    this.updateTask(objData);
+                }
+            }
+        },
+        beforeMount() {
+            this.getTasks();
+        }
+    }
+</script>
+<style>
+
+</style>
