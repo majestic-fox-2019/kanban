@@ -1,0 +1,143 @@
+<html>
+
+<head>
+	<title>Kanban</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:900|Muli&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./public/css/app.css">
+</head>
+
+<body>
+	<div id="app">
+		<div class="akunDiv1" v-if="tab == 'login'">
+			<div class="loginDiv">
+				<h3>Login</h3>
+				<div class="login">
+					<form method="POST" v-on:submit.prevent="login()">
+						<div class="form-group">
+							<input type="email" v-model="emailLogin" class="form-control" placeholder="Enter Email..">
+						</div>
+						<div class="form-group">
+							<input type="password" v-model="passwordLogin" class="form-control"
+								placeholder="Enter password..">
+						</div>
+						<button type="submit" class="btn">Submit</button>
+					</form>
+				</div>
+				<p>Doesn't have an account yet? Let's make it ez, just <a href="#" v-on:click="tab = 'register'"
+						style="color: blue;">Create
+						New Account</a>
+					here!</p>
+			</div>
+		</div>
+		<div class="akunDiv2" v-if="tab == 'register'">
+			<div class="registerDiv">
+				<h3>Register</h3>
+				<div class="register">
+					<form method="POST" v-on:submit.prevent="register()">
+						<div class="form-group">
+							<input type="text" v-model="nameRegister" class="form-control" placeholder="Enter Name..">
+						</div>
+						<div class="form-group">
+							<input type="email" v-model="emailRegister" class="form-control"
+								placeholder="Enter Email..">
+						</div>
+						<div class="form-group">
+							<input type="password" v-model="passwordRegister" class="form-control"
+								placeholder="Enter password..">
+						</div>
+						<button type="submit" class="btn">Save</button>
+					</form>
+				</div>
+				<p>Feels Have an account? Just go back, and get <a href="#" id="login" v-on:click="tab = 'login'"
+						style="color: blue;">Login to Your
+						Account</a>
+					here!</p>
+			</div>
+		</div>
+		<div class="cover" v-if="tab == 'main'">
+			<nav class="navbar navbar-expand-lg navbar-dark">
+				<a class="navbar-brand" href="#">Navbar</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+				</div>
+			</nav>
+			<main>
+				<div class="categoryDiv" v-for="(category, i) in categories">
+					<h5>{{category.title}}</h5>
+					<div class="line"></div>
+					<div class="todoDiv">
+						<div class="todo" v-for="(task, j) in category.Tasks">
+							<h6>{{task.title}}</h6>
+							<div class="right">
+								<button href="#" class="icon edit"><i class="fas fa-pencil-alt"
+										style="color: rgba(0, 0, 0, 0.5);font-size: 14px;margin-left: 2px;"></i></button>
+								<a href="#" v-on:click.prevent="deleteTask(task.id, i, j)"><i class="fas fa-trash-alt"
+										style="color: rgba(0, 0, 0, 0.5);font-size: 14px;margin-left: 2px;"></i></a>
+							</div>
+							<div class="formDiv">
+								<form method="POST">
+									<div class="form-group">
+										<textarea class="form-control" id="exampleFormControlTextarea1"
+											rows="3">{{task.title}}</textarea>
+									</div>
+								</form>
+							</div>
+							<br>
+						</div>
+					</div>
+					<div class="addTask">
+						<form method="POST" v-on:submit.prevent="createTask(category.title, category.id, i)">
+							<div class="form-group">
+								<input type="text" class="form-control icon" style="margin-left: 5px;"
+									v-model="titleCategories[category.title]" placeholder="Task">
+								<i class="fas fa-plus"
+									style="position: absolute;top: 12px;color:rgba(0, 0, 0, 0.5);font-size: 14px"></i>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="categoryDiv addCategory">
+					<form method="POST" v-on:submit.prevent="createCategory">
+						<div class="form-group">
+							<input type="text" class="form-control" v-model="titleCategory" placeholder="Category"
+								style="margin-left: 5px;">
+							<i class="fas fa-plus"
+								style="position: absolute;top: 31px;color:rgba(0, 0, 0, 0.5);font-size: 14px"></i>
+						</div>
+					</form>
+				</div>
+			</main>
+		</div>
+	</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+<script>
+	var socket = io.connect('http://localhost:3000');
+	socket.on('news', function (data) {
+		console.log(data);
+		socket.emit('my other event', { my: 'data' });
+	});
+</script>
+<script src="./public/js/app.js"></script>
+
+</html>
