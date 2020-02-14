@@ -60,6 +60,7 @@ export default {
     request: function(params) {
       const { method, data } = params;
       const url = this.endpoint_task;
+      console.log(url)
       return axios({
         method: method,
         url: url,

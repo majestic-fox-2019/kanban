@@ -33,7 +33,6 @@ export default {
     return {
       disable: true,
       endpoint_task: "https://api-kanban.herokuapp.com/task",
-      // endpoint_task: "http://localhost:3000/task"
     };
   },
   methods: {
@@ -111,6 +110,7 @@ export default {
     request: function(params) {
       const { method, data } = params;
       const url = `${this.endpoint_task}/${this.task.id}`;
+      console.log(url)
       return axios({
         method: method,
         url: url,
