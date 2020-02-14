@@ -40,7 +40,7 @@
 </template>
 
 <script>
-const server = "http://localhost:3000";
+const server = "https://kanban-ajengrf.herokuapp.com";
 import axios from "axios";
 import sidebar from "./components/sidebar";
 import register from "./components/register";

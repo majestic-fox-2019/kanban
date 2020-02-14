@@ -24,13 +24,12 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script>
-  var socket = io.connect('http://localhost:3000');
+  var socket = io.connect('https://kanban-ajengrf.herokuapp.com');
   socket.on('news', function (data) {
     console.log(data);
     socket.emit('my other event', { my: 'data' });
   });
 </script>
-<script src="homepage.js"></script>
 <script src="app.js"></script>
 
 </html>

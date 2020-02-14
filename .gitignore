@@ -1,6 +1,6 @@
-node_modules
-dist
-.cache
 .DS_Store
+.cache
 config
+node_modules
 .env
+.dist

@@ -42,7 +42,7 @@
 <script>
 import axios from "axios";
 import GoogleLogin from "vue-google-login";
-const server = "http://localhost:3000";
+const server = "https://kanban-ajengrf.herokuapp.com";
 
 export default {
   name: "registrationPage",

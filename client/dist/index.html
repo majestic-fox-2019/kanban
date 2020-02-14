@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700i|Rouge+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.e308ff8e.css">
+  <meta name="google-signin-client_id" content="31821651677-uorrrhti80raddfghfv72p72n03aoe8u.apps.googleusercontent.com">
+
+  <title>Kanban</title>
+<script src="/style.e308ff8e.js"></script><link rel="stylesheet" href="/app.c328ef1a.css"></head>
+
+<body>
+  <div id="kanban">
+
+  </div>
+</body>
+<script src="https://apis.google.com/js/platform.js" async="" defer=""></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script>var socket = io.connect('https://kanban-ajengrf.herokuapp.com');
+socket.on('news', function (data) {
+  console.log(data);
+  socket.emit('my other event', {
+    my: 'data'
+  });
+});</script>
+<script src="/app.c328ef1a.js"></script>
+
+</html>
