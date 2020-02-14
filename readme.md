@@ -26,6 +26,20 @@ set the config/config.json with your own rules
 sequelize db:migrate
 ```
 
+## To Start Project
+
+In folder client
+
+```
+npm run serve
+```
+
+In folder server
+
+```
+npm run dev
+```
+
 # Server API
 
 ```json
