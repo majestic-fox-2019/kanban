@@ -217,8 +217,11 @@ export default {
             let udahAdaDiDoing;
             for (let l of this.doing) {
               if (l.id == j.id) {
-                this.doing.push(j);
+                udahAdaDiDoing = true;
               }
+            }
+            if (!udahAdaDiDoing) {
+              this.doing.push(j);
             }
           } else if (j.status == "Done") {
             let udahAdadiDone;

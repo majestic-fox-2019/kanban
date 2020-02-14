@@ -166,7 +166,7 @@ export default {
         })
         .catch(err => {
           this.errorMSG = err.response.data;
-          console.log(err, "<<ini error di fungsi login");
+          // console.log(err, "<<ini error di fungsi login");
         });
     },
     emitGoogleLogin() {
@@ -229,7 +229,7 @@ export default {
           var errorMessage = error.message;
           var email = error.email;
           var credential = error.credential;
-          console.log(error);
+          // console.log(error);
         });
     },
     github() {
@@ -242,8 +242,8 @@ export default {
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
-          console.log(result, "<< ini punya github");
-          console.log(result.user.email, "<<< ini emailnya");
+          // console.log(result, "<< ini punya github");
+          // console.log(result.user.email, "<<< ini emailnya");
           // ...
           axios({
             method: "POST",

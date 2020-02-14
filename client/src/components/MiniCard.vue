@@ -94,7 +94,8 @@ export default {
           this.projectName = data.name;
         })
         .catch(err => {
-          console.log(err.response, "<< ini gagal get project");
+          // console.log(err.response, "<< ini gagal get project");
+          Swal.fire("Oops", "Something went wrong", "error");
         });
     },
     changeStatus(value) {

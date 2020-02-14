@@ -195,7 +195,7 @@ export default {
             this.$socket.emit("ada-project-didelete");
           })
           .catch(err => {
-            console.log(err.response, "<<gagal delete project");
+            // console.log(err.response, "<<gagal delete project");
             Swal.fire("Oops", "Something went wrong", "error");
           });
       } else {

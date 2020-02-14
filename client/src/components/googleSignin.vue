@@ -7,6 +7,7 @@
 </template>
  
 <script>
+import Swal from "sweetalert2";
 import axios from "axios";
 export default {
   data() {
@@ -19,7 +20,7 @@ export default {
        */
       googleSignInParams: {
         client_id:
-          "733475019943-k1nirgu710kktvdbnd9ut50fqdj41pu5.apps.googleusercontent.com"
+          "733475019943-ftk7rckj11uj8jso82j06r5j843p9mko.apps.googleusercontent.com"
       },
       // baseUrl: "http://localhost:3000"
       baseUrl: this.$baseUrl
@@ -46,7 +47,8 @@ export default {
     },
     onSignInError(error) {
       // `error` contains any error occurred.
-      console.log("OH NOES", error);
+      //
+      Swal.fire("Oops", "Something went wrong");
     }
   }
 };
