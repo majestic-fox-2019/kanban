@@ -12083,6 +12083,7 @@ var _default = {
           id_token: id_token
         }
       }).then(function (result) {
+        console.log(result.data, "< berhasil");
         localStorage.setItem("token", result.data.token);
         localStorage.setItem("UserId", result.data.UserId);
 

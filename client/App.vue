@@ -104,6 +104,7 @@ export default {
         data: { id_token }
       })
         .then(result => {
+          console.log(result.data, "< berhasil");
           localStorage.setItem("token", result.data.token);
           localStorage.setItem("UserId", result.data.UserId);
           this.showTask();

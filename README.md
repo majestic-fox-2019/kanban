@@ -4,6 +4,143 @@ KANBAN API
 <br>
 <br>
 
+### **POST /register**
+---
+*Create a new user.*
+> Request Body:
+* Schema
+
+  Value:
+    - name: string,
+    - email: string,
+    - password: string,
+
+  Example
+    ```javascript
+    {
+    "name": "Ajeng",
+    "email": "ajeng@gmail.com"
+    "password": "ajenghacktiv8"
+    }
+    ```
+
+<br>
+
+> Response:
+* 201
+
+
+  Example:
+  ```javascript
+  {
+    "id": 6,
+    "name": "Ajeng",
+    "email": "ajeng@gmail.com"
+    "password": "$2a$10$.nhegcxKFs56KKw1XTOf..fptzznZT4.ZshIwlNz5Uuvg7tGRcrCu",
+    "updatedAt": "2020-02-14T17:46:58.266Z",
+    "createdAt": "2020-02-14T17:46:58.266Z"
+  }
+  ```
+
+* 400
+
+  Example:
+  ```javascript
+  {
+    "email": "E-mail should not be empty!"
+  } 
+  ```
+
+* 500
+
+<br>
+
+### **POST /login**
+---
+*User login.*
+> Request Body:
+* Schema
+
+  Value:
+    - email: string,
+    - password: string,
+
+  Example
+    ```javascript
+    {
+    "email": "ajeng@gmail.com"
+    "password": "ajenghacktiv8"
+    }
+    ```
+
+<br>
+
+> Response:
+* 201
+
+  Example:
+  ```javascript
+  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXNAZ21haWwuY29tIiwiaWF0IjoxNTgxNzAyMjI2fQ.D44jSOpp5j1yAE_KklMKUYqTc-pwALusakfwWpIdz3M",
+    "UserId": 1
+  }
+  ```
+
+
+* 400
+
+  Example:
+  ```javascript
+  "Invalid email / password!"
+  ```
+
+* 404
+
+  Example:
+  ```javascript
+  "User not found!" 
+  ```
+
+* 500
+
+<br>
+
+### **POST /login/google**
+---
+*User login with google.*
+> Request Body:
+* Schema
+
+  Value:
+    - email: string,
+    - password: string,
+
+  Example
+    ```javascript
+    {
+    "email": "ajeng@gmail.com"
+    "password": "ajenghacktiv8"
+    }
+    ```
+
+<br>
+
+> Response:
+* 201
+
+  Example:
+  ```javascript
+  {
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6I…cwMX0.FrhEDezYKS6WlHtR7VRj9RtCXLF-CA1diMgLCqsGeG0", 
+    UserId: 4
+  }
+  ```
+
+
+* 500
+
+<br>
+
 ### **POST /kanban**
 ---
 *Create a new kanban.*
@@ -29,11 +166,13 @@ KANBAN API
   Example:
   ```javascript
   {
-    "id": 1,
-    "title": "Create Kanban App",
-    "description": "Learn how to create RESTful API",
-    "status": "backlog"
-    "due_date": "2020-02-08"
+    "id": 13,
+    "title": "tes",
+    "description": "tes",
+    "status": "backlog",
+    "UserId": 1,
+    "updatedAt": "2020-02-14T17:54:38.632Z",
+    "createdAt": "2020-02-14T17:54:38.632Z"
   }
   ```
 
@@ -61,16 +200,16 @@ KANBAN API
   ```javascript
   {
     "id": 1,
-    "title": "Create Fancy kanban",
+    "title": "Create kanban",
     "description": "Learn how to create RESTful API",
-    "status": "false"
+    "status": "backlog"
     "due_date": "2020-02-08"
   },
   {
     "id": 2,
-    "title": "Create Fancy kanban",
+    "title": "Create kanban",
     "description": "Learn how to create RESTful API",
-    "status": "false"
+    "status": "backlog"
     "due_date": "2020-02-08"
   } 
   ```
@@ -97,9 +236,9 @@ KANBAN API
   ```javascript
   {
     "id": 2,
-    "title": "Create Fancy kanban",
+    "title": "Create kanban",
     "description": "Learn how to create RESTful API",
-    "status": "false",
+    "status": "backlog",
     "due_date": "2020-02-08"
   }
   ```
@@ -132,15 +271,14 @@ KANBAN API
   Value:
     - title: string,
     - description: string,
-    - status: boolean,
-    - due_date: date
+    - status: string,
 
   Example
   ```javascript
   {
-    "title": "Create Fancy kanban",
+    "title": "Create kanban",
     "description": "Learn how to create RESTful API",
-    "status": "false"
+    "status": "todo"
     "due_date": "2020-02-08"
   }
   ```
@@ -153,9 +291,9 @@ KANBAN API
   ```javascript
   {
     "id": 2,
-    "title": "Create Fancy kanban",
+    "title": "Create kanban",
     "description": "Learn how to create RESTful API",
-    "status": "false",
+    "status": "todo",
     "due_date": "2020-02-08"
   }
   ```
@@ -200,9 +338,9 @@ KANBAN API
   ```javascript
   {
     "id": 2,
-    "title": "Create Fancy kanban",
+    "title": "Create kanban",
     "description": "Learn how to create RESTful API",
-    "status": "false",
+    "status": "done",
     "due_date": "2020-02-08"
   }
   ```
