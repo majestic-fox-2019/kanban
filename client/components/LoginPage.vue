@@ -78,6 +78,7 @@ export default {
         }
       })
       .then(response => {
+        localStorage.id = response.data.id
         localStorage.token = response.data.token
         localStorage.email = response.data.email
         this.$parent.loginGoogle()

@@ -29,6 +29,7 @@ class UserController {
 
               const token = AuthHelper.signToken(user)
               res.status(200).json({
+                id: response.id,
                 email: response.email,
                 token: token
               })
@@ -51,6 +52,7 @@ class UserController {
 
         const token = AuthHelper.signToken(user)
         res.status(200).json({
+          id: response.id,
           email: response.email,
           token: token
         })
@@ -77,6 +79,7 @@ class UserController {
 
             const token = AuthHelper.signToken(user)
             res.status(200).json({
+              id: response.id,
               email: response.email,
               token: token
             })

@@ -54,6 +54,9 @@ export default {
       update_form : null
     }
   },
+  created() {
+    this.user_id = localStorage.id
+  },
   methods : {
     deleteData(id){
       axios.delete(`${this.host}/tasks/${id}`, {

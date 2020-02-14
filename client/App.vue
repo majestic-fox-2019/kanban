@@ -93,6 +93,7 @@ export default {
           this.page.login = false
           this.page.main = true
           this.toaster = 'Sucessfully login!'
+          localStorage.id = response.data.id
           localStorage.email = response.data.email
           localStorage.token = response.data.token;
           form.clearField()
