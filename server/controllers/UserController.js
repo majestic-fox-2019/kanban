@@ -100,7 +100,7 @@ class UserController {
         })
         .then(response => {
             const accessToken = response.data.access_token
-            res.redirect(`http://localhost:1234/github.html?access_token=${accessToken}`)
+            res.redirect(`https://kanban-v1.firebaseapp.com/github.html?access_token=${accessToken}`)
         })
         .catch(next)
     }
