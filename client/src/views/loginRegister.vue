@@ -44,6 +44,9 @@ export default {
     },
     loginStatusTrue() {
       this.$emit("loginTrue");
+    },
+    statusLoginTrue() {
+      this.$emit("loginTrue");
     }
   }
 };

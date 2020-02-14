@@ -39,6 +39,7 @@ class kanbanController {
     }
     static update(req, res, next) {
         const { title, category, assignTo, description } = req.body
+        console.log('harusnya ga tembus kesini')
         Kanban.update({
             title,
             category,

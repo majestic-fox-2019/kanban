@@ -34,6 +34,16 @@
     >
       <i class="fab fa-github"></i>
     </button>
+    <button
+      class="fb"
+      social="facebook"
+      content="fb"
+      icon="fb"
+      color="steal"
+      @click.prevent="signInFb"
+    >
+      <i class="fab fa-facebook-f"></i>
+    </button>
   </div>
 </template>
 
@@ -58,6 +68,37 @@ export default {
     goSignup() {
       this.$emit("showRegister");
     },
+    signInFb() {
+      var provider = new firebase.auth.FacebookAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(function(result) {
+          return axios({
+            method: "post",
+            url: "https://my-kanban-cool.herokuapp.com/users/login/fb",
+            data: {
+              email: result.user.email,
+              name: result.user.displayName
+            }
+          });
+        })
+        .then(result => {
+          this.$emit("statusLoginTrue");
+          localStorage.setItem("token", result.data.token);
+          localStorage.setItem("id", result.data.user.id);
+          localStorage.setItem("name", result.data.user.name);
+          this.$root.nama = result.data.user.name;
+        })
+        .catch(function(error) {
+          const errorMessage = error.message;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: errorMessage
+          });
+        });
+    },
     signInGithub() {
       var provider = new firebase.auth.GithubAuthProvider();
       firebase
@@ -74,12 +115,11 @@ export default {
           });
         })
         .then(result => {
+          this.$emit("statusLoginTrue");
           localStorage.setItem("token", result.data.token);
           localStorage.setItem("id", result.data.user.id);
           localStorage.setItem("name", result.data.user.name);
           this.$root.nama = result.data.user.name;
-
-          this.$emit("statusLoginTrue");
         })
         .catch(function(error) {
           const errorMessage = error.message;
@@ -91,32 +131,28 @@ export default {
         });
     },
     onSignIn() {
-      this.$gAuth
-        .signIn()
-        .then(GoogleUser => {
-          return axios({
-            method: "post",
-            url: "https://my-kanban-cool.herokuapp.com/users/login/google",
-            data: { idToken: GoogleUser.getAuthResponse().id_token }
-          });
+      this.$gAuth.signIn().then(GoogleUser => {
+        const idToken = GoogleUser.getAuthResponse().id_token;
+        return axios({
+          method: "post",
+          url: "https://my-kanban-cool.herokuapp.com/users/login/google",
+          data: { idToken: idToken }
         })
-        .then(({ data }) => {
-          setTimeout(() => {
-            this.isLoading = false;
+          .then(({ data }) => {
+            this.$emit("statusLoginTrue");
             localStorage.setItem("token", data.token);
             localStorage.setItem("id", data.user.id);
             localStorage.setItem("name", data.user.name);
             this.$root.nama = data.user.name;
-            this.$emit("statusLoginTrue");
-          }, 1000);
-        })
-        .catch(({ response }) => {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: response.data
+          })
+          .catch(({ response }) => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: response.data
+            });
           });
-        });
+      });
     },
     signin() {
       this.isLoading = true;
@@ -185,7 +221,7 @@ export default {
   outline: 0;
   width: 50px;
   height: 35px;
-  margin-left: 43%;
+  margin-left: 41.5%;
   margin-top: -68px;
 }
 
@@ -195,7 +231,16 @@ export default {
   outline: 0;
   width: 50px;
   height: 35px;
-  margin-left: 49%;
+  margin-left: 47.9%;
+  margin-top: -36px;
+}
+.fb {
+  @extend %cool-button;
+  box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
+  outline: 0;
+  width: 50px;
+  height: 35px;
+  margin-left: 54.5%;
   margin-top: -36px;
 }
 

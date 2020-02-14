@@ -59,7 +59,7 @@ export default {
       const id = evt.item.attributes.id.value;
       const value = evt.to.attributes.class.value;
       return axios({
-        url: `https://my-kanban-cool.herokuapp.com/kanbans/${id}`,
+        url: `http://localhost:3000/kanbans/${id}`,
         method: "PUT",
         headers: {
           token: localStorage.getItem("token")
@@ -73,13 +73,12 @@ export default {
           this.$emit("getKanban");
         })
         .catch(({ response }) => {
-          this.$emit("getKanban");
-          console.log("masuk pak eko");
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: response.data
           });
+          this.$emit("getKanban");
         });
     },
     getingKanban() {
@@ -188,19 +187,19 @@ button {
 }
 
 ol.kanban.back-log {
-  border-top: 5px solid rgb(0, 225, 255);
-}
-
-ol.kanban.done {
   border-top: 5px solid rgb(255, 0, 0);
 }
 
+ol.kanban.done {
+  border-top: 5px solid rgb(136, 255, 0);
+}
+
 ol.kanban.to-do {
-  border-top: 5px solid rgb(255, 196, 0);
+  border-top: 5px solid rgb(0, 225, 255);
 }
 
 ol.kanban.doing {
-  border-top: 5px solid rgb(136, 255, 0);
+  border-top: 5px solid rgb(255, 196, 0);
 }
 
 #title-kanban {

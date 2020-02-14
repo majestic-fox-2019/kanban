@@ -9,17 +9,12 @@
       :whatShowLoginRegister="whatShowLoginRegister"
       :whatStatusLogin="whatStatusLogin"
     ></loginRegister>
-    <div class="row" style="margin-top: 5%; margin-right: 0px; margin-left: 7px">
-      <div class="col" v-for="(kanban, i) in this.kanbans" :key="i">
-        <cardKanban
-          @getKanban="getKanban"
-          v-if="whatStatusLogin"
-          @kanbanGoEdit="toEditKanban"
-          :name="kanban.name"
-          :kanbanItems="kanban.items"
-        ></cardKanban>
-      </div>
-    </div>
+    <myKanban
+      :kanbans="kanbans"
+      @getKanban="getKanban"
+      @kanbanGoEdit="toEditKanban"
+      v-if="whatStatusLogin"
+    ></myKanban>
     <mainPage @getKanban="getKanban" :kanbanToEdit="kanbanToEdit"></mainPage>
   </div>
 </template>
@@ -28,7 +23,7 @@
 import navbar from "./components/navbar";
 import mainPage from "./views/mainPage";
 import loginRegister from "./views/loginRegister";
-import cardKanban from "./components/cardKanban";
+import myKanban from "./components/myKanban";
 import Swal from "sweetalert2";
 import axios from "axios";
 export default {
@@ -62,7 +57,7 @@ export default {
     navbar,
     loginRegister,
     mainPage,
-    cardKanban
+    myKanban
   },
   created() {
     if (localStorage.getItem("token")) {
@@ -75,6 +70,7 @@ export default {
   methods: {
     toEditKanban(payload) {
       this.kanbanToEdit = payload;
+      this.getKanban();
     },
     goRegister() {
       this.whatShowLoginRegister = "register";
@@ -84,11 +80,30 @@ export default {
     },
     statusLoginTrue() {
       this.whatStatusLogin = true;
+      this.getKanban();
     },
     statusLoginFalse() {
       this.whatStatusLogin = false;
     },
     getKanban() {
+      this.kanbans = [
+        {
+          name: "back-log",
+          items: []
+        },
+        {
+          name: "to-do",
+          items: []
+        },
+        {
+          name: "doing",
+          items: []
+        },
+        {
+          name: "done",
+          items: []
+        }
+      ];
       axios({
         url: "https://my-kanban-cool.herokuapp.com/kanbans",
         method: "GET",
@@ -97,24 +112,6 @@ export default {
         }
       })
         .then(({ data }) => {
-          this.kanbans = [
-            {
-              name: "back-log",
-              items: []
-            },
-            {
-              name: "to-do",
-              items: []
-            },
-            {
-              name: "doing",
-              items: []
-            },
-            {
-              name: "done",
-              items: []
-            }
-          ];
           data.forEach(el => {
             switch (el.category) {
               case "back-log":

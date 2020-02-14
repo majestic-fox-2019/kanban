@@ -78,7 +78,31 @@ class UserController {
     }
     static loginGithub(req, res, next) {
         const { name, email } = req.body
-        console.log(name);
+        User.findOne({
+            where: {
+                email: email
+            }
+        })
+            .then((user) => {
+                if (user) {
+                    let token = createToken(user)
+                    res.status(200).json({ user, token })
+                } else {
+                    User.create({
+                        email: email,
+                        password: "bebasaja",
+                        name: name,
+                    })
+                        .then((user) => {
+                            let token = createToken(user)
+                            res.status(200).json({ user, token })
+                        })
+                }
+            })
+            .catch(next);
+    }
+    static loginFb(req, res, next) {
+        const { name, email } = req.body
         User.findOne({
             where: {
                 email: email
