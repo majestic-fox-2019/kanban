@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css?family=Coda+Caption:800&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+html, body{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.login{
+    display: none;
+}
+
+.register{
+    display: none;
+}
+
+.content{
+    display: none;  
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+}
+.left{
+    background-color: aqua;
+    padding: 1%;
+}
+.right{
+    position: relative;
+    background-color: aquamarine;
+    /* padding: 2%;  */
+    margin: 1%;
+    width: 3vw;
+    height: 3vw;
+    display: flex;
+}
+.right i{
+    position: relative;
+    padding: 2%;
+    align-items: center ;
+}
+main{
+    position: relative;
+    width: 100%;
+    height: 90%;
+    top: 100%;
+    transform: translateY(-100%);
+    background-color: royalblue;
+    white-space: nowrap;
+    overflow: hidden;
+    overflow-x: auto;
+}
+.kanban{
+    position: relative;
+    margin: 0px 20px;
+    width: 350px;
+    height: 500px;
+    background-color: white;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+}
+.category{
+    text-align: center;
+    transform: translateY(50%);
+    font-family: 'Coda Caption', sans-serif;
+}
+.item{
+    position: relative;
+    margin: 20px;
+    padding: 20px;
+    height: 70%;
+    background-color: yellow;
+    overflow-y: scroll;
+
+}
+.title{
+    position: relative;
+    padding: 0px;
+    margin: 0vw 0px;
+    /* transform: translateY(-5%); */
+    height: auto;
+    background-color: white;
+    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    text-align: justify;
+    border-radius: 5px;
+    background: url(../img/paper.gif);
+    /* background-position: left top; */
+    background-repeat: repeat;
+}
+.title p{
+    padding: 0px 10px;
+    transform: translateY(-10%);
+}
+.title-button{
+    position: relative;
+    margin: 0%;
+    padding: 2%;
+    text-align-last: right;
+}
+.title:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+.item-foot{
+    position: relative;
+    margin: 20px;
+    padding: 0px 10px;
+    background-color: burlywood;
+}
+.item-foot form input{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 10px 0;
+    display: inline-block;
+    box-sizing: border-box;
+}
