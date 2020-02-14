@@ -36,7 +36,7 @@ class UserController {
         if (result) {
           const compare = bcrypt.compareSync(user.password, result.password)
           if (compare) {
-            const token = jwt.sign({ id: result.id, email: result.email }, 'TOKEN')
+            const token = jwt.sign({ id: result.id, email: result.email }, process.env.JWT_TOKEN)
             res.status(200).json({ token: token, UserId: result.id })
           } else {
             throw createError('Invalid email / password!', { name: 'invalidLogin' })
@@ -51,11 +51,11 @@ class UserController {
 
   static googleSignIn(req, res, next) {
     let user = null
-    const client = new OAuth2Client("31821651677-uorrrhti80raddfghfv72p72n03aoe8u.apps.googleusercontent.com");
+    const client = new OAuth2Client(process.env.CLIENT_ID);
     client
       .verifyIdToken({
         idToken: req.body.id_token,
-        audience: "31821651677-uorrrhti80raddfghfv72p72n03aoe8u.apps.googleusercontent.com"
+        audience: process.env.CLIENT_ID
       })
       .then(result => {
         user = result.getPayload()
@@ -70,7 +70,7 @@ class UserController {
       .then(result => {
         console.log(result, '< result user')
         if (result) {
-          const token = jwt.sign({ email: result.email, id: result.id }, 'TOKEN');
+          const token = jwt.sign({ email: result.email, id: result.id }, process.env.JWT_TOKEN);
           res.status(200).json({ token: token, UserId: result.id })
         } else {
           return User
@@ -83,7 +83,7 @@ class UserController {
       })
       .then(result => {
         console.log('masuk')
-        const token = jwt.sign({ email: result.email, id: result.id }, 'TOKEN');
+        const token = jwt.sign({ email: result.email, id: result.id }, process.env.JWT_TOKEN);
         res.status(200).json({ token: token, UserId: result.id })
         console.log(token, '< ini token')
       })
