@@ -364,15 +364,15 @@ $ npm start
         "errors": [
             "Data not found!"
         ]
-  }
+    }
     ```
 
   - **Status:** `500`
   
     ```javascript
-    {
-        "errors": "Server currently unable to handle this request"
-  }
+      {
+          "errors": "Server currently unable to handle this request"
+      }
     ```
   
   
