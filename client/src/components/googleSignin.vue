@@ -20,7 +20,7 @@ export default {
        */
       googleSignInParams: {
         client_id:
-          "733475019943-ftk7rckj11uj8jso82j06r5j843p9mko.apps.googleusercontent.com"
+          "733475019943-94gobachfpnipv6tjoud7h498gi1bf6h.apps.googleusercontent.com"
       },
       // baseUrl: "http://localhost:3000"
       baseUrl: this.$baseUrl

@@ -33,8 +33,8 @@ const firebaseConfig = require("./config/configFirebase")
 firebase.initializeApp(firebaseConfig)
 Vue.use(firebase)
 
-Vue.prototype.$socket = io.connect("http://localhost:3000")
-Vue.prototype.$baseUrl = "http://localhost:3000"
+Vue.prototype.$socket = io.connect("https://kanbanmu.herokuapp.com")
+Vue.prototype.$baseUrl = "https://kanbanmu.herokuapp.com"
 
 new Vue({
     render: h => h(App)
