@@ -5,7 +5,7 @@ if(process.env.NODE_ENV == 'development') {
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const port = process.env.port || 3000
+const port = process.env.PORT || 3000
 const errorHandler = require('./middlewares/errorHandler')
 const routes = require('./routers')
 const http = require('http').createServer(app);
