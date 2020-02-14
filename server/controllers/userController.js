@@ -76,6 +76,7 @@ class UserController {
                         next({ message: 'email/password salah' })
                     } else {
                         const token = jwt.generateToken(user)
+                        console.log(token)
                         res.status(201).json({
                             access_token: token,
                             userId: user.id

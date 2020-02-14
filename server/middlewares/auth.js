@@ -26,7 +26,6 @@ function authorize(req, res, next) {
     try {
         Task.findByPk(req.params.id)
             .then(task => {
-                console.log(task.UserId, req.userId)
                 if (!task) {
                     next({ message: 'you are not authorize' })
                 } else {
