@@ -26,8 +26,8 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
-Vue.prototype.$BASE_URL = 'http://localhost:3000'
-Vue.prototype.$socket = io.connect('http://localhost:3000')
+Vue.prototype.$BASE_URL = 'https://kanmarz-v2.herokuapp.com'
+Vue.prototype.$socket = io.connect('https://kanmarz-v2.herokuapp.com')
 
 new Vue({
   el: '#app',

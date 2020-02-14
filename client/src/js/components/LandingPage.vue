@@ -172,7 +172,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.social-login .v-btn{
+.social-login .v-btn {
   color: white;
   width: 500px;
   padding: 5px;

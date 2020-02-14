@@ -12,28 +12,11 @@
     <a href="#" @click.stop="dialog = true">View Project Members</a>
     <v-row>
       <v-col md="3" lg="3" v-for="(category, i) in categories" :key="i">
-        <v-card :color="category.color">
-          <v-card-title class="headline text-center">{{
-            category.name
-          }}</v-card-title>
-
-          <div id="taskCard">
-            <draggable
-              v-model="category.task"
-              group="category"
-              @start="drag = true"
-              @end="drag = false"
-            >
-              <TaskCard
-                v-for="(task, i) in category.task"
-                :key="i"
-                :task="task"
-                v-on:DELETE_TASK="deleteTask"
-                v-on:EDIT_TASK="getEdit"
-              ></TaskCard>
-            </draggable>
-          </div>
-        </v-card>
+        <MainCard
+          :category="category"
+          @EDIT_DATA="getEdit"
+          @FETCH_DONG="fetchDong"
+        ></MainCard>
       </v-col>
     </v-row>
 
@@ -87,8 +70,7 @@
 <script>
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import TaskCard from './TaskCard'
-import draggable from 'vuedraggable'
+import MainCard from './MainCard'
 import ModalMember from './ModalMember'
 
 export default {
@@ -172,19 +154,8 @@ export default {
           console.log(response)
         })
     },
-    deleteTask(val) {
-      axios
-        .delete(`${this.$BASE_URL}/tasks/${val}/${this.task.projectId}`, {
-          headers: { token: localStorage.getItem('token') }
-        })
-        .then(resp => {
-          this.fetchProjectTasks(this.task.projectId)
-          this.$socket.emit('changeTask', 'task deleted')
-          Swal.fire('Success', 'Task deleted', 'success')
-        })
-        .catch(({ response }) => {
-          console.log(response)
-        })
+    fetchDong(val) {
+      return this.fetchProjectTasks(val)
     },
     getEdit(val) {
       this.editId = val.id
@@ -249,9 +220,8 @@ export default {
   },
   props: ['project'],
   components: {
-    TaskCard,
-    draggable,
-    ModalMember
+    ModalMember,
+    MainCard
   },
   watch: {
     categories: {
@@ -268,7 +238,7 @@ export default {
                     { headers: { token: localStorage.getItem('token') } }
                   )
                   .then(response => {
-                    // this.fetchProjectTasks(this.task.projectId)
+                    this.fetchProjectTasks(this.task.projectId)
                     this.$socket.emit('changeTask', 'task moved')
                   })
                   .catch(({ response }) => {
@@ -308,11 +278,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.v-card {
-  color: white !important;
-  font-weight: 500;
-  min-height: 15vh;
-}
 .v-btn {
   color: white;
 }

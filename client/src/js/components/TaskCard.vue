@@ -10,7 +10,7 @@
         class="mr-1"
         color="red"
         style="color: white;"
-        @click.prevent="deleteTask(task.id)"
+        @click.prevent="deleteTask(task)"
         >Delete</v-btn
       >
       <v-btn
@@ -31,8 +31,8 @@ export default {
   name: 'TaskCard',
   props: ['task'],
   methods: {
-    deleteTask(id) {
-      return this.$emit('DELETE_TASK', id)
+    deleteTask(task) {
+      return this.$emit('DELETE_TASK', task)
     },
     editTask(task) {
       return this.$emit('EDIT_TASK', task)
