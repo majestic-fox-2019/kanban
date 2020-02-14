@@ -3,7 +3,7 @@
     <a
       @click="showTodoDetails"
       class="ui card ml-0 mb-4"
-      style="background-color: #dbe0e8;"
+      style="background-color: rgb(192, 205, 224);"
     >
       <div is="sui-card-content">
         <div class="header">{{ cardData.title }}</div>

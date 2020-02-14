@@ -54,6 +54,7 @@
           >
           <el-button
             @click.prevent="hapus"
+            v-if="editPage"
             style="float: right;"
             size="small"
             type="danger"
@@ -69,10 +70,12 @@
 <script>
 import Swal from 'sweetalert2'
 import axios from 'axios'
+import firebase from 'firebase'
 export default {
   name: 'editAddTodo',
   data() {
     return {
+      userLogin: null,
       editPage: false,
       form: {
         title: ''
@@ -81,13 +84,18 @@ export default {
   },
   methods: {
     showEditPage() {
+      if (this.userLogin.photoURL === this.todoDetail.creatorImg) {
       this.editPage = true
+      } else {
+        this.open4('you are not allowed to edit, the only one can edit this is the owner')
+      }
     },
     hideEditPage() {
       this.$emit('hideEditPage')
     },
     update(){
-      axios({
+      if (this.userLogin.photoURL === this.todoDetail.creatorImg) {
+        axios({
         method: 'patch',
         url: `https://shielded-escarpment-11569.herokuapp.com/todos/${this.todoDetail.id}`,
         data: {
@@ -96,12 +104,16 @@ export default {
         }
       })
       .then((result) => {
+        this.successON('your update is going successfully')
         this.$socket.emit('updateStatus')
         console.log('update success');
         this.hideEditPage()
       }).catch((err) => {
         console.log(err);
       });
+      } else {
+        this.open4('update failed, sory:( ....something gone wrong')
+      }
     },
     hapus(){
       Swal.fire({
@@ -124,16 +136,30 @@ export default {
               }).catch((err) => {
                 console.log(err);
               });
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            )
           }
         })
-    }
+    },
+    open4(message) {
+        this.$message({
+          showClose: true,
+          message: message,
+          type: 'error'
+        });
+      },
+      successON(message) {
+        this.$notify.success({
+          title: 'Success',
+          message: message,
+          offset: 100
+        });
+      }
   },
-  props: ['todoDetail']
+  props: ['todoDetail'],
+  created(){
+    firebase.auth().onAuthStateChanged(userLogin => {
+      this.userLogin = userLogin
+    })
+  }
 }
 </script>
 

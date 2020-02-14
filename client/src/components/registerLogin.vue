@@ -159,7 +159,7 @@ export default {
         })
         .then(data => {
           console.log('ini data register yang sudah update', data)
-          this.open1('Yey you have register successfully')
+          this.open1('Yey..... you have register successfully')
         })
         .catch(err => {
           console.log(err)
@@ -176,6 +176,7 @@ export default {
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         // })
         .then(data => {
+          this.open1('Yey..... you are loged in successfully')
           this.form.email = ''
           this.form.password = ''
           console.log('user login succesfully', data)
@@ -194,6 +195,7 @@ export default {
         .signInWithPopup(provider)
         .then(function(result) {
           // This gives you a Google Access Token. You can use it to access the Google API.
+          this.open1('Yey..... you are loged in successfully')
           var token = result.credential.accessToken
           // The signed-in user info.
           var user = result.user
@@ -206,6 +208,7 @@ export default {
         })
         .catch(function(error) {
           // Handle Errors here.
+          this.open4(err.message)
           var errorCode = error.code
           var errorMessage = error.message
           // The email of the user's account used.
@@ -230,6 +233,7 @@ export default {
         .signInWithPopup(provider)
         .then(function(result) {
           // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+          this.open1('Yey..... you are loged in successfully')
           var token = result.credential.accessToken
           // The signed-in user info.
           var user = result.user
@@ -249,6 +253,7 @@ export default {
           var email = error.email
           // The firebase.auth.AuthCredential type that was used.
           var credential = error.credential
+          this.open4(err.message)
 
           console.log(
             'error login facebook',
@@ -266,6 +271,7 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(function(result) {
+          this.open1('Yey..... you are loged in successfully')
           // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
           // You can use these server side with your app's credentials to access the Twitter API.
           var token = result.credential.accessToken
@@ -280,6 +286,7 @@ export default {
           )
         })
         .catch(function(error) {
+          this.open4(err.message)
           // Handle Errors here.
           var errorCode = error.code
           var errorMessage = error.message
@@ -304,6 +311,7 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(function(result) {
+          this.open1('Yey..... you are loged in successfully')
           // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
           // You can use these server side with your app's credentials to access the Twitter API.
           var token = result.credential.accessToken
@@ -319,6 +327,7 @@ export default {
         })
         .catch(function(error) {
           // Handle Errors here.
+          this.open4(err.message)
           var errorCode = error.code
           var errorMessage = error.message
           // The email of the user's account used.
@@ -343,9 +352,11 @@ export default {
         .auth()
         .signOut()
         .then(result => {
+          this.open1('Yey..... you are log out in successfully')
           console.log('user succesfully logout', result)
         })
         .catch(err => {
+          this.open4(err.message)
           console.log(err)
         })
     },

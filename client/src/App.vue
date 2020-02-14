@@ -81,6 +81,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import cardDetail from './components/todoDetails'
 import navbar from './components/navbar.vue'
 import loginRegister from './components/registerLogin'
@@ -155,8 +156,9 @@ export default {
       this.todoDetailPage = false
     },
     deleteSuccess() {
-      this.getAllTodo()
       this.hideEditPage()
+      this.getAllTodo()
+      Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
     },
     showLoginRegisterPage() {
       this.loginRegisterPage = true
