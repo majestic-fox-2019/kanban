@@ -66,7 +66,7 @@ export default {
         .then(function(result) {
           return axios({
             method: "post",
-            url: "http://localhost:3000/users/login/github",
+            url: "https://my-kanban-cool.herokuapp.com/users/login/github",
             data: {
               email: result.user.email,
               name: result.user.displayName
@@ -96,7 +96,7 @@ export default {
         .then(GoogleUser => {
           return axios({
             method: "post",
-            url: "http://localhost:3000/users/login/google",
+            url: "https://my-kanban-cool.herokuapp.com/users/login/google",
             data: { idToken: GoogleUser.getAuthResponse().id_token }
           });
         })
@@ -121,7 +121,7 @@ export default {
     signin() {
       this.isLoading = true;
       axios({
-        url: "http://localhost:3000/users/login",
+        url: "https://my-kanban-cool.herokuapp.com/users/login",
         method: "post",
         data: {
           email: this.email,

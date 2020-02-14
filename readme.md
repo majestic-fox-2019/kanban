@@ -21,7 +21,7 @@ npm run dev
 ## BASE URL
 
 ```
-http://localhost:3000
+https://my-kanban-cool.herokuapp.com
 ```
 
 ##  ACCESS

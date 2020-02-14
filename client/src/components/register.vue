@@ -38,7 +38,7 @@ export default {
     signup() {
       this.isLoading = true;
       axios({
-        url: "http://localhost:3000/users/register",
+        url: "https://my-kanban-cool.herokuapp.com/users/register",
         method: "post",
         data: {
           name: this.name,
