@@ -1,9 +1,8 @@
 <template>
 <div>
   <div class="boxSize" >
-  <b-card :title="judul" :sub-title="judul">
+  <b-card :title="judul" :sub-title="`Task Total: ${tasks.length}`"  >
     <div v-for ="task in tasks" :key="task.id" >
-    <!-- <Card :task="task" :categoryTask="judul" :thatUser="users" @getData="$emit('getAllData')"></Card> -->
     <Card :task="task" :categoryTask="judul" @getData="$emit('getAllData')"></Card>
     </div>
   </b-card>
@@ -18,6 +17,11 @@ import axios from "axios"
 export default {
   components: {
     Card
+  },
+  data() {
+    return {
+      taskLength: this.tasks.length
+    }
   },
   props: ["judul", "users", "tasks"],
   mounted(){

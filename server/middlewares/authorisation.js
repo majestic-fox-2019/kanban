@@ -2,6 +2,7 @@ const Task = require('../models').Task
 const User = require('../models').User
 function authorisation (req, res, next) {
   let userId 
+  // if(typeof Number(req.user))
   User.findOne({where:{email: req.user}})
   .then(user => {
     userId = user.id

@@ -2,36 +2,36 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light  d-flex justify-content-center">
         <div class="container d-flex justify-content-between">
-          <div>
-            <a href="" data-toggle="modal" data-target="#addModal"><i class="fas fa-rocket"  ></i>  add task</a>
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-rocket"  ></i> menu task
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
+                  <a class="dropdown-item" href="" data-toggle="modal" data-target="#addModal">add task</a>
+                  <a v-b-modal.modal-remind class="dropdown-item" href="" data-toggle="modal">remind friend</a>
+              </div>
           </div>
-          <a class="navbar-brand" href="#">KANBAN</a>
+            <a class="navbar-brand" href="#" style="font-family: 'Lacquer', sans-serif; font-size: 50px; color: cornflowerblue; " >K A N B A N</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-            <!-- <div class="tombolUser"> -->
-              <div v-if="!isLogin" class="dropdown">
+            <div v-if="!isLogin" class="dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user-circle"></i> Login here
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="" data-toggle="modal" data-target="#loginForm">Login</a>
-                <a class="dropdown-item" href="" data-toggle="modal" data-target="#registForm">Register</a>
+                  <a class="dropdown-item" href="" data-toggle="modal" data-target="#registForm">Register</a>
               </div>
-              </div> 
+            </div> 
               <div v-else class="dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-user-circle"></i> Welcome {{userLogin}}
-                </a>
-              
+                </a>            
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                 
-                    <a class="dropdown-item" href="" @click = "logout()">Logout</a>
-                  
-                
+                <a class="dropdown-item" href="" @click = "logout()">Logout</a> 
                 </div>
-                </div> 
-            <!-- </div> -->
+              </div> 
         </div>
       </nav>
 
@@ -58,6 +58,8 @@
               <input type="password" class="form-control" id="passLogin" v-model="passLogin">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+            <p>or login with</p>
+            <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSignIn"></GoogleLogin>
           </form>
         </div> 
       </div>
@@ -132,12 +134,68 @@
   </div>
 </div>
 
+<!-- MODAL REMIND -->
+<div>
+  <b-modal id="modal-remind" size="lg" title="Remind your friend about their task!" hide-footer>
+     <form @submit.prevent = "sendReminding(emailRemind,textRemind)">
+      <label for="input-with-list">send this email to..</label>
+      <b-form-input list="input-list" id="input-with-list" v-model="emailRemind"></b-form-input>
+      <b-form-datalist id="input-list" :options="allUser"></b-form-datalist>
+      
+      <div class="mt-3" >
+      <label for="input-with-list">write your message here</label>
+      <b-form-textarea
+        id="textarea"
+        v-model="textRemind"
+        placeholder="Write your message here..."
+        rows="3"
+        max-rows="6" 
+      ></b-form-textarea>
+  </div>
+    <button type="submit" class="btn btn-primary mt-3" @click="$bvModal.hide('modal-remind')">Submit</button>
+    </form>
+  </b-modal>
+</div>
+
   </div>
 </template>
-
 <script>
+import GoogleLogin from 'vue-google-login';
 import axios from "axios"
+import nodemailer from 'nodemailer'
 export default {
+  components: {
+    GoogleLogin
+  },
+  data(){
+    return {
+      titleAddTask: null,
+      dateAddTask: null,
+      descriptionAddTask: null,
+
+      nameRegis: null,
+      emailRegis: null,
+      passRegis: null,
+  
+      emailLogin: null,
+      passLogin: null,
+  
+      isLogin: false,
+      userLogin: localStorage.getItem("userLogin"),
+      allUser: [],
+      textRemind: '',
+      emailRemind:'',
+      params: {
+          client_id: "65771320380-84k9dc4q4dp776r5482rsbl93npg1nsp.apps.googleusercontent.com"
+      },
+      // only needed if you want to render the button with the google ui
+      renderParams: {
+          width: 250,
+          height: 50,
+          longtitle: true
+      }
+    }
+  },
   methods: {
     checkLogin() {
             let token = localStorage.getItem("token")
@@ -178,6 +236,39 @@ export default {
       })
     },
 
+    sendReminding(email, textInput) {
+     axios({
+       url: "http://localhost:3000/remind-friend", 
+       method:"POST",
+       data: {
+         email: this.emailRemind,
+         inputText: this.textRemind
+       },
+       headers: {
+         token: localStorage.getItem("token")
+       }
+     })
+     .then(data => {
+       console.log("berhasil kirim email")
+        this.emailRemind = ''
+        this.textRemind = ''
+              Swal.fire({
+                icon: 'success',
+                title: 'Email send!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+     })
+     .catch(err => {
+       console.log(err, "gagal kirim email")
+       Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'failed send this email!'
+        })
+     })
+    },
+
     login() {
       axios({
         url: "http://localhost:3000/login",
@@ -191,13 +282,10 @@ export default {
         localStorage.setItem("token", data.data.token)
         localStorage.setItem("userLogin", data.data.user.name)
         this.userLogin = data.data.user.name
-        
-        console.log(data, "<<<<<<<<<<<<<<<<<<")
         $("#loginForm").modal("hide")
         this.checkLogin()
       })
       .catch(err => {
-        console.log(err.response)
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -206,14 +294,43 @@ export default {
       })
     },
 
-    logout() {
-      localStorage.clear()
-      this.checkLogin()
-      Swal.fire({
-        title:'successfully logout!',
-        timer: 1500
+    onSignIn(googleUser) {
+      var id_token = googleUser.getAuthResponse().id_token;
+      axios({
+        url: `http://localhost:3000/login-google`,
+        method: "POST",
+        data: {
+          id_token
+        },
+      })
+      .then(data => {
+        let token = data.token
+        localStorage.setItem("token", data.data.token) 
+        $("#loginForm").modal("hide")
+        localStorage.setItem("userLogin", data.data.user.name)
+        this.userLogin = data.data.user.name
+        Swal.fire({
+          icon: 'success',
+          title: 'Successfully login from your Google account!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.checkLogin()
+      })
+      .catch(err => {
+        console.log(err)
       })
 
+  },
+
+    logout() {
+       var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      localStorage.clear()
+      this.checkLogin()
+      Swal.fire('loged out!')
     },
 
     addTask() {
@@ -227,12 +344,12 @@ export default {
           status: this.descriptionAddTask
         },
         headers: {
-          token: localStorage.getItem("token")
+          token: localStorage.getItem("token"),
+          user: localStorage.getItem("user")
         }
       })
       .then(data => {
         this.$emit("getAllData")
-        console.log(data)
         $("#addModal").modal("hide")
       })
       .catch(err => {
@@ -255,28 +372,31 @@ export default {
       })
    },
 
+  getAllUser() {
+    axios({
+      url: "http://localhost:3000/users",
+      method:"GET",
+      headers: {
+        token: localStorage.getItem("token")
+      }
+    })
+    .then(data => {
+      data.data.forEach(user => {
+        this.allUser.push(user.email)
+      })
+      console.log(this.allUser, "<<<<<<<<<<<<")
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
     
   },
-  data(){
-    return {
-      titleAddTask: null,
-      dateAddTask: null,
-      descriptionAddTask: null,
-
-      nameRegis: null,
-      emailRegis: null,
-      passRegis: null,
   
-      emailLogin: null,
-      passLogin: null,
-  
-      isLogin: false,
-      userLogin: localStorage.getItem("userLogin")
-
-    }
-  },
   mounted(){
     this.checkLogin()
+    this.getAllUser()
   },
   created(){
     this.checkLogin()

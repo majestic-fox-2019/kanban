@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 function authentication (req, res, next) {
   try {
     const token = req.headers.token
-    const user = jwt.verify(token, "RAHASIANIH")
+    const user = jwt.verify(token, process.env.JWT_PASS)
     req.user = user
     next()
     

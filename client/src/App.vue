@@ -13,6 +13,12 @@
 import Navbar from "./Navbar"
 import BodyCard from "./BodyCard"
 import axios from "axios"
+import VueSocketIOExt from 'vue-socket.io-extended';
+import io from 'socket.io-client';
+ 
+const socket = io('http://localhost:3000');
+ 
+Vue.use(VueSocketIOExt, socket);
 export default {
   name: "app",
   components: {
@@ -25,6 +31,15 @@ export default {
       users:[],
       userLogin:false,
       test: false
+    }
+  },
+  sockets: {
+    connect() {
+      console.log('socket connected')
+    },
+    livesocket(){
+      console.log('masuk<<<<<<<<<<<')
+      this.getData()
     }
   },
   methods: {
@@ -49,10 +64,7 @@ export default {
   },
 
   created() {
-    
-  },
-  mounted() {
-    this.getData()
+    this.getData();
   },
   computed: {
     categoriesC: function(){
@@ -65,7 +77,9 @@ export default {
           }
         }
       }
+      console.log(obj)
       return obj;
+      
     }
   }
 }

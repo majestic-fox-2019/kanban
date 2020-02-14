@@ -35,8 +35,8 @@ class ControllerTask {
   } 
 
   static adding(req, res, next) {
-    console.log(req.body, "<<<<<")
-    console.log(req.user, "<<<<ini req user")
+    
+    let newEmail
     let objTask = {
       title: req.body.title,
       UserId: null,
@@ -44,18 +44,19 @@ class ControllerTask {
       status : req.body.status,
       date: req.body.date
     }
-    User.findOne({where: {email:req.user}})
-    .then(user => {
-      objTask.UserId = user.id
-      return Task.create(objTask)
-    })
-    Task.create(objTask)
-    .then(task => {
-      res.status(200).json(task)
-    })
-    .catch(err => {
-      next(err)
-    })
+      User.findOne({where: {email:req.user}})
+      .then(user => {
+        objTask.UserId = user.id
+          return Task.create(objTask)
+      })
+      .then(task => {
+        req.io.emit("livesocket")
+        res.status(200).json(task)
+      })
+      .catch(err => {
+        next(err)
+      })
+    
   }
 
   static deleting(req, res, next) {
@@ -70,6 +71,7 @@ class ControllerTask {
       }
     })
     .then(() => {
+      req.io.emit("livesocket")
       res.status(200).json(task)
     })
     .catch(err => {
@@ -98,6 +100,7 @@ class ControllerTask {
       return Task.update(objTask, {where:{id:req.params.id}, returning: true})
     })
     .then(task => {
+      req.io.emit("livesocket")
       res.status(200).json(task)
     })
     .catch(err => {
@@ -126,6 +129,7 @@ class ControllerTask {
       return Task.update(objTask, {where:{id:req.params.id}, returning: true})
     })
     .then(task => {
+      req.io.emit("livesocket")
       res.status(200).json(task)
     })
     .catch(err => {

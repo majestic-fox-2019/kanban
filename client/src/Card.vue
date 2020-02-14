@@ -45,6 +45,7 @@ export default {
           token: localStorage.getItem("token")
         }
       })
+       
       .then(data => {
         this.$emit("getData")
         console.log(data)
