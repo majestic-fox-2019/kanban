@@ -73,7 +73,7 @@ export default {
     accept(id) {
       axios({
         method: "patch",
-        url: `http://localhost:3000/tasks/${id}/assign`,
+        url: `https://shrouded-falls-18164.herokuapp.com/tasks/${id}/assign`,
         headers: {
           access_token: localStorage.getItem("access_token")
         }
@@ -92,7 +92,7 @@ export default {
     decline(id) {
       axios({
         method: "patch",
-        url: `http://localhost:3000/tasks/${id}/decline`,
+        url: `https://shrouded-falls-18164.herokuapp.com/tasks/${id}/decline`,
         headers: {
           access_token: localStorage.getItem("access_token")
         }
@@ -122,7 +122,7 @@ export default {
           if (result.value) {
             return axios({
               method: "delete",
-              url: `http://localhost:3000/tasks/${id}`,
+              url: `https://shrouded-falls-18164.herokuapp.com/tasks/${id}`,
               headers: {
                 access_token: localStorage.getItem("access_token")
               }
@@ -145,7 +145,7 @@ export default {
     findOne(id) {
       axios({
         method: "get",
-        url: `http://localhost:3000/tasks/${id}`,
+        url: `https://shrouded-falls-18164.herokuapp.com/tasks/${id}`,
         headers: {
           access_token: localStorage.getItem("access_token")
         }
@@ -167,7 +167,7 @@ export default {
     updateTask(id) {
       axios({
         method: "put",
-        url: `http://localhost:3000/tasks/${id}`,
+        url: `https://shrouded-falls-18164.herokuapp.com/tasks/${id}`,
         headers: {
           access_token: localStorage.getItem("access_token")
         },

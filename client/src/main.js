@@ -20,7 +20,7 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
 Vue.prototype.$axios = axios;
-Vue.prototype.$socket = io("http://localhost:3000")
+Vue.prototype.$socket = io("https://shrouded-falls-18164.herokuapp.com/")
 
 new Vue({
     render: (h) => h(App)

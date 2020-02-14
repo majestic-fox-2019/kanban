@@ -220,7 +220,7 @@ export default {
     login() {
       axios({
         method: "post",
-        url: `http://localhost:3000/users/login`,
+        url: `https://shrouded-falls-18164.herokuapp.com/users/login`,
         data: {
           email: this.email,
           password: this.password
@@ -243,7 +243,7 @@ export default {
     registerForm() {
       axios({
         method: "post",
-        url: `http://localhost:3000/users/register`,
+        url: `https://shrouded-falls-18164.herokuapp.com/users/register`,
         data: {
           name: this.name,
           email: this.email,
@@ -270,7 +270,8 @@ export default {
         .then(GoogleUser => {
           return axios({
             method: "post",
-            url: "http://localhost:3000/users/login-google",
+            url:
+              "https://shrouded-falls-18164.herokuapp.com/users/login-google",
             data: { idToken: GoogleUser.getAuthResponse().id_token }
           });
         })

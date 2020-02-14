@@ -146,7 +146,7 @@ export default {
     createTask() {
       axios({
         method: "post",
-        url: `http://localhost:3000/tasks`,
+        url: `https://shrouded-falls-18164.herokuapp.com/tasks`,
         headers: {
           access_token: localStorage.getItem("access_token")
         },
@@ -175,7 +175,7 @@ export default {
       this.todo = [];
       axios({
         method: "get",
-        url: `http://localhost:3000/tasks`,
+        url: `https://shrouded-falls-18164.herokuapp.com/tasks`,
         headers: {
           access_token: localStorage.getItem("access_token")
         }
@@ -213,7 +213,7 @@ export default {
         let category = newData.value;
         axios({
           method: "patch",
-          url: `http://localhost:3000/tasks/${id}`,
+          url: `https://shrouded-falls-18164.herokuapp.com/tasks/${id}`,
           headers: {
             access_token: localStorage.getItem("access_token")
           },
