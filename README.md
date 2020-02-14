@@ -5,7 +5,7 @@
 ## Table of Content
 
 - **Kanban-API**
-  - [Base URL](#base-url)
+  - [Base URL](#base-url:)
   - [Installation](#installation)
   - [Usage](#usage)
   - [List of Routes User](#list-of-routes-user)
@@ -22,15 +22,15 @@
 
 ------
 
-#### **Base URL :** `http://localhost:3000`
+#### **Base URL :** `https://kanban-api-majestic.herokuapp.com`
 
 #### **Installation:**
 
-Clone this API from repository and install npm, then on `server` directory install the neccessary npm package
+Clone this API from repository and install npm, then on `server` and `client` directory install the neccessary npm package
 
 ```
 $ git clone https://github.com/hafizulrifkihawari/kanban.git
-$ cd ../server
+$ cd ../server && cd ../client
 $ npm install
 ```
 
