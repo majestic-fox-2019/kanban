@@ -1,6 +1,5 @@
-if (process.env.NODE_ENV == 'test' || process.env.NODE_ENV == 'development') {
-  require('dotenv').config()
-}
+require('dotenv').config()
+
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
@@ -24,8 +23,7 @@ io.on('connection', function(socket) {
   console.log('connection made')
 
   socket.on('updateTaskList', function() {
-    socket.emit('taskUpdated')
-    socket.broadcast.emit('taskUpdated')
+    io.emit('taskUpdated')
   })
 
   socket.on('disconnect', function() {
