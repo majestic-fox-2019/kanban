@@ -3,8 +3,8 @@
 ## This project demo
 
 ```
-https://kanban-919b3.firebaseapp.com/
-or click [here](https://kanban-919b3.firebaseapp.com/)
+<https://kanban-919b3.firebaseapp.com/>
+
 ```
 
 ## First Config
