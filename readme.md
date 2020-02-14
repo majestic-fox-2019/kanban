@@ -2,9 +2,10 @@
 
 ## This project demo
 
-```
-<https://kanban-919b3.firebaseapp.com/>
+[click here](https://kanban-919b3.firebaseapp.com/) or copy the link below
 
+```
+https://kanban-919b3.firebaseapp.com/
 ```
 
 ## First Config
