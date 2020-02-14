@@ -84,11 +84,11 @@ export default {
           });
         })
         .then(result => {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("id", data.user.id);
+          localStorage.setItem("name", data.user.name);
+          this.$root.nama = data.user.name;
           this.$emit("statusLoginTrue");
-          localStorage.setItem("token", result.data.token);
-          localStorage.setItem("id", result.data.user.id);
-          localStorage.setItem("name", result.data.user.name);
-          this.$root.nama = result.data.user.name;
         })
         .catch(function(error) {
           const errorMessage = error.message;
@@ -105,6 +105,7 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(function(result) {
+          this.isLoading = true;
           return axios({
             method: "post",
             url: "https://my-kanban-cool.herokuapp.com/users/login/github",
@@ -115,11 +116,14 @@ export default {
           });
         })
         .then(result => {
-          this.$emit("statusLoginTrue");
-          localStorage.setItem("token", result.data.token);
-          localStorage.setItem("id", result.data.user.id);
-          localStorage.setItem("name", result.data.user.name);
-          this.$root.nama = result.data.user.name;
+          setTimeout(() => {
+            this.isLoading = false;
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("id", data.user.id);
+            localStorage.setItem("name", data.user.name);
+            this.$root.nama = data.user.name;
+            this.$emit("statusLoginTrue");
+          }, 1000);
         })
         .catch(function(error) {
           const errorMessage = error.message;
@@ -132,6 +136,7 @@ export default {
     },
     onSignIn() {
       this.$gAuth.signIn().then(GoogleUser => {
+        this.isLoading = true;
         const idToken = GoogleUser.getAuthResponse().id_token;
         return axios({
           method: "post",
@@ -139,11 +144,14 @@ export default {
           data: { idToken: idToken }
         })
           .then(({ data }) => {
-            this.$emit("statusLoginTrue");
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("id", data.user.id);
-            localStorage.setItem("name", data.user.name);
-            this.$root.nama = data.user.name;
+            setTimeout(() => {
+              this.isLoading = false;
+              localStorage.setItem("token", data.token);
+              localStorage.setItem("id", data.user.id);
+              localStorage.setItem("name", data.user.name);
+              this.$root.nama = data.user.name;
+              this.$emit("statusLoginTrue");
+            }, 1000);
           })
           .catch(({ response }) => {
             Swal.fire({
