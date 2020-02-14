@@ -1,11 +1,7 @@
 <template>
   <div id="app">
     <auth-page v-if="isLoggedIn" @login="isLoggedIn = !isLoggedIn"></auth-page>
-    <user-page
-      v-if="!isLoggedIn && !showKanban"
-      @logout="session"
-      @load-category="load"
-    ></user-page>
+    <user-page v-if="!isLoggedIn && !showKanban" @logout="session" @load-category="load"></user-page>
     <kanban-page
       v-if="showKanban"
       :categories="categories"
@@ -30,7 +26,8 @@ export default {
   },
   data: () => {
     return {
-      base_url: "https://api-kanban.herokuapp.com",
+      base_url: "http://localhost:3000",
+      // base_url: "https://api-kanban.herokuapp.com",
       endpoint_category: "/category",
       isLoggedIn: localStorage.token === undefined ? true : false,
       categories: null,
@@ -51,7 +48,10 @@ export default {
       return axios({
         method: method,
         url: url,
-        data: data
+        data: data,
+        headers: {
+          token: localStorage.token
+        }
       });
     },
     signOut: function() {
@@ -61,8 +61,8 @@ export default {
       });
     },
     session: function() {
-      this.signOut();
       this.isLoggedIn = !this.isLoggedIn;
+      // this.signOut();
     },
     getCategory: function() {
       this.request({ method: "get", endpoint: this.endpoint_category })
@@ -73,9 +73,6 @@ export default {
           console.log(err);
         });
     }
-  },
-  created: function() {
-    this.getCategory();
   }
 };
 </script>

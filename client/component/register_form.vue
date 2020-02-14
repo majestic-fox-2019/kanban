@@ -20,7 +20,8 @@ export default {
     return {
       email: "",
       password: "",
-      endpoint_register: "https://api-kanban.herokuapp.com/register"
+      // endpoint_register: "https://api-kanban.herokuapp.com/register"
+      endpoint_register: "http://localhost:3000/register"
     };
   },
   methods: {

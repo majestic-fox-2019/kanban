@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     UserId: DataTypes.INTEGER
   }, {});
-  Project.associate = function(models) {
+  Project.associate = function (models) {
     Project.hasMany(models.Task)
   };
   return Project;

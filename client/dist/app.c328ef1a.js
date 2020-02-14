@@ -10680,7 +10680,8 @@ var _default = {
     return {
       email: "",
       password: "",
-      endpoint_login: "https://api-kanban.herokuapp.com/login",
+      // endpoint_login: "https://api-kanban.herokuapp.com/login",
+      endpoint_login: "http://localhost:3000/login",
       params: {
         client_id: "296527354511-ljb6felanads0etlm9rlt1qo7uodhal1.apps.googleusercontent.com"
       },
@@ -10701,7 +10702,8 @@ var _default = {
         data: {
           id_token: id_token
         },
-        url: "https://api-kanban.herokuapp.com/google-signin"
+        url: "http://localhost:3000/google-signin" // url: "https://api-kanban.herokuapp.com/google-signin"
+
       }).then(function (res) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("email", res.data.email);
@@ -10954,7 +10956,8 @@ var _default = {
     return {
       email: "",
       password: "",
-      endpoint_register: "https://api-kanban.herokuapp.com/register"
+      // endpoint_register: "https://api-kanban.herokuapp.com/register"
+      endpoint_register: "http://localhost:3000/register"
     };
   },
   methods: {
@@ -11485,7 +11488,8 @@ var _default = {
     return {
       name: "",
       description: "",
-      endpoint_login: "https://api-kanban.herokuapp.com/project"
+      // endpoint_login: "https://api-kanban.herokuapp.com/project"
+      endpoint_login: "http://localhost:3000/project"
     };
   },
   methods: {
@@ -11736,7 +11740,8 @@ var _default = {
     return {
       showForm: false,
       projects: null,
-      endpoint_project: "https://api-kanban.herokuapp.com/project"
+      endpoint_project: "http://localhost:3000/project" // endpoint_project: "https://api-kanban.herokuapp.com/project"
+
     };
   },
   methods: {
@@ -11960,7 +11965,8 @@ var _default = {
   data: function data() {
     return {
       disable: true,
-      endpoint_task: "https://api-kanban.herokuapp.com/task"
+      // endpoint_task: "https://api-kanban.herokuapp.com/task",
+      endpoint_task: "http://localhost:3000/task"
     };
   },
   methods: {
@@ -12249,7 +12255,8 @@ var _default = {
   data: function data() {
     return {
       newTask: "",
-      endpoint_task: "https://api-kanban.herokuapp.com/task"
+      // endpoint_task: "https://api-kanban.herokuapp.com/task",
+      endpoint_task: "http://localhost:3000/task"
     };
   },
   methods: {
@@ -12713,10 +12720,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
 var _default = {
   components: {
     "auth-page": _auth_page.default,
@@ -12725,7 +12728,8 @@ var _default = {
   },
   data: function data() {
     return {
-      base_url: "https://api-kanban.herokuapp.com",
+      base_url: "http://localhost:3000",
+      // base_url: "https://api-kanban.herokuapp.com",
       endpoint_category: "/category",
       isLoggedIn: localStorage.token === undefined ? true : false,
       categories: null,
@@ -12749,7 +12753,10 @@ var _default = {
       return (0, _axios.default)({
         method: method,
         url: url,
-        data: data
+        data: data,
+        headers: {
+          token: localStorage.token
+        }
       });
     },
     signOut: function signOut() {
@@ -12759,8 +12766,7 @@ var _default = {
       });
     },
     session: function session() {
-      this.signOut();
-      this.isLoggedIn = !this.isLoggedIn;
+      this.isLoggedIn = !this.isLoggedIn; // this.signOut();
     },
     getCategory: function getCategory() {
       var _this = this;
@@ -12774,9 +12780,6 @@ var _default = {
         console.log(err);
       });
     }
-  },
-  created: function created() {
-    this.getCategory();
   }
 };
 exports.default = _default;
@@ -12905,7 +12908,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34263" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32839" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
