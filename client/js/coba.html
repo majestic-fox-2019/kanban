@@ -1,0 +1,120 @@
+const base_url = "http://localhost:3000"
+    let data = new Vue ({
+        el:'#app',
+        data:
+        {
+            taskCategory: null,
+            title: {},
+            buttonId: {}
+        },
+        methods: {
+            loadData(){
+                axios
+                .get('http://localhost:3000/tasks')
+                .then( res =>{
+                    let newObj = {}
+                    let objButton = {}
+                    res.data.forEach(el => {
+                        newObj[el.nameCategory] = null;
+                        el.Tasks.forEach(taskId => {
+                            objButton[taskId.id]
+                        });                    
+                    });
+                    this.buttonId= objButton
+                    this.title = newObj
+                    this.taskCategory = res.data
+
+                    console.log(newObj, "woeeee");
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+            },
+
+            addData(category, id){
+                let token = localStorage.getItem("token")
+                let obj = {
+                    title : this.title[category],
+                    CategoryId: id
+                }
+                console.log(obj, );
+                
+                axios
+                .post(`${base_url}/tasks/add`, obj)
+                .then(res=>{
+                    this.loadData()
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+            }
+        },
+
+        created(){
+            this.loadData()
+        }}
+        )
+
+
+
+        <div id="kanbans">
+        <!-- <div class="category" v-for="content in taskCategory"> -->
+            <div class="kanban-column">
+                <div class="text">
+                    {{content.nameCategory}}
+                </div>
+                <!-- content -->
+                <!-- <div class="kanban-content whatever">       -->
+                    <!-- <div class="isiKanban" v-for='task in content.Tasks'> -->
+                        {{task.title}}
+                            <div class="button-x" alyv-model="buttonId[task.id]">
+                                <button type="" class="button-close">
+                                    <div>
+                                        <span>x</span>                           
+                                    </div>
+                                </button>
+                            </div>
+                        <!-- </div> -->
+                </div>
+            <!-- </div> -->
+            <div>
+                <form action="" @submit.prevent="addData(content.nameCategory, content.id)">
+                    <input class="addInput" v-model="title[content.nameCategory]" type="text">
+                    <button class="btn fourth" type="submit">add a card... </button>
+                </form>
+            </div>
+        </div>
+
+                
+        <div id="kanbans">
+            <div 
+            class="category" 
+            v-for="content in taskCategory"
+            :key="content.id"
+            @click="addData()"        
+            >
+                <div class="kanban-column">
+                    <div class="text">
+                        {{content.nameCategory}}
+                    </div>
+                    <!-- content -->
+                    <div class="kanban-content whatever">      
+                        <div 
+                        class="isiKanban" 
+                        v-for='task in content.Task'
+                        :key="task.id"
+                        >
+                            {{task.title}}
+                                <div class="button-x">
+                                    <button type="" class="button-close">
+                                        <div>
+                                            <span @click="destroy(task.id)">x</span>                           
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            <buttonAdd></buttonAdd>
+            </div>
+         </div>

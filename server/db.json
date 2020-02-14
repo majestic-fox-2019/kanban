@@ -1,0 +1,85 @@
+{
+  "taskCategory": [
+    {
+      "id": 1,
+      "category": "Backlog",
+      "titles": [
+        {
+          "title": "Bersihin WC"
+        },
+        {
+          "title": "Bersihin WC2"
+        },
+        {
+          "title": "Bersihin WC"
+        },
+        {
+          "title": "Bersihin WC2"
+        },
+        {
+          "title": "Bersihin WC"
+        },
+        {
+          "title": "Bersihin WC2"
+        },
+        {
+          "title": "Bersihin WC"
+        },
+        {
+          "title": "Bersihin WC2"
+        },
+        {
+          "title": "Bersihin WC3"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "category": "Todo",
+      "titles": [
+        {
+          "title": "Bersihin kamar"
+        },
+        {
+          "title": "Bersihin kamar2"
+        },
+        {
+          "title": "Bersihin kamar3"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "category": "Done",
+      "titles": [
+        {
+          "title": "Bersihin halaman"
+        },
+        {
+          "title": "Bersihin halaman2"
+        },
+        {
+          "title": "Bersihin halaman3"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "category": "Completed",
+      "titles": [
+        {
+          "title": "makan"
+        },
+        {
+          "title": "makan2"
+        },
+        {
+          "title": "makan3"
+        },
+        {
+            "title":"makan4"
+        }
+      ]
+    }
+  ]
+}
