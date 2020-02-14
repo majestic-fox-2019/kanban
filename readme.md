@@ -1,5 +1,16 @@
 # Kanban API Documentation
 
+```
+Deploy Server : https://kanmarz-v2.herokuapp.com
+Deploy Client : https://kanmarz-v2.firebaseapp.com
+```
+
+How to run locally : 
+```
+npm i (server side)
+npm start (client side)
+```
+
 ## Users Routes
 
 ### POST /users/login
