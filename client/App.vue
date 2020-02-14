@@ -64,11 +64,11 @@ export default {
   },
   sockets: {
     connect() {
-      console.log('socket connected')
+      // console.log('socket connected')
     },
     liveTask(){
       this.getTaskList()
-      console.log('masuk')
+      // console.log('masuk')
     }
   },
   methods: {

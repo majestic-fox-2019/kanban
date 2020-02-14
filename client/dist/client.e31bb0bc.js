@@ -28239,12 +28239,10 @@ var _default = {
     this.checkLocalStorage();
   },
   sockets: {
-    connect: function connect() {
-      console.log('socket connected');
+    connect: function connect() {// console.log('socket connected')
     },
     liveTask: function liveTask() {
-      this.getTaskList();
-      console.log('masuk');
+      this.getTaskList(); // console.log('masuk')
     }
   },
   methods: {
