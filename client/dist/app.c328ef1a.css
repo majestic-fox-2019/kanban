@@ -20,6 +20,12 @@ textarea[data-v-e95071] {
 }
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+h2 {
+  color: white;
+  letter-spacing: 5px;
+  text-align: center;
+  margin-bottom: 5px;
+}
 .googleBtn {
   margin: 10px 80px 0 80px;
 }

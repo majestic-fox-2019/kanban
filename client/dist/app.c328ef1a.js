@@ -11656,6 +11656,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
 var server = "https://kanban-ajengrf.herokuapp.com";
 var _default = {
   components: {
@@ -11817,6 +11821,8 @@ exports.default = _default;
           ])
         : _vm._e(),
       _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
       _vm.showReg
         ? _c(
             "div",
@@ -11911,7 +11917,17 @@ exports.default = _default;
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", [
+      _c("i", { staticClass: "fas fa-magic" }),
+      _vm._v("KANBAN CREATOR\n  ")
+    ])
+  }
+]
 render._withStripped = true
 
           return {

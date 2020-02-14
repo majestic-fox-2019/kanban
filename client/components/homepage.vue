@@ -12,6 +12,10 @@
         </p>
       </form>
     </div>
+    <h2>
+      <i class="fas fa-magic"></i>KANBAN CREATOR
+    </h2>
+
     <div class="form" v-if="showReg">
       <form class="login-form" v-on:submit.prevent="$emit('loginUser', login)">
         <input type="email" placeholder="email" v-model=" login.email" />
@@ -76,6 +80,12 @@ export default {
 <style >
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+h2 {
+  color: white;
+  letter-spacing: 5px;
+  text-align: center;
+  margin-bottom: 5px;
+}
 .googleBtn {
   margin: 10px 80px 0 80px;
 }
