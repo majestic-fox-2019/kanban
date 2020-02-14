@@ -96,7 +96,7 @@ export default {
   },
   data: function(){
     return {
-      baseUrl: `http://localhost:3000/api`,
+      baseUrl: `https://kanban-fancy.herokuapp.com/api`,
       categories: {
         'Backlog':[],
         'Will Do': [],
@@ -306,6 +306,9 @@ export default {
         this.loginPage = true
         this.allProjectPage = true
         this.navbar = true
+        data.name = ''
+        data.email = ''
+        data.password = ''
         // this.showAllProjects()
         
       })
@@ -333,7 +336,7 @@ export default {
     onSuccess: function(id_token) {
       axios({
         method: "post",
-        url: `http://localhost:3000/api/google`,
+        url: `${this.baseUrl}/google`,
         data: {
           googleToken: id_token
         }

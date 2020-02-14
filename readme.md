@@ -1,3 +1,8 @@
+Link Deploy:
+
+https://kanbanfancy.firebaseapp.com
+
+
 # Kanban 
 
 Route on My Kanban API is:
