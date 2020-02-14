@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "xxxxxxxxxx",
-    "password": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "database": "xxxxxxxxxx",
-    "host": "xxxxxxxxxxxxxx","dialect": "postgres",
+    "username": "postgres",
+    "password": "admin123",
+    "database": "Kanban_DB",
+    "host": "localhost","dialect": "postgres",
     "operatorsAliases": false
   },
   "test": {
@@ -15,10 +15,10 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": "xxxxxxxxxx",
-    "password": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "database": "xxxxxxxxxx",
-    "host": "xxxxxxxxxxxxxx",
+    "username": "zhbroufterrhqd",
+    "password": "45aa2a7d74a03b97ddf3b69ef1dfbc0f4dda3d25489cdcd30bfe66ef216bdbb4",
+    "database": "dcuhtp017klqjl",
+    "host": "ec2-50-17-178-87.compute-1.amazonaws.com",
     "dialect": "postgres"
   }
 }

@@ -10683,7 +10683,7 @@ var _default = {
       endpoint_login: "https://api-kanban.herokuapp.com/login",
       // endpoint_login: "http://localhost:3000/login",
       params: {
-        client_id: "296527354511-ljb6felanads0etlm9rlt1qo7uodhal1.apps.googleusercontent.com"
+        client_id: "562480713482-1e3649b07bupnvsaqu41nkgeosfdsofg.apps.googleusercontent.com"
       },
       renderParams: {
         width: 250,
@@ -11965,8 +11965,8 @@ var _default = {
   data: function data() {
     return {
       disable: true,
-      // endpoint_task: "https://api-kanban.herokuapp.com/task",
-      endpoint_task: "http://localhost:3000/task"
+      endpoint_task: "https://api-kanban.herokuapp.com/task" // endpoint_task: "http://localhost:3000/task"
+
     };
   },
   methods: {
@@ -12908,7 +12908,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32839" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35673" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
