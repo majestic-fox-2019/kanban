@@ -11,6 +11,8 @@
                 :taskCategory="taskCategory"
                 :setModalValue="setModalValue"
                 :handleDelete="handleDelete"
+                :arrCategoryNames="arrCategoryNames"
+                :handleChangeStatus="handleChangeStatus"
             >
             </task-category>               
         </div>
@@ -31,7 +33,8 @@
             return {
                 "backend_url"       : "http://localhost:3000",
                 "taskCategory"      : null,
-                "dataModal"         : {}
+                "dataModal"         : {},
+                "arrCategoryNames"  : []
             }
         },
         methods: {
@@ -41,7 +44,13 @@
                     return res.json();  
                 })
                 .then(data => {
-                    this.taskCategory = data
+                    this.taskCategory = data;
+
+                    let tempCategories = [];
+                    data.forEach(cat => {
+                        tempCategories.push({id: cat.id, name: cat.name});
+                    });
+                    this.arrCategoryNames = tempCategories;
                 })
                 .catch(err => console.log(err));
             },
@@ -116,6 +125,22 @@
                         console.log(err);
                     })  
                 }
+            },
+            handleChangeStatus: function(event, objData){
+                fetch(`${this.backend_url}/tasks/${objData.id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ProjectId: event.target.value})
+                })  
+                .then(res => {
+                    console.log(res);
+                    this.getTasks();
+                })
+                .catch(err => {
+                    console.log(err);
+                })
             }
         },
         beforeMount() {

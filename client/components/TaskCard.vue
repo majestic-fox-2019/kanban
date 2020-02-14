@@ -18,9 +18,9 @@
                         <b-icon icon="trash" @click="setModalValue(task); handleDelete(task);"></b-icon>
                     </p>
                     <hr/>
-                    <div class="text-center">Status</div>
-                    <select class="form-control" style="width: 100%">
-                        <option>{{category.name}}</option>
+                    <select class="form-control" style="width: 100%" @change="handleChangeStatus($event, task)">
+                        <option value="">-- [Change Status] --</option>
+                        <option :key="cat.id" :value="cat.id" v-for="cat in filterCategoryOptions">{{cat.name}}</option>
                     </select>
                 </div>
             </div>            
@@ -29,7 +29,20 @@
 </template>
 <script>
     export default {
-        props: ["category", "setModalValue", "handleDelete"]
+        props: [
+            "category", 
+            "setModalValue", 
+            "handleDelete", 
+            "arrCategoryNames",
+            "handleChangeStatus"
+        ],
+        computed: {
+            filterCategoryOptions: function() {
+                return this.arrCategoryNames.filter(cat => {
+                    return cat.name !== this.category.name
+                });
+            }
+        }
     }
 </script>
 <style>

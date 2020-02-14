@@ -46,6 +46,22 @@ class TasksController {
             })
     }
 
+    static updateCategory(req, res, next) {
+        const {ProjectId} = req.body;
+        Task
+            .update({ProjectId}, {
+                where: {
+                    id: Number(req.params.id)
+                }
+            })
+            .then(updatedTask => {
+                res.status(200).json(updatedTask[1][0] || "Data not found!");
+            })
+            .catch(err => {
+                next(err)
+            })
+    }
+
     static delete(req, res, next) {
         Task
             .destroy({

@@ -5,6 +5,8 @@
                 :category="category"
                 :setModalValue="setModalValue"
                 :handleDelete="handleDelete"
+                :arrCategoryNames="arrCategoryNames"
+                :handleChangeStatus="handleChangeStatus"
             >
             </task-card>
             <div class="footer">
@@ -20,7 +22,13 @@
         components: {
             'task-card': TaskCard
         },
-        props: ["taskCategory", "setModalValue", "handleDelete"],
+        props: [
+            "taskCategory", 
+            "setModalValue", 
+            "handleDelete", 
+            "arrCategoryNames",
+            "handleChangeStatus"
+        ],
         data(){
             return {
 
