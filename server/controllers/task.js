@@ -13,7 +13,7 @@ class TaskController {
     Task
       .create(task)
       .then(task => {
-        // req.io.emit("add")
+        req.io.emit("addTask")
         res.status(201).json(task)
       })
       .catch(next)
@@ -63,7 +63,7 @@ class TaskController {
         }
       })
       .then(() => {
-        // req.io.emit("delete")
+        req.io.emit("deleteTask")
         res.status(200).json(deleted)
       })
       .catch(next)

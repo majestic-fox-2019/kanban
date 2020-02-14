@@ -40,6 +40,7 @@
 </template>
 
 <script>
+// const server = "http://localhost:3000";
 const server = "https://kanban-ajengrf.herokuapp.com";
 import axios from "axios";
 import sidebar from "./components/sidebar";
@@ -85,17 +86,15 @@ export default {
   sockets: {
     connect() {
       console.log("socket connected");
+    },
+    addTask() {
+      console.log("add live nih");
+      this.lists;
+    },
+    deleteTask() {
+      console.log("delete live nih");
+      this.lists;
     }
-    // add() {
-    // this.lists;
-    // this.showTask();
-    // this.addTask();
-    // console.log("add live nih");
-    // },
-    // delete() {
-    //   this.lists;
-    //   console.log("delete live nih");
-    // }
   },
   methods: {
     gSignIn(id_token) {
@@ -183,7 +182,6 @@ export default {
         url: `${server}/task`
       })
         .then(result => {
-          console.log(result.data);
           this.lists = result.data;
           result.data.forEach(el => {
             if (el.status == "backlog") {

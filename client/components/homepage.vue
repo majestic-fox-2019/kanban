@@ -59,7 +59,7 @@ export default {
         password: null
       },
       params: {
-        client_id: `31821651677-uorrrhti80raddfghfv72p72n03aoe8u.apps.googleusercontent.com`
+        client_id: `510424758616-rot9et41hv6j8bromch9cprkchgnqjjt.apps.googleusercontent.com`
       },
       renderParams: {
         width: 100,

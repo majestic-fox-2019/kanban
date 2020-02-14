@@ -10957,7 +10957,7 @@ var _default = {
         password: null
       },
       params: {
-        client_id: "31821651677-uorrrhti80raddfghfv72p72n03aoe8u.apps.googleusercontent.com"
+        client_id: "510424758616-rot9et41hv6j8bromch9cprkchgnqjjt.apps.googleusercontent.com"
       },
       renderParams: {
         width: 100,
@@ -11679,7 +11679,7 @@ var _default = {
         password: null
       },
       params: {
-        client_id: "31821651677-uorrrhti80raddfghfv72p72n03aoe8u.apps.googleusercontent.com"
+        client_id: "510424758616-rot9et41hv6j8bromch9cprkchgnqjjt.apps.googleusercontent.com"
       },
       renderParams: {
         width: 100,
@@ -12023,6 +12023,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+// const server = "http://localhost:3000";
 var server = "https://kanban-ajengrf.herokuapp.com";
 var _default = {
   components: {
@@ -12061,17 +12062,15 @@ var _default = {
   sockets: {
     connect: function connect() {
       console.log("socket connected");
-    } // add() {
-    // this.lists;
-    // this.showTask();
-    // this.addTask();
-    // console.log("add live nih");
-    // },
-    // delete() {
-    //   this.lists;
-    //   console.log("delete live nih");
-    // }
-
+    },
+    addTask: function addTask() {
+      console.log("add live nih");
+      this.lists;
+    },
+    deleteTask: function deleteTask() {
+      console.log("delete live nih");
+      this.lists;
+    }
   },
   methods: {
     gSignIn: function gSignIn(id_token) {
@@ -12166,7 +12165,6 @@ var _default = {
         },
         url: "".concat(server, "/task")
       }).then(function (result) {
-        console.log(result.data);
         _this4.lists = result.data;
         result.data.forEach(function (el) {
           if (el.status == "backlog") {

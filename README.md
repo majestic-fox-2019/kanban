@@ -30,9 +30,9 @@ KANBAN API
   ```javascript
   {
     "id": 1,
-    "title": "Create Fancy kanban",
+    "title": "Create Kanban App",
     "description": "Learn how to create RESTful API",
-    "status": "false"
+    "status": "backlog"
     "due_date": "2020-02-08"
   }
   ```
