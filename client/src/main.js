@@ -36,7 +36,9 @@ firebase.initializeApp(firebaseConfig)
 
 Vue.use(firebase)
 
-Vue.prototype.$socket = io.connect('http://localhost:3000')
+Vue.prototype.$socket = io.connect(
+  'https://intense-journey-51797.herokuapp.com'
+)
 
 new Vue({
   render: (h) => h(App)

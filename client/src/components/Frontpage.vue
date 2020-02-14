@@ -119,7 +119,7 @@ export default {
     getLogin() {
       axios({
         method: 'POST',
-        url: 'http://localhost:3000/login',
+        url: 'https://intense-journey-51797.herokuapp.com/login',
         data: {
           email: this.login.email,
           password: this.login.password
@@ -140,7 +140,7 @@ export default {
     getRegister() {
       axios({
         method: 'POST',
-        url: 'http://localhost:3000/register',
+        url: 'https://intense-journey-51797.herokuapp.com/register',
         data: {
           name: this.register.name,
           email: this.register.email,
@@ -177,7 +177,7 @@ export default {
           const user = result.user
           return axios({
             method: 'POST',
-            url: 'http://localhost:3000/g-auth',
+            url: 'https://intense-journey-51797.herokuapp.com/g-auth',
             data: {
               email: user.email,
               name: user.displayName

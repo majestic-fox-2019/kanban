@@ -106,7 +106,7 @@ export default {
     getAllTasks(){
       axios({
       method: 'GET',
-      url: 'http://localhost:3000/tasks/',
+      url: 'https://intense-journey-51797.herokuapp.com/tasks/',
       headers: {
         token: localStorage.token
       }
@@ -138,7 +138,7 @@ export default {
     createTask(title){
       axios({
         method: 'POST',
-        url: 'http://localhost:3000/tasks/',
+        url: 'https://intense-journey-51797.herokuapp.com/tasks/',
         headers: {
           token: localStorage.token
         },
@@ -164,7 +164,7 @@ export default {
       // console.log(categoryToUpdate);
       axios({
         method: 'PATCH',
-        url: 'http://localhost:3000/tasks/'+task.id,
+        url: 'https://intense-journey-51797.herokuapp.com/tasks/'+task.id,
         headers: {
           token: localStorage.token
         },
@@ -184,7 +184,7 @@ export default {
     updateTask(task){
         axios({
           method: 'PUT',
-          url: 'http://localhost:3000/tasks/'+task.id,
+          url: 'https://intense-journey-51797.herokuapp.com/tasks/'+task.id,
           headers: {
             token: localStorage.token
           },
@@ -204,7 +204,7 @@ export default {
     deleteTask(taskId){
       axios({
         method: 'DELETE',
-        url: 'http://localhost:3000/tasks/'+taskId,
+        url: 'https://intense-journey-51797.herokuapp.com/tasks/'+taskId,
         headers: {
           token: localStorage.token
         }
