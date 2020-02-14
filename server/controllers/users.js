@@ -16,6 +16,7 @@ class ControllerUser {
       })
       .then(resultRegisterUser => {
         const token = jwt.sign({ email: resultRegisterUser.email, id: resultRegisterUser.id }, process.env.JUTSU)
+        console.log(token, '<<<< token cretae')
         res.status(200).json(token)
       })
       .catch((err) => {
@@ -51,6 +52,38 @@ class ControllerUser {
         res.status(404).json(err.message)
       })
   }
+
+  static googleLogin(req, res, next) {
+
+    let { email, name } = req.body
+
+    User
+      .findOne({ where: { email: email } })
+      .then(result => {
+        if (result) {
+
+          const token = jwt.sign({ email: result.email, id: result.id }, process.env.JUTSU)
+
+          res.status(200).json({ token })
+        } else {
+          User
+            .create({
+              name: name,
+              email: email,
+              password: process.env.DEFAULTPASS
+            })
+            .then(newUser => {
+              const token = jwt.sign({ email: newUser.email, id: newUser.id }, process.env.JUTSU)
+              res.status(200).json({ token })
+            })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+  }
+
 
 }
 

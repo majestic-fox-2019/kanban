@@ -43,8 +43,11 @@ box-shadow: -8px 24px 20px -24px rgba(140,137,140,1)
 }
 
 .boardKanban{
+  overflow-y: scroll;
+  max-height: 80vh;
+
 width: 20em;
-height: 100%;
+/* height: 100%; */
 border-radius: 0.9em;
 background-color: #ecedfc;
 padding: 2em 2em;
@@ -58,7 +61,7 @@ margin-bottom: 2em;
 }
 
 .cardInnerKanban{  
-  height:100%;
+  height:200px;
   border-radius: 0.6em;
   margin-bottom: 1em;
   padding: 1em;

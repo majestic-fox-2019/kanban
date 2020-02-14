@@ -62,6 +62,7 @@ class ControllerTask {
   static updateOne(req, res, next) {
     let id = req.params.id
     let { category } = req.body
+
     Task
       .update({ category }, { where: { id: id }, returning: true })
       .then(result => {

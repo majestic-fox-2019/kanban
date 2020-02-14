@@ -34,6 +34,7 @@
                 id="register"
                 @click="toRegister"
               >to Create Account</button>
+              <button class="ghost-round full-width" id="google" @click="googleSign">Google</button>
             </div>
           </div>
         </div>
@@ -94,6 +95,14 @@
 </template>
 
 <script>
+import axios from "axios";
+const server = "http://localhost:3000";
+import firebase from "firebase";
+// import "firebase/auth";
+
+// const firebaseConfig = require("../firbaseConfigAuth");
+// firebase.initializeApp(firebaseConfig);
+
 export default {
   name: "loginRegister",
   data() {
@@ -125,6 +134,43 @@ export default {
     },
     registerHandle() {
       this.$emit("fromRegister", this.registerData);
+    },
+    googleSign() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(function(result) {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          // ...
+
+          return axios({
+            method: "post",
+            url: `${server}/user/googleLogin`,
+            data: {
+              name: user.displayName,
+              email: user.email
+            }
+          });
+        })
+        .then(({ data }) => {
+          localStorage.setItem("token", data.token);
+          this.$emit("googleSign");
+        })
+        .catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+          console.log(error);
+        });
     }
   }
 };

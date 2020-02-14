@@ -7,6 +7,8 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.4.0",
+    "firebase": "^7.8.2",
+    "sweetalert2": "^9.7.2",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4"
   },
