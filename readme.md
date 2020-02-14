@@ -4,7 +4,7 @@
 
 ```
 https://kanban-919b3.firebaseapp.com/
-or click [here](http://www.dropwizard.io/1.0.2/docs/)
+or click [here](https://kanban-919b3.firebaseapp.com/)
 ```
 
 ## First Config
