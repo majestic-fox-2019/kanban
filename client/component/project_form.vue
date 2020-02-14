@@ -29,8 +29,8 @@ export default {
     return {
       name: "",
       description: "",
-      // endpoint_login: "https://api-kanban.herokuapp.com/project"
-      endpoint_login: "http://localhost:3000/project"
+      endpoint_login: "https://api-kanban.herokuapp.com/project"
+      // endpoint_login: "http://localhost:3000/project"
     };
   },
   methods: {

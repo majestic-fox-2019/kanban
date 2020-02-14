@@ -22,8 +22,8 @@ export default {
   data: function() {
     return {
       newTask: "",
-      // endpoint_task: "https://api-kanban.herokuapp.com/task",
-      endpoint_task: "http://localhost:3000/task"
+      endpoint_task: "https://api-kanban.herokuapp.com/task",
+      // endpoint_task: "http://localhost:3000/task"
     };
   },
   methods: {

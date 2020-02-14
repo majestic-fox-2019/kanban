@@ -43,8 +43,8 @@ export default {
     return {
       showForm: false,
       projects: null,
-      endpoint_project: "http://localhost:3000/project"
-      // endpoint_project: "https://api-kanban.herokuapp.com/project"
+      // endpoint_project: "http://localhost:3000/project"
+      endpoint_project: "https://api-kanban.herokuapp.com/project"
     };
   },
   methods: {

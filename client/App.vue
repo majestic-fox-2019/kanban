@@ -26,8 +26,8 @@ export default {
   },
   data: () => {
     return {
-      base_url: "http://localhost:3000",
-      // base_url: "https://api-kanban.herokuapp.com",
+      // base_url: "http://localhost:3000",
+      base_url: "https://api-kanban.herokuapp.com",
       endpoint_category: "/category",
       isLoggedIn: localStorage.token === undefined ? true : false,
       categories: null,

@@ -10680,8 +10680,8 @@ var _default = {
     return {
       email: "",
       password: "",
-      // endpoint_login: "https://api-kanban.herokuapp.com/login",
-      endpoint_login: "http://localhost:3000/login",
+      endpoint_login: "https://api-kanban.herokuapp.com/login",
+      // endpoint_login: "http://localhost:3000/login",
       params: {
         client_id: "296527354511-ljb6felanads0etlm9rlt1qo7uodhal1.apps.googleusercontent.com"
       },
@@ -10702,8 +10702,8 @@ var _default = {
         data: {
           id_token: id_token
         },
-        url: "http://localhost:3000/google-signin" // url: "https://api-kanban.herokuapp.com/google-signin"
-
+        // url: "http://localhost:3000/google-signin"
+        url: "https://api-kanban.herokuapp.com/google-signin"
       }).then(function (res) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("email", res.data.email);
@@ -10956,8 +10956,8 @@ var _default = {
     return {
       email: "",
       password: "",
-      // endpoint_register: "https://api-kanban.herokuapp.com/register"
-      endpoint_register: "http://localhost:3000/register"
+      endpoint_register: "https://api-kanban.herokuapp.com/register" // endpoint_register: "http://localhost:3000/register"
+
     };
   },
   methods: {
@@ -11488,8 +11488,8 @@ var _default = {
     return {
       name: "",
       description: "",
-      // endpoint_login: "https://api-kanban.herokuapp.com/project"
-      endpoint_login: "http://localhost:3000/project"
+      endpoint_login: "https://api-kanban.herokuapp.com/project" // endpoint_login: "http://localhost:3000/project"
+
     };
   },
   methods: {
@@ -11740,8 +11740,8 @@ var _default = {
     return {
       showForm: false,
       projects: null,
-      endpoint_project: "http://localhost:3000/project" // endpoint_project: "https://api-kanban.herokuapp.com/project"
-
+      // endpoint_project: "http://localhost:3000/project"
+      endpoint_project: "https://api-kanban.herokuapp.com/project"
     };
   },
   methods: {
@@ -12255,8 +12255,8 @@ var _default = {
   data: function data() {
     return {
       newTask: "",
-      // endpoint_task: "https://api-kanban.herokuapp.com/task",
-      endpoint_task: "http://localhost:3000/task"
+      endpoint_task: "https://api-kanban.herokuapp.com/task" // endpoint_task: "http://localhost:3000/task"
+
     };
   },
   methods: {
@@ -12728,8 +12728,8 @@ var _default = {
   },
   data: function data() {
     return {
-      base_url: "http://localhost:3000",
-      // base_url: "https://api-kanban.herokuapp.com",
+      // base_url: "http://localhost:3000",
+      base_url: "https://api-kanban.herokuapp.com",
       endpoint_category: "/category",
       isLoggedIn: localStorage.token === undefined ? true : false,
       categories: null,
