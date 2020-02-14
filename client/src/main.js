@@ -15,7 +15,7 @@ Vue.use(IconsPlugin)
 Vue.use(ToastPlugin)
 Vue.use(firebase)
 
-Vue.prototype.$socket = io.connect('http://localhost:3000')
+Vue.prototype.$socket = io.connect('https://kanban-v2.herokuapp.com')
 
 new Vue({
   render: h => h(App),

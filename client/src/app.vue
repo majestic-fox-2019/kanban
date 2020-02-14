@@ -38,7 +38,7 @@ export default {
     },
     getUserProjects() {
             axios({
-                url: 'http://localhost:3000/projects',
+                url: 'https://kanban-v2.herokuapp.com/projects',
                 method: 'get',
                 headers: {
                 token: localStorage.getItem('token')

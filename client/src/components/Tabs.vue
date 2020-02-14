@@ -54,20 +54,6 @@
     Projects
       </span>
     </label>
-
-    <input name="nav" type="radio" class="contact-radio" id="contact"/>
-  <div class="page contact-page">
-    <div class="page-contents" style="width:100vw">
-      <!-- ini untuk backlog -->
-    </div>
-  </div>
-  <label class="nav" for="contact">
-    <span>
-    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-    Available Tasks
-      </span>
-    
-  </label>
 <!-- modals -->
 <b-modal id="createProjectModal" centered hide-footer size="sm">
     <template v-slot:modal-title>
@@ -222,7 +208,7 @@ export default {
         }).then((result) => {
           if (result.value) {
             return axios({
-          url: 'http://localhost:3000/projects/members/'+ this.selectedProject.id +'/?member=' + email,
+          url: 'https://kanban-v2.herokuapp.com/projects/members/'+ this.selectedProject.id +'/?member=' + email,
           method: 'delete',
           headers: {
             token: localStorage.getItem('token')
@@ -260,7 +246,7 @@ export default {
         }).then((result) => {
           if (result.value) {
             return axios({
-                url: 'http://localhost:3000/projects/' + this.selectedProject.id,
+                url: 'https://kanban-v2.herokuapp.com/projects/' + this.selectedProject.id,
                 method: 'delete',
                 headers: {
                   token: localStorage.getItem('token')
@@ -299,7 +285,7 @@ export default {
           }).then((result) => {
             if (result.value) {
               return axios({
-                url: 'http://localhost:3000/projects/members',
+                url: 'https://kanban-v2.herokuapp.com/projects/members',
                 method: 'post',
                 headers: {
                   token: localStorage.getItem('token')
@@ -333,7 +319,7 @@ export default {
         getProjectMembers() {
           let members = []
           axios({
-            url: 'http://localhost:3000/projects/members/' + this.selectedProject.id,
+            url: 'https://kanban-v2.herokuapp.com/projects/members/' + this.selectedProject.id,
             method: 'get',
             headers: {
               token: localStorage.getItem('token')
@@ -360,7 +346,7 @@ export default {
         },
         createTask() {
           axios({
-            url: 'http://localhost:3000/tasks',
+            url: 'https://kanban-v2.herokuapp.com/tasks',
             method: 'post',
             headers: {
               token: localStorage.getItem('token')
@@ -391,7 +377,7 @@ export default {
         },
         createProject() {
           axios({
-            url: 'http://localhost:3000/projects',
+            url: 'https://kanban-v2.herokuapp.com/projects',
             method: 'post',
             headers: {
               token: localStorage.getItem('token')
@@ -421,7 +407,7 @@ export default {
         getPropjectTasks(id) {
           this.cardsLoading = true
           axios({
-          url: 'http://localhost:3000/projects/tasks/'+ id,
+          url: 'https://kanban-v2.herokuapp.com/projects/tasks/'+ id,
           method: 'get',
           headers: {
             token: localStorage.getItem('token')

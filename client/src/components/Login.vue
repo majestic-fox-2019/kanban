@@ -83,7 +83,7 @@ export default {
 				const user = result.user;
 				userEmail = user.email
 				return axios({
-				url: 'http://localhost:3000/gSignIn',
+				url: 'https://kanban-v2.herokuapp.com/gSignIn',
 				method: 'post',
 				data: {
 					email: user.email,
@@ -144,7 +144,7 @@ export default {
 			// console.log(user.displayName);
 			userEmail = user.email
 			return axios({
-				url: 'http://localhost:3000/gSignIn',
+				url: 'https://kanban-v2.herokuapp.com/gSignIn',
 				method: 'post',
 				data: {
 					email: user.email,
@@ -172,7 +172,7 @@ export default {
 		},
         login () {
             axios({
-                url: 'http://localhost:3000/login',
+                url: 'https://kanban-v2.herokuapp.com/login',
                 method: 'post',
                 data: {
                     email: this.loginEmail,
@@ -199,7 +199,7 @@ export default {
 		},
 		register () {
             axios({
-                url: 'http://localhost:3000/register',
+                url: 'https://kanban-v2.herokuapp.com/register',
                 method: 'post',
                 data: {
 					name: this.registerName,

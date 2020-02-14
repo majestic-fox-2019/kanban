@@ -78,7 +78,7 @@ export default {
                 }).then((result) => {
                     if (result.value) {
                         return axios({
-                            url: 'http://localhost:3000/tasks/' + this.taskDetails.id,
+                            url: 'https://kanban-v2.herokuapp.com/tasks/' + this.taskDetails.id,
                             method: 'put',
                             headers: {
                                 token: localStorage.getItem('token')
@@ -118,7 +118,7 @@ export default {
                 }).then((result) => {
                     if (result.value) {
                         return axios({
-                            url: 'http://localhost:3000/tasks/' + this.taskDetails.id,
+                            url: 'https://kanban-v2.herokuapp.com/tasks/' + this.taskDetails.id,
                             method: 'delete',
                             headers: {
                                 token: localStorage.getItem('token')
@@ -176,7 +176,7 @@ export default {
                 }).then((result) => {
                     if (result.value) {
                         return axios({
-                            url: 'http://localhost:3000/tasks/' + this.taskDetails.id,
+                            url: 'https://kanban-v2.herokuapp.com/tasks/' + this.taskDetails.id,
                             method: 'patch',
                             headers: {
                                 token: localStorage.getItem('token')
@@ -235,7 +235,7 @@ export default {
                 }).then((result) => {
                     if (result.value) {
                         return axios({
-                            url: 'http://localhost:3000/tasks/' + this.taskDetails.id + '/prev',
+                            url: 'https://kanban-v2.herokuapp.com/tasks/' + this.taskDetails.id + '/prev',
                             method: 'patch',
                             headers: {
                                 token: localStorage.getItem('token')
