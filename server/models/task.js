@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: { args: true, msg: 'the name column cannot be empty' }
       }
     },
+    status: DataTypes.STRING,
     category: DataTypes.STRING,
     UserId: DataTypes.INTEGER
   }, { sequelize })
