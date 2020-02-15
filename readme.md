@@ -4,7 +4,7 @@ created by Muhammad Ali Mazhuda
 
 
 1. Login
-* url : http://https://api-kanban.herokuapp.com/login
+* url : https://api-kanban.herokuapp.com/login
 * method : POST
 * header : none
 * parameter sent :
@@ -22,7 +22,7 @@ created by Muhammad Ali Mazhuda
     ```
 
 2. Register
-* url : http://https://api-kanban.herokuapp.com/register
+* url : https://api-kanban.herokuapp.com/register
 * method : POST
 * header : none
 * parameter sent : 
@@ -141,7 +141,7 @@ created by Muhammad Ali Mazhuda
 7. Delete Task
 
 * url : https://api-kanban.herokuapp.com/task/id
-* method : PUT
+* method : DELETE
 * header : {token : "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
 * parameter sent : 
 
