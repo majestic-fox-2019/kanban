@@ -103,18 +103,18 @@
 </template>
 
 <script>
-// import Vue from "vue";
+import Vue from "vue";
 import axios from "axios";
 import Swal from "sweetalert2";
 import innerCard from './InnerCard'
-// import VueSocketIOExt from "vue-socket.io-extended";
-// import io from "socket.io-client";
+import VueSocketIOExt from "vue-socket.io-extended";
+import io from "socket.io-client";
 const server = "http://localhost:3000"
 // const server = "https://hidden-caverns-32228.herokuapp.com";
 
 
-// const socket = io(`${server}`);
-// Vue.use(VueSocketIOExt, socket);
+const socket = io(`${server}`);
+Vue.use(VueSocketIOExt, socket);
 
 
 export default {
@@ -122,19 +122,36 @@ export default {
   components:{
     innerCard
   },
-// sockets: {
-  //   connect() {
-  //     console.log("socket connected");
-  //   },
-  //   createTask(val) {
-  //     console.log("example"); 
-  //     this.createCard()
-  //     this.showAllTask()
-  //     this.moveNextCategory()
-  //     this.movePevCategory()
-
-  //   }
-  // },
+sockets: {
+    connect() {
+      console.log("socket connected");
+    },
+    createTask() {
+      console.log("example"); 
+      // this.createCard()
+      this.showAllTask()
+    },
+    findTask(val){
+      this.showAllTask()
+      this.editCardCategory(task)
+      this.editAllCard(task)
+    },
+    updateOne(){
+      this.showAllTask()
+      this.editCardCategory(task)
+      this.moveNextCategory()
+      this.movePevCategory()
+    },
+    updateAll(){
+      this.showAllTask()      
+      this.editAllCard(task)
+      this.editAllcardSubmit()
+    },
+    deleteDestroy(){
+      this.showAllTask()      
+      this.deleteCard(id)
+    }
+  },
   data() {
     return {
       tasks: [],
@@ -143,8 +160,7 @@ export default {
         { name: "todo", img: require("../asset/img/crosshair.svg") },
         { name: "completed", img: require("../asset/img/activity.svg") },
         { name: "done", img: require("../asset/img/hexagon.svg") }
-      ],
-      
+      ],      
       formCreate:{
         title:null,
         description:null,
@@ -188,7 +204,7 @@ export default {
         this.showAllTask()
         this.formCreate.title = null
         this.formCreate.description = null
-        this.formCreate.category = null
+        // this.formCreate.category = null
         this.$bvModal.hide('modal-1')
       Swal.fire({
         position: 'center',
@@ -200,6 +216,12 @@ export default {
       })
       .catch(err=>{
         console.log(err)
+          Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          // footer: '<a href>Why do I have this issue?</a>'
+        })
       })
     },
 
@@ -221,6 +243,7 @@ export default {
         this.formCreate.description = task.description
         this.formCreate.category = task.category
     },
+
 editAllcardSubmit(){
   axios({
     method:'put',

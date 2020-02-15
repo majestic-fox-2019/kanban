@@ -26,7 +26,7 @@ class ControllerTask {
         UserId: req.user.id
       })
       .then(result => {
-        // req.io.emit('createTask')
+        req.io.emit('createTask')
         res.status(201).json(result)
       })
       .catch((err) => {
@@ -46,6 +46,7 @@ class ControllerTask {
       .findOne({ where: { id: id }, returning: true })
       .then(result => {
         if (result) {
+          req.io.emit('findTask')
           res.status(200).json(result)
         } else {
           let err = {
@@ -68,6 +69,7 @@ class ControllerTask {
       .update({ category }, { where: { id: id }, returning: true })
       .then(result => {
         if (result[1]) {
+          req.io.emit('updateOne')
           res.status(200).json(result[1][0])
         } else {
           let err = {
@@ -89,6 +91,7 @@ class ControllerTask {
       .update({ title, description }, { where: { id: id }, returning: true })
       .then(resultupdate => {
         if (resultupdate[1]) {
+          req.io.emit('updateAll')
           res.status(200).json(resultupdate[1][0])
         } else {
           let err = {
@@ -106,7 +109,6 @@ class ControllerTask {
 
 
   static deleteTask(req, res, next) {
-    console.log('controlle dlete')
     let id = req.params.id
     let isi = null
     Task
@@ -116,6 +118,7 @@ class ControllerTask {
         return Task.destroy({ where: { id: id }, returning: true })
       })
       .then(resultDestroy => {
+        req.io.emit('deleteDestroy')
         if (resultDestroy > 0) {
           res.status(200).json(isi)
         } else {
