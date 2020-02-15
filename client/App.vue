@@ -5,6 +5,7 @@
       @fromLogin="loginApp($event)"
       @fromRegister="registerApp($event)"
       @googleSign="isLogin=true"
+      @facebookLogin="isLogin=true"
       v-if="!isLogin"
     ></loginRegister>
     <dashboard @logout="isLogin=false" v-if="isLogin"></dashboard>

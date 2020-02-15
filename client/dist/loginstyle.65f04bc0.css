@@ -72,6 +72,15 @@ button:focus {
   transition: all .2s ease;
 }
 
+.socialLogin{
+cursor: pointer;
+background-color: none;
+align-content: center;
+width: 100%;
+/* margin: 0 auto;   */
+
+}
+
 .ghost-round:hover {
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
