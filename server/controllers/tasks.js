@@ -6,7 +6,7 @@ const errors = require('http-errors')
 class ControllerTask {
   static taskAll(req, res, next) {
     Task
-      .findAll()
+      .findAll({ order: [['updatedAt', 'DESC']] })
       .then(taskResult => {
         res.status(200).json(taskResult)
       })
@@ -26,6 +26,7 @@ class ControllerTask {
         UserId: req.user.id
       })
       .then(result => {
+        // req.io.emit('createTask')
         res.status(201).json(result)
       })
       .catch((err) => {
@@ -74,6 +75,28 @@ class ControllerTask {
             message: 'Not Found'
           }
           next(err)
+        }
+      })
+      .catch(err => {
+        next(err)
+      })
+  }
+
+  static updateAll(req, res, next) {
+    let id = req.params.id
+    let { title, description } = req.body
+    Task
+      .update({ title, description }, { where: { id: id }, returning: true })
+      .then(resultupdate => {
+        if (resultupdate[1]) {
+          res.status(200).json(resultupdate[1][0])
+        } else {
+          let err = {
+            statusCode: '404',
+            message: 'Not Found'
+          }
+          next(err)
+          // throw errors('404', 'not found')
         }
       })
       .catch(err => {

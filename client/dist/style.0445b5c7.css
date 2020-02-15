@@ -84,6 +84,26 @@ box-shadow: -6px 1px 50px -30px rgba(140,137,140,1);
   font-size: 0.9em;
 }
 
+#EditTitleAndDescription{
+  display: flex;
+  justify-content: space-between;
+}
+
+#editBtnAll{
+  font-weight: 100;
+  font-size: 0.8em;
+  
+  border-top: 2px solid #daddfa;
+  color:#daddfa;
+  
+}
+#editBtnAll:hover{
+  /* border-bottom: 2px solid #1b37da; */
+  border-top: 2px solid #1b37da;
+  color:#1b37da;
+  /* padding: 0; */
+}
+
 #btnEditCard, #btnDeleteCard{
   border-radius: 1em ;  
   text-align: center;
@@ -92,6 +112,8 @@ box-shadow: -6px 1px 50px -30px rgba(140,137,140,1);
   background-color: #1b37da;  
 cursor: pointer;
 }
+
+
 
 
 #btnEditCard:hover, #btnDeleteCard:hover{

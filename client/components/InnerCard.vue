@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h4>{{title}}</h4>
+    <div id="EditTitleAndDescription">
+      <h5>{{title}}</h5>
+      <div type="button" id="editBtnAll" @click.prevent="$emit('editallcard')">edit</div>
+    </div>
     <div class="description">
       <p>{{description}}</p>
     </div>

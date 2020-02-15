@@ -1,5 +1,6 @@
 
 const server = 'http://localhost:3000'
+// const server = 'https://hidden-caverns-32228.herokuapp.com/'
 new Vue({
   el: '#boardKanbanApp',
   data: {

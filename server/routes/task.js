@@ -7,7 +7,7 @@ router.get('/', controllerTask.taskAll)
 router.post('/', controllerTask.createTask)
 router.get('/:id', authoris, controllerTask.findTask)
 router.patch('/:id', authoris, controllerTask.updateOne)
-// router.patch('/:id', authoris, controllerTask.update)
+router.put('/:id', authoris, controllerTask.updateAll)
 router.delete('/:id', authoris, controllerTask.deleteTask)
 
 module.exports = router

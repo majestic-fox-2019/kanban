@@ -30,6 +30,7 @@ npm install
 | Post   | /task     | Create a Task                       |
 | Get    | /task/:id | Get task base on id                 |
 | Patch  | /task/:id | Update one Task category base on id |
+| Put    | /task/:id | Update title and description base on id |
 | Delete | /task:id  | Delete Task base on Id              |
 
 **Routes User :**

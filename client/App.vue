@@ -15,7 +15,11 @@
 import Swal from "sweetalert2";
 import dashboard from "./components/Dasboard";
 import loginRegister from "./components/Loginregister";
+
 const server = "http://localhost:3000";
+// const server = "https://hidden-caverns-32228.herokuapp.com";
+
+// const socket = io("https://hidden-caverns-32228.herokuapp.com");
 
 export default {
   el: "#app",
@@ -24,6 +28,7 @@ export default {
     dashboard: dashboard,
     loginRegister: loginRegister
   },
+
   data() {
     return {
       isLogin: false

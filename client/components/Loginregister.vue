@@ -97,6 +97,7 @@
 <script>
 import axios from "axios";
 const server = "http://localhost:3000";
+// const server = "https://hidden-caverns-32228.herokuapp.com";
 import firebase from "firebase";
 // import "firebase/auth";
 

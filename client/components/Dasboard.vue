@@ -38,7 +38,7 @@
               <span>delete</span>
             </div>
           </div> -->
-          <innerCard :title="task.title" :description="task.description" :task="task" :id="task.id" @deletecard="deleteCard(task.id)" @editcardcategory="editCardCategory(task)"></innerCard>
+          <innerCard :title="task.title" :description="task.description" :task="task" :id="task.id" @deletecard="deleteCard(task.id)" @editcardcategory="editCardCategory(task)" @editallcard="editAllCard(task)"></innerCard>
         </div>
         <!-- end inner cards -->
 
@@ -82,21 +82,59 @@
               </b-modal>
         </div>
         <!-- end modal edit pindah card-->
+        <!-- modal edit All card -->
+        <div>
+              <b-modal id="modal-3" title="Edit card" hide-footer>                
+                <b-form>
+                  <b-form-group  label="Title:" >
+                  <b-form-input v-model="formCreate.title" type="text" required placeholder="title" > </b-form-input>
+                  <b-form-group  label="Description:" >
+                  <b-form-input v-model="formCreate.description" type="text" required placeholder="description" ></b-form-input>
+                  <b-form-group  label="Category:" >
+                  <b-form-input v-model="formCreate.category" type="text" required placeholder="category" disabled></b-form-input>
+                  <b-button type="button" variant="primary" @click.prevent="editAllcardSubmit">Update</b-button>              
+                </b-form>
+              </b-modal>
+        </div>
+        <!-- end modal edit All card-->
 
 
   </div>
 </template>
 
 <script>
+// import Vue from "vue";
 import axios from "axios";
 import Swal from "sweetalert2";
 import innerCard from './InnerCard'
-const server = "http://localhost:3000";
+// import VueSocketIOExt from "vue-socket.io-extended";
+// import io from "socket.io-client";
+const server = "http://localhost:3000"
+// const server = "https://hidden-caverns-32228.herokuapp.com";
+
+
+// const socket = io(`${server}`);
+// Vue.use(VueSocketIOExt, socket);
+
+
 export default {
   name: "navbar",
   components:{
     innerCard
   },
+// sockets: {
+  //   connect() {
+  //     console.log("socket connected");
+  //   },
+  //   createTask(val) {
+  //     console.log("example"); 
+  //     this.createCard()
+  //     this.showAllTask()
+  //     this.moveNextCategory()
+  //     this.movePevCategory()
+
+  //   }
+  // },
   data() {
     return {
       tasks: [],
@@ -152,13 +190,13 @@ export default {
         this.formCreate.description = null
         this.formCreate.category = null
         this.$bvModal.hide('modal-1')
-Swal.fire({
-  position: 'center',
-  icon: 'success',
-  title: 'Your work has been saved',
-  showConfirmButton: false,
-  timer: 1500
-})
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      })
       })
       .catch(err=>{
         console.log(err)
@@ -175,6 +213,38 @@ Swal.fire({
         // this.target = this.formCreate
         // console.log(task,'<<<<< dari editGetCard')        
     },
+    editAllCard(task){
+      // console.log(task,'<<< harus dapet dri')
+        this.$bvModal.show('modal-3')
+        this.updateMoveCardId = task.id
+        this.formCreate.title = task.title
+        this.formCreate.description = task.description
+        this.formCreate.category = task.category
+    },
+editAllcardSubmit(){
+  axios({
+    method:'put',
+    url:`${server}/task/${this.updateMoveCardId}`,
+    headers:{token:localStorage.token},
+    data:{
+      title:this.formCreate.title,
+      description:this.formCreate.description,
+    }
+  })
+  .then(resultEditAllcard=>{
+    this.showAllTask()
+    this.$bvModal.hide('modal-3')
+  })
+  .catch(err=>{
+    console.log(err)
+    Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: `Unauthorized`,
+  // footer: '<a href>Why do I have this issue?</a>'
+})
+  })
+},
 
   moveNextCategory(){
     let status = ''    
