@@ -19,8 +19,8 @@ export default {
     getKanban() {
       this.$emit("getKanban");
     },
-    kanbanGoEdit() {
-      this.$emit("kanbanGoEdit");
+    kanbanGoEdit(data) {
+      this.$emit("kanbanGoEdit", data);
     }
   },
   components: {

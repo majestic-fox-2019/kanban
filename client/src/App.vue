@@ -70,7 +70,6 @@ export default {
   methods: {
     toEditKanban(payload) {
       this.kanbanToEdit = payload;
-      this.getKanban();
     },
     goRegister() {
       this.whatShowLoginRegister = "register";
@@ -112,6 +111,24 @@ export default {
         }
       })
         .then(({ data }) => {
+          this.kanbans = [
+            {
+              name: "back-log",
+              items: []
+            },
+            {
+              name: "to-do",
+              items: []
+            },
+            {
+              name: "doing",
+              items: []
+            },
+            {
+              name: "done",
+              items: []
+            }
+          ];
           data.forEach(el => {
             switch (el.category) {
               case "back-log":
