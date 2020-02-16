@@ -1,8 +1,9 @@
 # Kanban 
+## https://kanban-fix-asli.firebaseapp.com
 ### created by Fadhilah Rayafi Varselia on February 2020
 
 ## Routes on Kanban
-* ### Route: http://loccalhost:3000/tasks
+* ### Route: https://kanban-fix-asli.firebaseapp.com/tasks
     - Method : GET
     - Response : 
       * code 200 :
@@ -31,7 +32,7 @@
             "msg": "internal server error"
           }
         ```
-* ### Route: http://loccalhost:3000/tasks  
+* ### Route: https://kanban-fix-asli.firebaseapp.com/tasks  
     - Method : POST
     - Request headers : 
         ```
@@ -109,7 +110,7 @@
           }
         ```
 
-* ### Route: http://loccalhost:3000/tasks/:id
+* ### Route: https://kanban-fix-asli.firebaseapp.com/tasks/:id
     - Method : DELETE
     - Request headers : 
         ```
@@ -165,7 +166,7 @@
           }
         ```
 
-* ### Route: http://loccalhost:3000/tasks/next/:id  
+* ### Route: https://kanban-fix-asli.firebaseapp.com/tasks/next/:id  
     - Method : PUT
     - Request headers : 
         ```
@@ -243,7 +244,7 @@
           }
         ```
 
-* ### Route: http://loccalhost:3000/tasks/back/:id  
+* ### Route: https://kanban-fix-asli.firebaseapp.com/tasks/back/:id  
     - Method : PUT
     - Request headers : 
         ```
@@ -321,7 +322,7 @@
           }
         ```
 
-* ### Route: http://loccalhost:3000/remind-friend 
+* ### Route: https://kanban-fix-asli.firebaseapp.com/remind-friend 
     - Method : POST
     - Request headers : 
         ```
@@ -348,7 +349,7 @@
           }
         ```
 
-* ### Route: http://loccalhost:3000/users  
+* ### Route: https://kanban-fix-asli.firebaseapp.com/users  
     - Method : POST
     - Request headers : 
         ```
@@ -383,7 +384,7 @@
           }
         ```
 
-* ### Route: http://loccalhost:3000/register
+* ### Route: https://kanban-fix-asli.firebaseapp.com/register
     - Method : POST
     - Request body :
         ```
@@ -432,7 +433,7 @@
             }
           ```
 
-* ### Route: http://loccalhost:3000/login
+* ### Route: https://kanban-fix-asli.firebaseapp.com/login
     - Method : POST
     - Request body :
         ```
