@@ -64,7 +64,7 @@
                   <b-form-group  label="Category:" >
                   <b-form-input v-model="formCreate.category" type="text" required placeholder="category" disabled></b-form-input>
                   <b-button type="button" variant="primary" @click.prevent="createCard">Submit</b-button>
-              <!-- <b-button type="reset" variant="danger">Cancel</b-button> -->
+              <b-button type="reset" variant="danger">Reset</b-button>
                 </b-form>
               </b-modal>
             </div>
@@ -72,8 +72,7 @@
 
         <!-- modal edit pindah card -->
         <div>
-              <b-modal id="modal-2" title="Edit card" hide-footer>
-                
+              <b-modal id="modal-2" title="Edit card" hide-footer>                
                 <b-form>
                   <b-form-group  label="Title:" >
                   <b-form-input v-model="formCreate.title" type="text" required placeholder="title" disabled> </b-form-input>
@@ -160,7 +159,7 @@ sockets: {
   data() {
     return {
 
-options: [         
+        options: [         
           { value: 'low', text: 'Low Level' },
           { value: 'medium', text: 'Medium Level' },
           { value: 'high', text: 'High level' }          
@@ -198,6 +197,9 @@ options: [
       })
         .then(resultAllTask => {
           this.tasks = resultAllTask.data;
+          this.formCreate.title = null
+          this.formCreate.description = null
+          this.formCreate.status = null
         })
         .catch(err => {
           console.log(err);
@@ -236,8 +238,7 @@ options: [
           Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
-          
+          text: 'Something went wrong!',          
         })
       })
     },
@@ -248,7 +249,7 @@ options: [
         this.formCreate.title = task.title
         this.formCreate.description = task.description
         this.formCreate.status = task.status
-        this.formCreate.category = task.category        
+        this.formCreate.category = task.category
     },
     editAllCard(task){
         this.$bvModal.show('modal-3')
@@ -354,41 +355,55 @@ editAllcardSubmit(){
           
         })
     })
-
-
-
   },
 
     deleteCard(id) {
       Swal.fire({
-  title: 'Are you sure?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, delete it!'
-}).then((result) => {
-  if (result.value) {
-    Swal.fire(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
-        axios({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          axios({
           method: "delete",
           url: `${server}/task/${id}`,
           headers: { token: localStorage.token }
         })
-          .then(dataDelete => {
-            this.showAllTask();
-            
-          })
+            .then(dataDelete => {
+              this.showAllTask();
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+            })
           .catch(err => {
             console.log(err);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: `Something went wrong!`,
+            })
           });
-  }
-})
+        }
+      })
+      // axios({
+      //     method: "delete",
+      //     url: `${server}/task/${id}`,
+      //     headers: { token: localStorage.token }
+      //   })
+      //     .then(dataDelete => {
+      //       this.showAllTask();
+            
+      //     })
+      //     .catch(err => {
+      //       console.log(err);
+      //     });
+    
 
     },
 
