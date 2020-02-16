@@ -43,25 +43,26 @@ box-shadow: -8px 24px 20px -24px rgba(140,137,140,1)
 }
 
 .boardKanban{
+  display: flex;
+  flex-direction: column;
   overflow-y: scroll;
   max-height: 80vh;
-
-width: 20em;
-/* height: 100%; */
-border-radius: 0.9em;
-background-color: #ecedfc;
-padding: 2em 2em;
-margin-bottom: 2em;
+  width: 20em;
+  /* height: 100%; */
+  border-radius: 0.9em;
+  background-color: #ecedfc;
+  padding: 2em 2em;
+  margin-bottom: 2em;
 }
 
-.titleBoxKanban{
-  display: flex;
+.titleBoxKanban{  
+  display:flex;  
   justify-content: space-between;
   margin-bottom: 2em;
 }
 
 .cardInnerKanban{  
-  height:200px;
+  height:100%;
   border-radius: 0.6em;
   margin-bottom: 1em;
   padding: 1em;

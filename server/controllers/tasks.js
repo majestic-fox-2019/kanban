@@ -16,12 +16,12 @@ class ControllerTask {
   }
 
   static createTask(req, res, next) {
-    let { title, description, category } = req.body
-
+    let { title, description, status, category } = req.body
     Task
       .create({
         title,
         description,
+        status,
         category,
         UserId: req.user.id
       })
@@ -30,7 +30,6 @@ class ControllerTask {
         res.status(201).json(result)
       })
       .catch((err) => {
-
         if (err.message != 0) {
           err.statusCode = '400'
         } else {
@@ -86,9 +85,9 @@ class ControllerTask {
 
   static updateAll(req, res, next) {
     let id = req.params.id
-    let { title, description } = req.body
+    let { title, description, status } = req.body
     Task
-      .update({ title, description }, { where: { id: id }, returning: true })
+      .update({ title, description, status }, { where: { id: id }, returning: true })
       .then(resultupdate => {
         if (resultupdate[1]) {
           req.io.emit('updateAll')
@@ -99,7 +98,7 @@ class ControllerTask {
             message: 'Not Found'
           }
           next(err)
-          // throw errors('404', 'not found')
+
         }
       })
       .catch(err => {

@@ -13,10 +13,12 @@
     <!-- Card -->
     <section class="containerBoard">
       <div class="boardKanban" v-for="(category, i) in categorys" :key="i">
+        
         <div class="titleBoxKanban">
           <h3>{{category.name}}</h3>
           <img v-bind:src="category.img" />
         </div>
+        
 
         <!-- inner cards -->
         <div
@@ -38,7 +40,7 @@
               <span>delete</span>
             </div>
           </div> -->
-          <innerCard :title="task.title" :description="task.description" :task="task" :id="task.id" @deletecard="deleteCard(task.id)" @editcardcategory="editCardCategory(task)" @editallcard="editAllCard(task)"></innerCard>
+          <innerCard :badges="badges" :title="task.title" :description="task.description" :task="task" :id="task.id" @deletecard="deleteCard(task.id)" @editcardcategory="editCardCategory(task)" @editallcard="editAllCard(task)"></innerCard>
         </div>
         <!-- end inner cards -->
 
@@ -54,6 +56,9 @@
                 <b-form>
                   <b-form-group  label="Title:" >
                   <b-form-input v-model="formCreate.title" type="text" required placeholder="title"></b-form-input>
+                  <b-form-group  label="Status:" >
+                 <!--  <b-form-input v-model="formCreate.status" type="text" required placeholder="status"></b-form-input> -->
+                <b-form-select v-model="formCreate.status" :options="options"></b-form-select>
                   <b-form-group  label="Description:" >
                   <b-form-input v-model="formCreate.description" type="text" required placeholder="description"></b-form-input>
                   <b-form-group  label="Category:" >
@@ -82,6 +87,7 @@
               </b-modal>
         </div>
         <!-- end modal edit pindah card-->
+
         <!-- modal edit All card -->
         <div>
               <b-modal id="modal-3" title="Edit card" hide-footer>                
@@ -127,8 +133,7 @@ sockets: {
       console.log("socket connected");
     },
     createTask() {
-      console.log("example"); 
-      // this.createCard()
+      console.log("example");       
       this.showAllTask()
     },
     findTask(val){
@@ -136,7 +141,7 @@ sockets: {
       this.editCardCategory(task)
       this.editAllCard(task)
     },
-    updateOne(){
+    updateOne(val){
       this.showAllTask()
       this.editCardCategory(task)
       this.moveNextCategory()
@@ -154,6 +159,13 @@ sockets: {
   },
   data() {
     return {
+
+options: [         
+          { value: 'low', text: 'Low Level' },
+          { value: 'medium', text: 'Medium Level' },
+          { value: 'high', text: 'High level' }          
+        ],
+
       tasks: [],
       categorys: [
         { name: "backlog", img: require("../asset/img/book-open.svg") },
@@ -164,9 +176,15 @@ sockets: {
       formCreate:{
         title:null,
         description:null,
-        category:'backlog'
+        status:null,
+        category:'backlog',
       },
-      updateMoveCardId: null    
+      updateMoveCardId: null,
+      badges:{
+        isLow:false,
+        isMedium:false,
+        isHigh:false
+      }
     };
   },
   methods: {
@@ -180,15 +198,13 @@ sockets: {
       })
         .then(resultAllTask => {
           this.tasks = resultAllTask.data;
-          // console.log(resultAllTask);
         })
         .catch(err => {
           console.log(err);
         });
     },
-
-    createCard(){
-      axios({
+    createCard(){      
+        axios({
         method: "post",
         url:`${server}/task`,
         headers:{
@@ -197,6 +213,7 @@ sockets: {
         data:{
           title:this.formCreate.title,
           description:this.formCreate.description,
+          status:this.formCreate.status,
           category:this.formCreate.category
         }
       })
@@ -204,15 +221,15 @@ sockets: {
         this.showAllTask()
         this.formCreate.title = null
         this.formCreate.description = null
-        // this.formCreate.category = null
+        this.formCreate.status = null
         this.$bvModal.hide('modal-1')
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-      })
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
       .catch(err=>{
         console.log(err)
@@ -220,27 +237,25 @@ sockets: {
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
-          // footer: '<a href>Why do I have this issue?</a>'
+          
         })
       })
     },
 
     editCardCategory(task){
-      // console.log(task,'<<< harus dapet dri')
         this.$bvModal.show('modal-2')
         this.updateMoveCardId = task.id
         this.formCreate.title = task.title
         this.formCreate.description = task.description
-        this.formCreate.category = task.category
-        // this.target = this.formCreate
-        // console.log(task,'<<<<< dari editGetCard')        
+        this.formCreate.status = task.status
+        this.formCreate.category = task.category        
     },
     editAllCard(task){
-      // console.log(task,'<<< harus dapet dri')
         this.$bvModal.show('modal-3')
         this.updateMoveCardId = task.id
         this.formCreate.title = task.title
         this.formCreate.description = task.description
+        this.formCreate.status = task.status
         this.formCreate.category = task.category
     },
 
@@ -251,19 +266,21 @@ editAllcardSubmit(){
     headers:{token:localStorage.token},
     data:{
       title:this.formCreate.title,
-      description:this.formCreate.description,
+      status:this.formCreate.status,
+      description:this.formCreate.description
     }
   })
   .then(resultEditAllcard=>{
     this.showAllTask()
+    
     this.$bvModal.hide('modal-3')
   })
   .catch(err=>{
     console.log(err)
     Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: `Unauthorized`,
+    icon: 'error',
+    title: 'Oops...',
+    text: `Unauthorized`,
   // footer: '<a href>Why do I have this issue?</a>'
 })
   })
@@ -296,11 +313,11 @@ editAllcardSubmit(){
     .catch(err=>{
       console.log(err)
       Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'Something went wrong!',
-  // footer: '<a href>Why do I have this issue?</a>'
-})
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong!',
+      
+    })
     })
   },
 
@@ -331,11 +348,11 @@ editAllcardSubmit(){
     .catch(err=>{
       console.log(err)
           Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'Something went wrong!',
-  // footer: '<a href>Why do I have this issue?</a>'
-})
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          
+        })
     })
 
 
