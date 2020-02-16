@@ -19,7 +19,6 @@ import loginRegister from "./components/Loginregister";
 
 const server = "http://localhost:3000";
 // const server = "https://hidden-caverns-32228.herokuapp.com";
-
 // const socket = io("https://hidden-caverns-32228.herokuapp.com");
 
 export default {

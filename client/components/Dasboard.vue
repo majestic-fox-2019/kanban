@@ -64,7 +64,7 @@
                   <b-form-group  label="Category:" >
                   <b-form-input v-model="formCreate.category" type="text" required placeholder="category" disabled></b-form-input>
                   <b-button type="button" variant="primary" @click.prevent="createCard">Submit</b-button>
-              <b-button type="reset" variant="danger">Reset</b-button>
+              <!-- <b-button type="reset" variant="danger">Reset</b-button> -->
                 </b-form>
               </b-modal>
             </div>
@@ -75,13 +75,13 @@
               <b-modal id="modal-2" title="Edit card" hide-footer>                
                 <b-form>
                   <b-form-group  label="Title:" >
-                  <b-form-input v-model="formCreate.title" type="text" required placeholder="title" disabled> </b-form-input>
+                  <b-form-input v-model="getEdit.title" type="text" required placeholder="title" disabled> </b-form-input>
                   <b-form-group  label="Description:" >
-                  <b-form-input v-model="formCreate.description" type="text" required placeholder="description" disabled></b-form-input>
+                  <b-form-input v-model="getEdit.description" type="text" required placeholder="description" disabled></b-form-input>
                   <b-form-group  label="Category:" >
-                  <b-form-input v-model="formCreate.category" type="text" required placeholder="category" disabled></b-form-input>
-                  <b-button type="button" variant="primary" v-if="formCreate.category !== 'backlog'" @click.prevent="movePevCategory()">prev</b-button>
-              <b-button type="button" variant="primary" @click.prevent="moveNextCategory()">next</b-button>
+                  <b-form-input v-model="getEdit.category" type="text" required placeholder="category" disabled></b-form-input>
+                  <b-button type="button" variant="primary" v-if="getEdit.category !== 'backlog'" @click.prevent="movePevCategory()">prev</b-button>
+              <b-button type="button" variant="primary" v-if="getEdit.category !== 'done'" @click.prevent="moveNextCategory()">next</b-button>
                 </b-form>
               </b-modal>
         </div>
@@ -92,11 +92,11 @@
               <b-modal id="modal-3" title="Edit card" hide-footer>                
                 <b-form>
                   <b-form-group  label="Title:" >
-                  <b-form-input v-model="formCreate.title" type="text" required placeholder="title" > </b-form-input>
+                  <b-form-input v-model="getEdit.title" type="text" required placeholder="title" > </b-form-input>
                   <b-form-group  label="Description:" >
-                  <b-form-input v-model="formCreate.description" type="text" required placeholder="description" ></b-form-input>
+                  <b-form-input v-model="getEdit.description" type="text" required placeholder="description" ></b-form-input>
                   <b-form-group  label="Category:" >
-                  <b-form-input v-model="formCreate.category" type="text" required placeholder="category" disabled></b-form-input>
+                  <b-form-input v-model="getEdit.category" type="text" required placeholder="category" disabled></b-form-input>
                   <b-button type="button" variant="primary" @click.prevent="editAllcardSubmit">Update</b-button>              
                 </b-form>
               </b-modal>
@@ -158,7 +158,6 @@ sockets: {
   },
   data() {
     return {
-
         options: [         
           { value: 'low', text: 'Low Level' },
           { value: 'medium', text: 'Medium Level' },
@@ -179,6 +178,13 @@ sockets: {
         category:'backlog',
       },
       updateMoveCardId: null,
+      getEdit:{
+        title:null,
+        description:null,
+        status:null,
+        category:null
+
+      },
       badges:{
         isLow:false,
         isMedium:false,
@@ -197,9 +203,9 @@ sockets: {
       })
         .then(resultAllTask => {
           this.tasks = resultAllTask.data;
-          this.formCreate.title = null
-          this.formCreate.description = null
-          this.formCreate.status = null
+          // this.formCreate.title = null
+          // this.formCreate.description = null
+          // this.formCreate.status = null
         })
         .catch(err => {
           console.log(err);
@@ -246,18 +252,18 @@ sockets: {
     editCardCategory(task){
         this.$bvModal.show('modal-2')
         this.updateMoveCardId = task.id
-        this.formCreate.title = task.title
-        this.formCreate.description = task.description
-        this.formCreate.status = task.status
-        this.formCreate.category = task.category
+        this.getEdit.title = task.title
+        this.getEdit.description = task.description
+        this.getEdit.status = task.status
+        this.getEdit.category = task.category
     },
     editAllCard(task){
         this.$bvModal.show('modal-3')
         this.updateMoveCardId = task.id
-        this.formCreate.title = task.title
-        this.formCreate.description = task.description
-        this.formCreate.status = task.status
-        this.formCreate.category = task.category
+        this.getEdit.title = task.title
+        this.getEdit.description = task.description
+        this.getEdit.status = task.status
+        this.getEdit.category = task.category
     },
 
 editAllcardSubmit(){
@@ -266,9 +272,9 @@ editAllcardSubmit(){
     url:`${server}/task/${this.updateMoveCardId}`,
     headers:{token:localStorage.token},
     data:{
-      title:this.formCreate.title,
-      status:this.formCreate.status,
-      description:this.formCreate.description
+      title:this.getEdit.title,
+      status:this.getEdit.status,
+      description:this.getEdit.description
     }
   })
   .then(resultEditAllcard=>{
@@ -289,13 +295,13 @@ editAllcardSubmit(){
 
   moveNextCategory(){
     let status = ''    
-    if (this.formCreate.category == 'backlog') {
+    if (this.getEdit.category == 'backlog') {
       status = 'todo'
     }
-    else if(this.formCreate.category == 'todo'){
+    else if(this.getEdit.category == 'todo'){
       status = 'completed'
     }
-    else if(this.formCreate.category == 'completed'){
+    else if(this.getEdit.category == 'completed'){
       status = 'done'    
     }
 
@@ -324,16 +330,15 @@ editAllcardSubmit(){
 
   movePevCategory(){
     let status = ''
-    if (this.formCreate.category == 'done') {
+    if (this.getEdit.category == 'done') {
       status = 'completed'
     }
-    else if(this.formCreate.category == 'completed'){
+    else if(this.getEdit.category == 'completed'){
       status = 'todo'
     }
-    else if(this.formCreate.category == 'todo'){
+    else if(this.getEdit.category == 'todo'){
       status = 'backlog'    
     }
-
      axios({
       method:'patch',
       url:`${server}/task/${this.updateMoveCardId}`,
