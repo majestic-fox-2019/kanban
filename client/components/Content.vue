@@ -73,6 +73,7 @@ export default {
             this.$swal.fire({
             title: 'Update Task title',
             input: `text`,
+            text: `${task.title}`, 
             inputAttributes: {
                 autocapitalize: 'off'
             },
