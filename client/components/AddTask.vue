@@ -1,7 +1,7 @@
 <template>
    <div class="item-foot">
         <form method="POST" v-on:submit.prevent="add(CategoryId, title)">
-            <input type="text" v-model="title" />
+            <input type="text" v-model="title" placeholder="Add some task here...">
         </form>
     </div>
 </template>

@@ -47,7 +47,6 @@ export default {
                 this.email = null
                 this.password = null
                 this.getCategory()
-                this.checkLogin()
                 this.pageLogin = false
                 this.pageContent = true
                 this.pageRegister = false
@@ -97,7 +96,10 @@ export default {
         },
         logout(){
             localStorage.removeItem('userToken')
-            // this.getCategory()
+                this.$swal.fire(
+                'You succes logout!',
+                'success'
+                )
             this.pageContent = false
             this.pageLogin = true
         },

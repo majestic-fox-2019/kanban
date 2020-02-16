@@ -6,7 +6,7 @@
                     <a class="navbar-brand" href="#" ><div style="font-family: 'Quicksand', sans-serif;">KANBAN</div ></a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/"><span class="glyphicon glyphicon-log-out" @click.prevent="logout()"></span> Logout</a></li>
+                    <li><a href="/" class="glyphicon glyphicon-log-out" @click.prevent="logout()"> Logout</a></li>
                 </ul>
             </div>
             </nav>
@@ -17,7 +17,7 @@
                         <div class="title" v-for="task in category.Tasks" v-bind:key="task.id">
                             <div>
                                 <div class="title-button">
-                                     <i class="material-icons" v-bind:key="task.id">edit</i>
+                                     <i class="material-icons" @click.prevent="update(task)" v-bind:key="task.id">edit</i>
                                      <i class="material-icons" @click.prevent="alertDisplay(task)">delete</i>
                                 </div>
                                 <p>{{task.title}}</p>
@@ -60,7 +60,6 @@ export default {
               .then(data =>{
                   this.$swal('Deleted', 'You successfully deleted this file', 'success')
                   this.$parent.getCategory()
-
               })
           } else {
             this.$swal('Cancelled', 'Your taks is still in', 'info')
@@ -68,16 +67,42 @@ export default {
         })
         },
         logout(){
-            // this.$parent.getCategory()
-            // localStorage.removeItem('userToken')
-            console.log('asuk log cont')
             this.$parent.logout()
-            this.$swal('Logout', 'You successfully logout', 'success')
         },
-        
+        update(task){            
+            this.$swal.fire({
+            title: 'Update Task title',
+            input: `text`,
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            showLoaderOnConfirm: true,
+            preConfirm: (titleTask) => {
+                return axios
+                .put(`${process.env.BASE_URL}/tasks/${task.id}`, {
+                    title:titleTask
+                })
+                .then(response => {
+                    if (!response) {
+                    throw new Error(response.statusText)
+                    }
+                    this.$swal('Update', 'You successfully update this task', 'success')
+                    this.$parent.getCategory()
+
+                })
+                .catch(error => {
+                    this.$swal.showValidationMessage(
+                    `Request failed: ${error}`
+                    )
+                })
+            }
+            })
+        }
     },
     created(){
-
+        
     }
 
 }
