@@ -13,6 +13,9 @@
       <p>{{description}}</p>
     </div>
 
+    <div id="nameUser">
+      <p>by:{{task.User.name}}</p>
+    </div>
     <div class="btnCard">
       <div
         type="button"

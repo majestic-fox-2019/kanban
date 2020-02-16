@@ -1,12 +1,15 @@
-const { Task } = require('../models')
+const { Task, User } = require('../models')
 const errors = require('http-errors')
-
-
 
 class ControllerTask {
   static taskAll(req, res, next) {
     Task
-      .findAll({ order: [['updatedAt', 'DESC']] })
+      .findAll({
+        include: [
+          { model: User }
+        ],
+        order: [['updatedAt', 'DESC']]
+      })
       .then(taskResult => {
         res.status(200).json(taskResult)
       })

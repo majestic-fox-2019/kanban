@@ -139,12 +139,16 @@ vertical-align: middle;
 line-height: normal;
 /* cursor: pointer; */
 }
+
 .btnAddTask:hover{
   background-color: #c9cce6;  
 }
 
-#createBtn, #userLoginRegister{
-  
+#nameUser{
+  font-size: 0.8em;
+}
+
+#createBtn, #userLoginRegister{  
   cursor: pointer;  
   letter-spacing: 1px;
   width: 10em;
