@@ -3,8 +3,8 @@
 Kanban Project: Client & Server Documentation, API Documentation
 
 # Link Demo
-    Backend: 
-    Frontend: 
+    Backend: https://kanban-project-backend.herokuapp.com/ ( Heroku )
+    Frontend: https://kanban-a98c9.firebaseapp.com/ (Firebase)
 
 
 # Client & Server Documentation
