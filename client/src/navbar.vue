@@ -20,8 +20,16 @@
 export default {
     methods:{
       logout(){
-          localStorage.clear()
-          this.$emit('logout-data')
+        Swal.fire(
+          'Are You Sure?',
+          'no more task need action',
+          'question'
+        ).then(result=>{
+          this.$emit('logout')
+            localStorage.clear()
+        })
+          
+          
       }
     }
   

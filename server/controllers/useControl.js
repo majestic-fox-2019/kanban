@@ -89,6 +89,7 @@ class ControlUser{
     let data ={
       title: req.body.title,
       category: req.body.category,
+      UserId : req.user.id
     }
    
     Task.create(data)

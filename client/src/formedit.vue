@@ -1,10 +1,10 @@
 <template>
-  <div class="form-container" v-if="show">
+  <div class="form-container" v-if="close">
   
       <div class="form-bg">
       <div class="form-box">
         <form @submit.prevent="sendEditData" >
-                   <a  @click="$emit('closeform')" style="margin-left:auto"> <i class="fas fa-times fa-lg"></i> </a>
+          <a  @click="showhide" style="margin-left:auto"> <i class="fas fa-times fa-lg"></i> </a>
           <label for="task" >Task</label>
           <textarea v-model="inputdata" name="task" id="" cols="30" rows="20"></textarea>
           
@@ -20,28 +20,37 @@
 <script>
 export default {
   name : 'formedit',
-  props : ['show','selectdata'],
+  props : ['selected', 'show'],
   data(){
     return{
-      inputdata : ""
-
+      inputdata : "",
+      close : false
      }
   },
   watch: {
-      selectdata : function(){
-        this.inputdata = this.selectdata.title
+
+      show : function(){
+        this.inputdata = this.selected.title
+        this.close = !this.close
       }
+  
+
   },
   methods:{
     
     sendEditData(){
       
       let newData = {
-        id : this.selectdata.id ,
+        id : this.selected.id ,
         title: this.inputdata
         }
-      this.$emit('edit-data',newData)
+      this.$parent.getedit(newData)
       this.selectData = ""
+      this.close = !this.close
+     },
+
+     showhide(){
+      this.close = !this.close
      }
     }
   

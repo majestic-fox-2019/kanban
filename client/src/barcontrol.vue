@@ -43,11 +43,13 @@ export default {
   
   data(){
     return{
-      baseUrl: `http://localhost:3000`,
+      baseUrl: ``,
       show : false,
+      test : true,
       form : {
         task :''
       }
+
     }
   },
   
@@ -55,6 +57,11 @@ export default {
 
     showForm(){
       this.show = !this.show
+    
+    },
+
+    testTrue(){
+      this.test = !this.test
     },
 
     sendData(){

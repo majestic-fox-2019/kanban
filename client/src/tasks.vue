@@ -1,63 +1,71 @@
 <template>
+
     <div class="col-1 col back-log">
+      <formedit @hide="hide" :selected="selected" :show="form" ></formedit>
       <div class="title">
         <h1>{{cate}}</h1>
       </div>
       <div class="card" >
-        
-      <div class="data" v-if="tasks == null || tasks.length== 0 " >
+
+      <div class="data" v-if="datatasks == null || !datatasks || datatasks.length == 0" >
           <div class="card-data">
             <h1>No task</h1>
           </div>
         </div>
         <div >
-        <div v-if="tasks.length!==0" v-for="task in tasks" :key="task.id" >
-        <div class="data" v-if="tasks" >
+        <div v-if="datatasks || datatasks !== null"  >
+        <div v-for="task in datatasks" :key="task.id" >
+        <div class="data" v-if="datatasks" >
           <div class="card-data" >
             <div>
               <p>{{task.title}}</p>
             </div>
              <div class="icon" v-if="task.category=='backlog'">
               <a @click="move(task,true);" ><i class="fa fa-arrow-circle-right fa-lg"  aria-hidden="true"></i></a>
-              <a @click="showedit(task);"> <i class="fas fa-edit fa-lg"></i></a>
+              <a @click="showedit(task)"> <i class="fa fa-edit fa-lg"></i></a>
               <a @click="destroy(task);"><i class="fa fa-trash" aria-hidden="true"></i></a>
             </div>
             <div class="icon" v-if="task.category=='complete'">
               <a @click="destroy(task);"><i class="fa fa-trash" aria-hidden="true"></i></a>
-              <a @click="showedit(task);"> <i class="fas fa-edit fa-lg"></i></a>
+              <a @click="showedit(task);"> <i class="fa fa-edit fa-lg"></i></a>
               <a @click="move(task,false);" ><i class="fa fa-arrow-circle-left fa-lg"  aria-hidden="true"></i></a>
             </div> 
             <div class="icon" v-if=" task.category!=='backlog'&& task.category!=='complete' ">
                 <a @click="move(task,true);" ><i class="fa fa-arrow-circle-right fa-lg"  aria-hidden="true"></i></a>
-                <a @click="showedit(task);"> <i class="fas fa-edit fa-lg"></i></a>
+                <a @click="showedit(task);"> <i class="fa fa-edit fa-lg"></i></a>
                 <a @click="destroy(task);"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 <a @click="move(task,false);" ><i class="fa fa-arrow-circle-left fa-lg"  aria-hidden="true"></i></a>
             </div>
+          </div>
           </div>
         </div>
         </div>
       </div>
       </div>
-    <!-- </div> -->
+   
 </template>
 <script>  
   
   import axios from 'axios'
+  import formedit from './formedit'
 
 export default {
 
   components:{
-    
+    formedit
   },
 
-  props : ['tasks','cate'],
+  props : ['datatasks','cate'],
   name : 'tasks',
   data(){
     return {
-        baseUrl: `http://localhost:3000`,
+        baseUrl: ``,
+        form: false,
         selected: null
+        
     }
   },
+ 
   methods:{
     move(task,cond){
       let data = task
@@ -69,9 +77,19 @@ export default {
       this.$emit('move-data',data)
     },
 
+    hide(){
+      this.form =!this.form
+    },
+
     showedit(task){
-      this.selected = task
-      this.$emit('data-edit',task)
+     this.form = !this.form
+     this.selected = task
+    // this.$emit('data-edit',task)
+    },
+
+    getedit(newData){
+     
+      this.$parent.getEdited(newData)
     },
 
     destroy(task){

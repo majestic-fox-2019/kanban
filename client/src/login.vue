@@ -1,10 +1,10 @@
 <template>
-<div class="contain" v-if="pagelogin">
+<div class="contain" v-if="page">
   <div class="login-board" >
 
-        <div class="form" v-if="register" >
+        <div class="form" v-if="login" >
            <h1 style="color: black;">Login</h1>
-              <form @submit.prevent="checkLogin">
+              <form @submit.prevent="sendLogin">
                 <label for="fname">email </label>
                 <input type="text" v-model="email" id="email" name="email" placeholder="Your email..">
 
@@ -14,14 +14,14 @@
 
                 <input type="submit" value="Submit">
                 <div class="linkregister">
-                    <p>haven't account ?? <a href="" @click.prevent="showregister">register</a></p>
+                    <p>haven't account ?? <a href="" @click.prevent="hideshow">register</a></p>
                 </div>
                 </form>
         </div>
 
-        <div class="form" v-if="login" >
+        <div class="form" v-if="register" >
           <h1 style="color: black;">Register</h1>
-              <form @submit.prevent="registerNew">
+              <form @submit.prevent="sendRegister">
                 <label for="fname">name </label>
                 <input type="text" v-model="namereg" id="name" name="name" placeholder="Your name..">
 
@@ -35,7 +35,7 @@
 
                 <input type="submit" value="Submit">
                 <div class="linkregister">
-                  <p>have account ?? <a href="" @click.prevent="showregister"> Login </a></p>
+                  <p>have account ?? <a  @click.prevent="hideshow"> Login </a></p>
                 </div>
             </form>
         </div>     
@@ -46,75 +46,111 @@
 import axios from 'axios'
 export default {
   name : "login",
+  props : ['loginstatus', 'registerstatus','local'],
   data(){
     return {
-      baseUrl: `http://localhost:3000`,
+      baseUrl: ``,
       email : "",
       password: "",
       emailreg: "",
       namereg: "",
       passreg: "",
-      login: false,
-      register : true,
-      pagelogin: true,
+      login: true,
+      register : false,
+      page: true,
     }
+  },
+
+  watch : {
+
+      loginstatus : function(){
+        this.page = !this.page
+      },
+
+      registerstatus: function(){
+        this.register = !this.register
+        this.login = !this.login
+      }
   },
 
   created(){
-          if(localStorage.token){
-            this.pagelogin = false
-          }else{
-            this.pagelogin = true
-          }
+       if(localStorage.token){
+         this.page = false
+       } else{
+         this.page = true
+       }
   },
-     watch :{
 
-    }
-  ,
   methods : {
-    checkLogin(){
-      let data = {
-        email : this.email,
-        password : this.password
-      }
-      axios.post(`${this.baseUrl}/login`,data)
-      .then(result=>{
-        this.$emit('reload-page')
-        this.pagelogin = false
-        this.register = false
-        localStorage.setItem("token", result.data.token)
-      })
-      .catch(err=>{
-        console.log(err)
-      })
-    },
 
-    
-    showregister(){
+    hideshow(){ 
       this.login = !this.login
       this.register = !this.register
     },
 
-    registerNew(){
-      let data ={
+    sendLogin(){
+      let datalogin = {
+        email : this.email,
+        password : this.password
+      }
+
+      this.$emit('data-login',datalogin)
+    },
+
+    sendRegister(){
+      let dataregister = {
         name : this.namereg,
         email : this.emailreg,
         password : this.passreg
       }
 
-      console.log(data)
-      
-      axios.post(`${this.baseUrl}/register`,data)
-       .then(result=>{
-         console.log(result)
-         this.login = !this.login
-         this.register = !this.register
-      })
+      this.$emit('data-register', dataregister)
     }
+
   }
-
-
 }
+  //   checkLogin(){
+  //     let data = {
+  //       email : this.email,
+  //       password : this.password
+  //     }
+  //     axios.post(`${this.baseUrl}/login`,data)
+  //     .then(result=>{
+  //       this.$emit('reload-page')
+  //       this.pagelogin = false
+  //       this.register = false
+  //       localStorage.setItem("token", result.data.token)
+  //     })
+  //     .catch(err=>{
+  //       console.log(err)
+  //     })
+  //   },
+
+    
+  //   showregister(){
+  //     this.login = !this.login
+  //     this.register = !this.register
+  //   },
+
+  //   registerNew(){
+  //     let data ={
+  //       name : this.namereg,
+  //       email : this.emailreg,
+  //       password : this.passreg
+  //     }
+
+  //     console.log(data)
+      
+  //     axios.post(`${this.baseUrl}/register`,data)
+  //      .then(result=>{
+  //        console.log(result)
+  //        this.login = !this.login
+  //        this.register = !this.register
+  //     })
+  //   }
+  
+
+
 </script>
 <style scoped>
 .linkregister{

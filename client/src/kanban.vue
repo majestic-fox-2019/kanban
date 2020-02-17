@@ -1,15 +1,36 @@
 <template>
-<div>
-    <login @reload-page="readData()"></login>
+
+  <!-- <login @reload-page="readData()"></login>
   <form-add @add-data="postData"></form-add>
-  <form-edit :show="showedit" :selectdata="selectedData" @closeform="close" @edit-data="putData"></form-edit>
-  <div class="kanban">
-    <tasks-list :tasks="tasksBacklog" :cate="'Backlog'" @move-data="moveData" @data-edit="sendedit" @destroy-data="destroyData"></tasks-list>
-    <tasks-list :tasks="tasksTodo" :cate="'Todo'" @move-data="moveData" @data-edit="sendedit" @destroy-data="destroyData"></tasks-list>
-    <tasks-list :tasks="tasksDone" :cate="'Done'" @move-data="moveData" @data-edit="sendedit" @destroy-data="destroyData"></tasks-list>
-    <tasks-list :tasks="tasksComplete" :cate="'Complete'" @move-data="moveData" @data-edit="sendedit" @destroy-data="destroyData"></tasks-list>
-  </div>
-</div>
+  <form-edit :show="showedit" :selectdata="selectedData" @closeform="close" @edit-data="putData"></form-edit> -->
+  
+  <div class="kanban"> 
+    <tasks-list 
+    :datatasks="tasksBacklog" :cate="'Backlog'" 
+    @move-data="moveData"
+    @data-edit="sendedit" 
+    @destroy-data="destroyData"
+    ></tasks-list>
+    <tasks-list 
+    :datatasks="tasksTodo" :cate="'Todo'" 
+    @move-data="moveData" 
+    @data-edit="sendedit" 
+    @destroy-data="destroyData">
+    </tasks-list>
+    <tasks-list 
+    :datatasks="tasksDone" :cate="'Done'"
+    @move-data="moveData"
+    @data-edit="sendedit" 
+    @destroy-data="destroyData">
+    </tasks-list>
+    <tasks-list 
+    :datatasks="tasksComplete" :cate="'Complete'" 
+    @move-data="moveData" 
+    @data-edit="sendedit" 
+    @destroy-data="destroyData">
+    </tasks-list>
+
+    </div>
 </template>
 
 <script> 
@@ -24,13 +45,12 @@ export default {
   components:{
     'tasks-list' : tasks,
     'form-add' : form,
-    'form-edit': edit
-     login
+    // 'form-edit': edit,
   },
-  props: ['addData'],
+  props: ['addData','datakanban'],
   data(){
     return {
-      baseUrl: `http://localhost:3000`,
+      baseUrl: ``,
       tasksBacklog : [],
       tasksTodo: [],
       tasksDone: [],
@@ -40,107 +60,124 @@ export default {
     }
   },
   created(){
-      if(localStorage.token){
-        this.readData()
-      }else{
-        console.log('a')
-      }
+     
+     this.loaddata()
   },
 
-  methods:{
-    checklocal(){
-    
+  watch:{
+    datakanban : function(){
+      this.loaddata()
     }
+  },
 
-    readData(){
-      console.log('from emit')
-      axios({
-        method: "GET",
-        url: this.baseUrl ,
-        headers: {token : localStorage.token}
-      })
-      .then(result=>{
-          
-          let tasksBl= result.data.filter(el => {return el.category == 'backlog'})
-          let tasksTd= result.data.filter(el => {return el.category == 'todo'})
-          let tasksDn= result.data.filter(el => {return el.category == 'done'})
-          let tasksCp= result.data.filter(el => {return el.category == 'complete'})
-
-          this.tasksBacklog = tasksBl
-          this.tasksTodo = tasksTd
-          this.tasksDone = tasksDn
-          this.tasksComplete = tasksCp
-      })
-    },
-
-    moveData(e){
-      axios({
-        method: "PUT",
-        url :`${this.baseUrl}/${e.id}`,
-        headers :{token : localStorage.token},
-        data : {category : e.category }
-      })
-      .then(res=>{
-        this.readData()
-      })
-      .catch(err=>{
-        console.log(err)
-      })
-     
-    },
-
-    postData(title){
-      axios({
-        method: "POST",
-        url :`${this.baseUrl}`,
-        headers :{token : localStorage.token},
-        data : {title : title , category: "backlog" }
-      })
-      .then(res=>{
-        this.readData()
-      })
-      .catch(err=>{
-        console.log(err)
-      })
-
-    },
-
-    putData(data){
-     axios({
-        method: "PUT",
-        url :`${this.baseUrl}/${data.id}`,
-        headers :{token : localStorage.token},
-        data : {title : data.title }
-      })
-      .then(res=>{
-        this.readData()
-        this.close()
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+  
+  methods:{
+    
+    loaddata(){
+      let allLoadedData = this.datakanban
+      this.tasksBacklog = allLoadedData.backlog 
+      this.tasksTodo = allLoadedData.todo  
+      this.tasksDone = allLoadedData.done   
+      this.tasksComplete = allLoadedData.complete
     },
 
     destroyData(data){
-     axios({
-        method: "DELETE",
-        url :`${this.baseUrl}/${data.id}`,
-        headers :{token : localStorage.token},
-      })
-      .then(res=>{
-        this.readData()
-      })
+      this.$emit('toDelete',data)
     },
 
-    close(){
-      this.showedit = !this.showedit
+    moveData(data){
+      
+      this.$emit('movedata',data)
     },
 
-    sendedit(data){
-      this.showedit = !this.showedit
-      this.selectedData = data
+    sendedit(selectedTask){
+      this.SelectedData(selectedTask)
+    },
 
+    getEdited(newData){
+      this.$parent.editData(newData)
+     
     }
+    // readData(){
+    //   console.log('from emit')
+    //   axios({
+    //     method: "GET",
+    //     url: this.baseUrl ,
+    //     headers: {token : localStorage.token}
+    //   })
+    //   .then(result=>{
+          
+    //       let tasksBl= result.data.filter(el => {return el.category == 'backlog'})
+    //       let tasksTd= result.data.filter(el => {return el.category == 'todo'})
+    //       let tasksDn= result.data.filter(el => {return el.category == 'done'})
+    //       let tasksCp= result.data.filter(el => {return el.category == 'complete'})
+
+    //       this.tasksBacklog = tasksBl
+    //       this.tasksTodo = tasksTd
+    //       this.tasksDone = tasksDn
+    //       this.tasksComplete = tasksCp
+    //   })
+    // },
+
+    // moveData(e){
+    //   axios({
+    //     method: "PUT",
+    //     url :`${this.baseUrl}/${e.id}`,
+    //     headers :{token : localStorage.token},
+    //     data : {category : e.category }
+    //   })
+    //   .then(res=>{
+    //     this.readData()
+    //   })
+    //   .catch(err=>{
+    //     console.log(err)
+    //   })
+     
+    // },
+
+    // postData(title){
+    //   axios({
+    //     method: "POST",
+    //     url :`${this.baseUrl}`,
+    //     headers :{token : localStorage.token},
+    //     data : {title : title , category: "backlog" }
+    //   })
+    //   .then(res=>{
+    //     this.readData()
+    //   })
+    //   .catch(err=>{
+    //     console.log(err)
+    //   })
+
+    // },
+
+    // putData(data){
+    //  axios({
+    //     method: "PUT",
+    //     url :`${this.baseUrl}/${data.id}`,
+    //     headers :{token : localStorage.token},
+    //     data : {title : data.title }
+    //   })
+    //   .then(res=>{
+    //     this.readData()
+    //     this.close()
+    //   })
+    //   .catch(err=>{
+    //     console.log(err)
+    //   })
+    // },
+
+    
+
+    // close(){
+    //   this.showedit = !this.showedit
+    // },
+
+    // sendedit(data){
+    //   this.showedit = !this.showedit
+    //   this.selectedData = data
+
+    // }
   }
 }
 
