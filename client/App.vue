@@ -39,8 +39,8 @@ import addtask from './components/AddTask.vue'
 import tasklist from './components/TaskList.vue'
 import edittask from './components/EditTask.vue'
 
-const baseURL = 'http://localhost:3000'
-// const baseURL = 'https://kanban-km.herokuapp.com'
+// const baseURL = 'http://localhost:3000'
+const baseURL = 'https://kanban-km.herokuapp.com'
 
 export default {
     name: 'app',

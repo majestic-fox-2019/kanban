@@ -11,7 +11,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-outline-secondary" v-on:click="showViewTask(item)">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary" v-on:click.prevent="showEditTask(item)">Edit</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" v-on:click.prevent="showEditTask(item)" v-if="localStorage.email===item.assignedTo">Edit</button>
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-secondary" v-on:click.prevent="deleteTask(item.id)">Delete</button>
                 </div>
@@ -25,8 +25,8 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-const baseURL = 'http://localhost:3000'
-// const baseURL = 'https://kanban-km.herokuapp.com'
+// const baseURL = 'http://localhost:3000'
+const baseURL = 'https://kanban-km.herokuapp.com'
 
 export default {
     name: 'taskitem',

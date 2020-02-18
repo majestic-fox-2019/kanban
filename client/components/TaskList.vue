@@ -51,8 +51,8 @@ import Swal from 'sweetalert2'
 
 import taskitem from './TaskItem.vue'
 
-const baseURL = 'http://localhost:3000'
-// const baseURL = 'https://kanban-km.herokuapp.com'
+// const baseURL = 'http://localhost:3000'
+const baseURL = 'https://kanban-km.herokuapp.com'
 
 export default {
     name: 'tasklist',
