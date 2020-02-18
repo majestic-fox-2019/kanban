@@ -5,27 +5,27 @@
         @afterRegisterLogin="afterRegisterLogin"
     ></registerlogin>
     <navbar
-        v-if="page=='kanban' || page=='addTodo' || page=='editTodo' || page=='viewTodo'"
+        v-if="page=='kanban' || page=='addTask' || page=='editTask' || page=='viewTask'"
         @logout="logout"
         :email="dataUser.email"
-        @addTodo="addTodo"
+        @addTask="addTask"
         @kanban="kanban"
     ></navbar>
-    <addtodo
-        v-if="page=='addTodo'"
-        @cancelAddTodo="cancelAddTodo"
-        @afterAddTodo="afterAddTodo"
-    ></addtodo>
-    <todolist
+    <addtask
+        v-if="page=='addTask'"
+        @cancelAddTask="cancelAddTask"
+        @afterAddTask="afterAddTask"
+    ></addtask>
+    <tasklist
         v-if="page=='kanban'"
-        @showEditTodo="showEditTodo"
-    ></todolist>
-    <edittodo
-        v-if="page=='editTodo'"
+        @showEditTask="showEditTask"
+    ></tasklist>
+    <edittask
+        v-if="page=='editTask'"
         :item="item"
-        @cancelEditTodo="cancelEditTodo"
-        @afterEditTodo="afterEditTodo"
-    ></edittodo>
+        @cancelEditTask="cancelEditTask"
+        @afterEditTask="afterEditTask"
+    ></edittask>
 </div>
 </template>
 
@@ -35,21 +35,21 @@ import Swal from 'sweetalert2'
 
 import registerlogin from './components/RegisterLogin.vue'
 import navbar from './components/NavBar.vue'
-import addtodo from './components/AddTodo.vue'
-import todolist from './components/TodoList.vue'
-import edittodo from './components/EditTodo.vue'
+import addtask from './components/AddTask.vue'
+import tasklist from './components/TaskList.vue'
+import edittask from './components/EditTask.vue'
 
-// const baseURL = 'http://localhost:3000'
-const baseURL = 'https://kanban-km.herokuapp.com'
+const baseURL = 'http://localhost:3000'
+// const baseURL = 'https://kanban-km.herokuapp.com'
 
 export default {
     name: 'app',
     components: {
         registerlogin,
         navbar,
-        addtodo,
-        todolist,
-        edittodo,
+        addtask,
+        tasklist,
+        edittask,
     },
     data: function() {
         return {
@@ -91,24 +91,24 @@ export default {
             localStorage.removeItem('email')
             this.page = 'login'
         },
-        addTodo() {
-            this.page = 'addTodo'
+        addTask() {
+            this.page = 'addTask'
         },
-        cancelAddTodo() {
+        cancelAddTask() {
             this.page = 'kanban'
         },
-        afterAddTodo() {
+        afterAddTask() {
             this.page = 'kanban'
             this.socket.emit('SOMETHING_CHANGE')
         },
-        showEditTodo(item) {
+        showEditTask(item) {
             this.item = item
-            this.page = 'editTodo'
+            this.page = 'editTask'
         },
-        cancelEditTodo() {
+        cancelEditTask() {
             this.page = 'kanban'
         },
-        afterEditTodo() {
+        afterEditTask() {
             this.page = 'kanban'
             this.socket.emit('SOMETHING_CHANGE')
         },

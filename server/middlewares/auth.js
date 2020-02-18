@@ -1,7 +1,7 @@
 'use strict'
 
 const { verifyToken } = require('./jwt')
-const { User, Todo } = require('../models')
+const { User, Todo, Task } = require('../models')
 
 function authentication(req, res, next) {
     try {
@@ -40,7 +40,27 @@ function authorizeTodo(req, res, next) {
     .catch(next)
 }
 
+function authorizeTask(req, res, next) {
+    const UserId = req.userLoggedIn.id
+    const id = req.params.id
+
+    Task.findByPk(id)
+    .then(task => {
+        if(task) {
+            if(task.UserId === UserId) {
+                next()
+            } else {
+                next({ status: 403, message: 'User unauthorize' })
+            }
+        } else {
+            next({ status: 404, message: 'Data not found' })
+        }
+    })
+    .catch(next)
+}
+
 module.exports = {
     authentication,
-    authorizeTodo
+    authorizeTodo,
+    authorizeTask
 }
