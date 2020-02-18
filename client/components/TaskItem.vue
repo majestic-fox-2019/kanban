@@ -11,9 +11,9 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-outline-secondary" v-on:click="showViewTask(item)">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary" v-on:click.prevent="showEditTask(item)" v-if="localStorage.email===item.assignedTo">Edit</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" v-on:click.prevent="showEditTask(item)" v-if="localEmail===item.assignedTo">Edit</button>
                     </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" v-on:click.prevent="deleteTask(item.id)">Delete</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" v-on:click.prevent="deleteTask(item.id)" v-if="localEmail===item.assignedTo">Delete</button>
                 </div>
                 </div>
             </div>
@@ -30,6 +30,11 @@ const baseURL = 'https://kanban-km.herokuapp.com'
 
 export default {
     name: 'taskitem',
+    data() {
+        return {
+            localEmail: localStorage.getItem('email')
+        }
+    },
     props: ['item'],
     methods: {
         showViewTask(item) {
