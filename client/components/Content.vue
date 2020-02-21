@@ -26,16 +26,19 @@
                     </div>
                     <AddTask v-bind:task="task" v-bind:CategoryId="category.id"></AddTask>
                 </div>
+            <!-- <Categories v-for="category in categories" v-bind:key="category.id">
+            </Categories> -->
             </main>
         </div>  
 </template>
 
 <script>
 import axios from 'axios'
+import Categories from './Categories'
 import AddTask from './AddTask'
 export default {
     name:"Content",
-    components:{AddTask},
+    components:{AddTask,Categories},
     props:["categories", "pageContent"],
     data() {
     return{

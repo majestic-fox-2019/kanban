@@ -1,21 +1,19 @@
 <template>
-              <main >
-                <div class="kanban" v-for="category in categories" v-bind:key="category.id">
-                    <div class="category">{{category.name}}</div>
+                <div class="kanban" >
+                    <div class="category"></div>
                     <div class="item">
-                        <div class="title" v-for="task in category.Tasks" v-bind:key="task.id">
+                        <div class="title" >
                             <div>
                                 <div class="title-button">
-                                     <i class="material-icons" @click.prevent="update(task)" v-bind:key="task.id">edit</i>
-                                     <i class="material-icons" @click.prevent="alertDisplay(task)">delete</i>
+                                     <i class="material-icons" >edit</i>
+                                     <i class="material-icons">delete</i>
                                 </div>
-                                <p>{{task.title}}</p>
+                                <p></p>
                             </div>
                         </div>
                     </div>
-                    <AddTask v-bind:task="task" v-bind:CategoryId="category.id"></AddTask>
+                    <AddTask ></AddTask>
                 </div>
-            </main>
 </template>
 
 <script>
