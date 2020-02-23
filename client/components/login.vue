@@ -4,15 +4,16 @@
       <!-- Tabs Titles -->
 
       <!-- Icon -->
+      <form @submit.prevent="showlist" >
+
       <div class="fadeIn first">
-                <p class="h2" style="color: black">
-              <b-icon icon="person-fill">
-              </p>
+        <p class="h2" style="color: black">
+          <b-icon icon="person-fill">
+        </p>
       </div>
-      <form>
         <input
           type="text"
-          id="login"
+          id="register_username"
           class="fadeIn second"
           name="login"
           placeholder="register username"
@@ -20,7 +21,7 @@
         />
                 <input
           type="text"
-          id="login"
+          id="register_email"
           class="fadeIn second"
           name="login"
           placeholder="email"
@@ -35,7 +36,9 @@
           placeholder="password"
           v-model="passwordReg"
         />
-        <input type="submit" @submit.prevent="showlist" class="fadeIn fourth" />
+        <br>
+        <input type="submit" class="fadeIn fourth"  value="Register"/> 
+        <!-- <button @click="showlist" class="btn btn-primary fadeIn fourth">Register</button> -->
       </form>
 
       <!-- Remind Passowrd -->
@@ -45,6 +48,7 @@
         >
       </div>
     </div>
+
 
     <!--                             LOGIN PAGE                                    -->
 
@@ -57,10 +61,10 @@
               <b-icon icon="person-fill">
               </p>
       </div>
-      <form>
+      <form @submit.prevent="login">
         <input
           type="text"
-          id="login"
+          id="register"
           class="fadeIn second"
           name="login email"
           placeholder="login"
@@ -73,10 +77,10 @@
           class="fadeIn third"
           name="login"
           placeholder="password"
-          v-model="passwordReg"
+          v-model="passwordLog"
           
         />
-        <input type="submit" @submit.prevent="showlist" class="fadeIn fourth"/>
+        <input type="submit" class="fadeIn fourth"/>
       </form>
 
       <!-- Remind Passowrd -->
@@ -91,6 +95,8 @@
   
 </template>
 <script>
+import axios from 'axios'
+
 export default {
   name: "loginregister",
   data() {
@@ -105,19 +111,49 @@ export default {
       
     };
   },
-
   methods: {
     toshow(){
       this.showregister= !this.showregister
       this.showlogin=!this.showlogin
+    },
+    login(){
+      axios.post( "http://localhost:3000/login", {
+          email: this.emailLog,
+          password: this.passwordLog,
+        })
+      .then(user => {
+        console.log(user.data, "ini apaaa??");
+        const token = user.data
+        this.showregister= false
+        this.showlogin=false
+        localStorage.setItem('token', token)
+        this.$emit('showlist', {token: token})     
+      })
+      .catch(err => {console.log(err);
+      })
+    },
+    showlist(){
+      console.log("cimaw");
+      console.log(this.usernameReg, this.emailReg, this.passwordReg,);
+      axios.post( "http://localhost:3000/register",
+        {
+          username: this.usernameReg,
+          email: this.emailReg,
+          password: this.passwordReg
+        })
+      .then(user => {
+        console.log(user, 'thenn');
+        // this.showregister= false
+        // this.showlogin=false
+        // this.$emit('showlist')        
+      })
+      .catch(err => {
+        console.log(err, 'atau error?');
+        
+      })
     }
-  },
 
-  showlist(){
-    this.showregister= false
-    this.showlogin=false
-    $emit('showlist')
-  }
+  },
 };
 </script>
 <style></style>

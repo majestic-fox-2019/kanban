@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 class UserController {
   static login(req, res, next) {
-    const { email, password } = req.body;
+    const { email } = req.body;
     // console.log(email, password, "jagungggg");
     User.findOne({
       where: {
@@ -14,8 +14,7 @@ class UserController {
       }
     })
       .then(result => {
-        if (result && hashing.hashed(req.password, result.password)) {
-          // console.log(result.email, "cimbeeee");
+        if (result && hashing.compare(req.body.password, result.password)) {
           var token = jwt.sign(
             {
               id: result.id,
@@ -30,13 +29,11 @@ class UserController {
           throw {
             statusCode: 400,
             msg: "Your Email or Password is wrong!"
-            // msg: "HAHHH??"
           };
         }
       })
       .catch(err => {
-        // console.log(err);
-
+        console.log(err);
         next(err);
       });
   }
@@ -44,16 +41,18 @@ class UserController {
   static register(req, res, next) {
     const { username, email, password } = req.body;
     // console.log(hashing.hashed(password, 10), "masukkk??");
+    // console.log(password);
     const hashedPass = hashing.hashed(password, 10);
+    // console.log(hashedPass);
 
-    const post = {
+    // res.status(200).json(resu);
+    User.create({
       username,
       email,
       password: hashedPass
-    };
-    // res.status(200).json(resu);
-    User.create(post)
+    })
       .then(result => {
+        console.log(result, "masuk kok");
         res.status(200).json(result);
       })
       .catch(err => {

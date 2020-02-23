@@ -1,11 +1,10 @@
 <template>
   <div>
-    <navbar></navbar>
-    <loginregister v-if="showlogin" v-on:showlist="showlist($event)"></loginregister>
+    <navbar :token='authToken'></navbar>
+    <loginregister v-if="showlogin && !authToken" v-on:showlist="showlist($event)"></loginregister>
     <modal :dataUpdate="dataUpdate" v-on:editData="editData($event)"></modal>
     <kanbans
-      v-if="showkanban"
-      hidden
+      :showkanban="showkanban"
       :taskcategory="taskcategory"
       :title="title"
       v-on:destroy="destroy($event)"
@@ -33,25 +32,33 @@ export default {
   data() {
     return {
       showlogin: true,
-      showkanban: true,
+      showkanban: false,
       taskcategory: null,
       urlBase: "http://localhost:3000",
       title: {},
-      dataUpdate: {}
+      dataUpdate: {},
+      authToken: localStorage.getItem('token')
     };
   },
 
   created() {
     this.loadData();
   },
-
+  mounted() {
+    this.loadData();
+  },
   methods: {
     loadData() {
-      // console.log("hahhhh???");
+      console.log("hahhhh???");
+      this.title = {};
+      this.taskcategory = null;
       axios
-        .get(`${this.urlBase}/tasks/`)
+        .get(`${this.urlBase}/tasks`,
+         {headers: {
+          'token': this.authToken          
+        }})
         .then(res => {
-          console.log(res);
+          console.log(res, "resssssss");
           let newObj = {};
           let objButton = {};
           res.data.forEach(el => {
@@ -59,11 +66,11 @@ export default {
             el.Tasks.forEach(taskId => {
               objButton[taskId.id];
             });
-          });
+          }
+          );
           this.title = newObj;
           this.taskcategory = res.data;
-
-          console.log(res.data, "woeeee");
+          console.log(res.data[0].Tasks, "woeeee");
         })
         .catch(err => {
           console.log(err);
@@ -78,7 +85,9 @@ export default {
         CategoryId: id
       };
       axios
-        .post(`${this.urlBase}/tasks/add`, obj)
+        .post(`${this.urlBase}/tasks/add`, obj, {headers: {
+          'token': this.authToken          
+        }})
         .then(res => {
           this.loadData();
         })
@@ -89,14 +98,10 @@ export default {
 
     destroy(taskId) {
       console.log(taskId, "masukkkk");
-
       axios
-        .delete(`${this.urlBase}/tasks/${taskId}`, {
-          where: {
-            id: taskId
-          }
-        })
+        .delete(`${this.urlBase}/tasks/${taskId}`,{headers: {'token': this.authToken}})
         .then(res => {
+          console.log(res, 'masukkk gaa?');
           this.loadData();
         })
         .catch(err => {
@@ -124,7 +129,9 @@ export default {
       };
 
       axios
-        .put(`${this.urlBase}/tasks/${taskId}`, objData)
+        .put(`${this.urlBase}/tasks/${taskId}`, objData, {headers: {
+          'token': this.authToken          
+        }})
         .then(result => {
           this.loadData();
         })
@@ -133,9 +140,13 @@ export default {
         });
     },
 
-    showlist() {
+    showlist(token) {
+      // console.log(token, "Sdfghjk");
+      this.authToken = localStorage.getItem('token')
+      // console.log(this.authToken, "apaini??");
       this.showloginregister = false;
       this.showkanban = true;
+      this.loadData()
     }
   }
 };

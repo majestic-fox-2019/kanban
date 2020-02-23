@@ -13,13 +13,23 @@
           alt=""
         />
       </li>
-      <li><a href="">Logout</a></li>
+      <li><a href="" v-if="token" @click="logout">Logout</a></li>
     </ul>
   </div>
 </template>
 <script>
 export default {
-  name: "navbar"
+  name: "navbar",
+  props: ['token'],
+  data() {
+    return {
+    }
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('token')
+    }
+  }
 };
 </script>
 <style>

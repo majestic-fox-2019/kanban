@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
       if (!result) {
         throw {
           statusCode: 404,
-          msg: "No Todo's data found!"
+          msg: "No data found!"
         };
       } else if (result.UserId == req.user.id) {
         next();

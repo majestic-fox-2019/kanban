@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="kanbans" >
+    <div id="kanbans"  v-if="showkanban">
       <div class="category" v-for="content in taskcategory" :key="content.id">
         <div class="kanban-column">
           <div class="text">{{ content.nameCategory }}</div>
@@ -43,16 +43,17 @@
   </div>
 </template>
 <script>
-// import buttonAdd from "./button";
-// import axios from "axios";
-// import Vue from "vue";
+import buttonAdd from "./button";
+import axios from "axios";
+import Vue from "vue";
 import upModal from "./updateModal";
 
 export default {
   name: "kanbans",
-  props: ["taskcategory", "title"],
+  props: ["taskcategory", "title", "showkanban"],
   components: {
     upModal,
+    buttonAdd
   },
   data() {
     return {
@@ -82,7 +83,7 @@ export default {
 <style>
 #upIcon {
   width: 40%;
-  margin-left: 30px;
+  margin-left: auto;
   padding: 0%;
   color: black
 }
