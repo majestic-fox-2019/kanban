@@ -1,0 +1,58 @@
+{
+    "taskCategory": [
+        {
+            "id": 1, 
+            "name": "Backlog",
+            "tasks": [
+                {
+                    "id": 1,
+                    "title": "Memberi makan kucing",
+                    "description": "Memberi makan kucing hacktiv yang suka nyebar virus corona",
+                    "categoryId": 1
+                },
+                {
+                    "id": 2,
+                    "title": "Memberi makan buaya",
+                    "description": "Memberi makan buaya hacktiv yang suka nyebar virus corona",
+                    "categoryId": 1
+                }
+            ]
+        },
+        {
+            "id": 2, 
+            "name": "Product",
+            "tasks": [
+                {
+                    "id": 1,
+                    "title": "Memberi makan kambing",
+                    "description": "Memberi makan kambing hacktiv yang suka nyebar virus corona",
+                    "categoryId": 2
+                }
+            ]
+        },
+        {
+            "id": 3, 
+            "name": "Development",
+            "tasks": [
+                {
+                    "id": 1,
+                    "title": "Memberi makan kucing",
+                    "description": "Memberi makan kucing hacktiv yang suka nyebar virus corona",
+                    "categoryId": 3
+                }
+            ]
+        },
+        {
+            "id": 4, 
+            "name": "Done",
+            "tasks": [
+                {
+                    "id": 1,
+                    "title": "Memberi makan biawak",
+                    "description": "Memberi makan biawak hacktiv yang suka nyebar virus corona",
+                    "categoryId": 1
+                }
+            ]
+        }
+    ]
+}

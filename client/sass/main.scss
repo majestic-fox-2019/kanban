@@ -1,0 +1,122 @@
+@import "base";
+
+body{
+  background-color: $bgcolor;
+  // margin: 0;
+  // padding: 0;
+  overflow: hidden;
+}
+
+.kanban{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+
+  overflow: auto;
+
+  .col-3{
+    height: auto;
+    width: 100%;
+    margin-top: 0.5%;
+    margin-bottom: 2%;
+
+    .title{
+      text-align: center;
+      font-size: 16pt;
+      color: $bgcolor;
+      background-color: lightgray;
+      border-radius: 10px 10px 0 0;
+      border-bottom: 1px solid gray;
+      padding: 1%;
+    }
+
+    .footer{
+      background-color: lightgray;
+      text-align: center;
+      font-size: 12pt;
+      border-radius: 0 0 10px 10px;
+      padding: 1%;
+      border-top: 1px solid gray;
+
+      button {
+        font-weight: bold;
+        color: lightslategray;
+        border: 1px solid grey;
+        border-radius: 5px;
+        padding: 1%;
+        min-width: 50%;
+      }
+      button:hover{
+        background-color: whitesmoke
+      }
+    }
+
+    .title , .footer{
+      padding-left: 1%;
+      font-weight: bold;
+    }
+  }
+}
+
+.cards {
+  // border-radius: 10px 10px 0 0;
+  background-color: lightblue;
+  overflow: auto;
+  max-height: 72vh;
+  padding-bottom: 1%;
+}
+
+.card{
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 1%;
+    min-height: 10vh;
+    margin: 3%;
+
+    .card-title{
+      text-align: center;
+      font-size: 12pt;
+      // margin-bottom: 5%; 
+    }
+
+    .card-content{
+      text-align: center;
+      font-size: 10pt;
+    }
+
+    /* No copy text */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+.card-title, .card-content, button, svg{
+  cursor: pointer;
+}
+
+
+
+/* Scroll Style */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
