@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,300" rel="stylesheet">
+
+  <link rel="stylesheet" href="/asset/css/style.css">
+  <link rel="stylesheet" href="/asset/css/loginstyle.css">
+  <link rel="stylesheet" href="/asset/css/buttonEditCreate.css">
+
+
+
+  <title>KANBAN</title>
+</head>
+
+<body>
+  <div id="boardKanbanApp">
+
+    <nav id="navbar" v-if="isLogin">
+      <div id="mainButton">
+        <div class="btn-text" onclick="openForm()">Create Task</div>
+        <div class="modal">
+          <div class="close-button" onclick="closeForm()">x</div>
+          <div class="form-title">Create Task</div>
+          <div class="input-group">
+            <input type="text" id="title" onblur="checkInput(this)" v-model="createTask.title" />
+            <label for="title">Tite</label>
+          </div>
+          <div class="input-group">
+            <input type="text" id="description" onblur="checkInput(this)" v-model="createTask.description" />
+            <label for="description">Description</label>
+          </div>
+          <div class="input-group">
+            <input type="text" id="category" onblur="checkInput(this)" v-model="createTask.category" />
+            <label for="text">Category</label>
+          </div>
+          <div class="form-button" onclick="closeForm()" @click="createKanband">Submit</div>
+        </div>
+      </div>
+      <!-- <div id="createBtn" @click='createKanband'>
+        <span>Create Task</span>
+      </div> -->
+      <div>KANBAND</div>
+      <div id="userLoginRegister">
+        <!-- <div id="login">Login</div> -->
+        <div id="register" @click="logoutUser">Logout</div>
+      </div>
+    </nav>
+
+
+
+
+
+
+    <!-- Card -->
+    <section class="containerBoard" v-if="isLogin">
+      <div class="boardKanban" v-for='category in categorys'>
+        <div class="titleBoxKanban">
+          <h3>{{category.name}}</h3>
+          <img v-bind:src="category.img">
+        </div>
+
+        <div class="cardInnerKanban" v-for='task in tasks' v-if="task.category == category.name">
+
+          <h4>{{task.title}}</h4>
+          <div class="description">
+            <p>{{task.description}}</p>
+          </div>
+
+          <div class="btnCard">
+            <div type="button" id="btnEditCard"> <img src="/asset/img/edit-3.svg"> Edit</div>
+            <button id="btnDeleteCard">Delete</button>
+          </div>
+
+
+        </div>
+
+        <div class="btnAddTask">{{category.name}}</div>
+      </div>
+    </section>
+    <!-- end Card -->
+
+
+    <!-- login and register -->
+    <section v-if="!isLogin">
+      <!-- login form -->
+      <div id="loginForm" v-if="loginForm">
+        <div class='bold-line'></div>
+        <div class='container'>
+          <div class='window'>
+            <div class='overlay'></div>
+            <div class='content'>
+              <div class='welcome'>KANBAND</div>
+
+              <div class='input-fields'>
+                <!-- <input type='text' placeholder='Username' class='input-line full-width'></input> -->
+                <input type='email' placeholder='Email' class='input-line full-width' id="email"
+                  v-model="login.email"></input>
+                <input type='password' placeholder='Password' class='input-line full-width' id="password"
+                  v-model="login.password"></input>
+              </div>
+
+              <div>
+                <button class='ghost-round full-width' id="login" @click="loginUser">Login</button>
+                <button class='ghost-round full-width' id="register" @click="toRegister">to Create Account</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end login form -->
+
+      <!-- register form -->
+      <div id="loginForm" v-if="registerForm">
+        <div class='bold-line'></div>
+        <div class='container'>
+          <div class='window'>
+            <div class='overlay'></div>
+            <div class='content'>
+              <div class='welcome'>KANBAND</div>
+
+              <div class='input-fields'>
+                <input type='text' placeholder='Username' class='input-line full-width' id="name"
+                  v-model="register.name"></input>
+                <input type='email' placeholder='Email' class='input-line full-width' id="email"
+                  v-model="register.email" required></input>
+                <input type='password' placeholder='Password' class='input-line full-width' id="password"
+                  v-model="register.password"></input>
+              </div>
+
+              <div>
+                <button class='ghost-round full-width' id="register" @click="registerUser">Create Account</button>
+                <button class='ghost-round full-width' id="login" @click="toLogin">to Login</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end logi form -->
+
+    </section>
+
+
+
+
+
+  </div>
+
+
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="./app.js"></script>
+
+<script>
+
+</script>
+
+
+
+</html>
