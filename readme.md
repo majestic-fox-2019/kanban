@@ -2,7 +2,7 @@
 
 
 
-deploy link = kanban-dede.firebaseapp.com
+deploy link = kanban-dede.web.app
 
 
 
