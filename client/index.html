@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/12d44f92ab.js" crossorigin="anonymous"></script>
+    <title>KanBan V2</title>
+  </head>
+  <body style="background: linear-gradient(to right, #4b79a1, #283e51);margin:0;padding-bottom: 3vh;">
+    <div id="app">
+    </div>
+    
+    <script src="https://kanban-v2.herokuapp.com/socket.io/socket.io.js"></script>
+    <script src="./src/script.js"></script>
+    <script src="./src/main.js"></script>
+</body>
+<script>
+  const switchers = [...document.querySelectorAll('.switcher')]
+
+switchers.forEach(item => {
+	item.addEventListener('click', function() {
+		switchers.forEach(item => item.parentElement.classList.remove('is-active'))
+		this.parentElement.classList.add('is-active')
+	})
+})
+</script>
+</html>
