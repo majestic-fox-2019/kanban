@@ -1,0 +1,54 @@
+%property-shared {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+%checkbox-shared {
+    .checkbox {
+        font-weight: 400;
+    }
+}
+%form-control-shared {
+    .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+}
+%form-control-focus-shared {
+    .form-control:focus {
+        z-index: 2;
+    }
+}
+@mixin border-radius($property) {
+    border-bottom-left-radius: $property;
+    border-bottom-right-radius: $property;
+}
+%input-shared {
+    input[type="email"] {
+        margin-bottom: -1px;
+        @include border-radius(0);
+    }
+    input[type="password"] {
+        margin-bottom: 10px;
+        @include border-radius(0);
+    }
+}
+.form-signin {
+    @extend %property-shared;
+    @extend %checkbox-shared;
+    @extend %form-control-shared;
+    @extend %form-control-focus-shared;
+    @extend %input-shared;
+}
+.form-register {
+    @extend %property-shared;
+    @extend %checkbox-shared;
+    @extend %form-control-shared;
+    @extend %form-control-focus-shared;
+    @extend %input-shared;
+}
+

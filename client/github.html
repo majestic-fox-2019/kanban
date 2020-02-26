@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>github</title>
+</head>
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      const query = window.location.search.substring(1)
+      const token = query.split('access_token=')[1]
+      if(token) {
+        axios({
+            url: 'https://api.github.com/user',
+            headers: {
+                Authorization: 'token ' + token 
+            }
+        })
+        .then(({ data }) => {
+            if(data.email) {
+                const email = data.email
+
+                return axios({
+                    url: `https://kanban-km.herokuapp.com/githubsigninOk`,
+                    method: 'POST',
+                    data: {
+                        email: email
+                    },
+                })
+            
+            } else {
+
+            }
+        })
+        .then(({ data }) => {
+            localStorage.setItem('token', data.token)
+            localStorage.setItem('email', data.email)
+            window.location.href = 'https://kanban-v1.firebaseapp.com/index.html'
+        })
+      }
+    </script>
+</body>
+</html>
