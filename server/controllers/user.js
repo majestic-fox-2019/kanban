@@ -81,6 +81,7 @@ class Controller {
           return User.create({
             name: req.body.name,
             email: req.body.email,
+            platform: 'google',
             password: process.env.G_USER_DEF_PASS
           })
         }
