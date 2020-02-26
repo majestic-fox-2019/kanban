@@ -2,6 +2,7 @@
 
 
 
+deploy link = kanban-dede.firebaseapp.com
 
 
 
