@@ -1,0 +1,296 @@
+@use "dimens"
+@use "colors"
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif&display=swap')
+
+*
+    -webkit-box-sizing: border-box
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+
+=colWidth($i)
+    width: (($i * 100) * 100) / 1200+#{dimens.$percent}
+
+body
+    margin : 0
+    background-image: linear-gradient(#c94b4b, #4b134f)
+
+.container-fluid
+    width: 100+#{dimens.$percent}
+    display: flex
+
+.center
+    text-align: center
+
+.container
+    width: 100+#{dimens.$percent}
+    max-width: 1200px
+    padding-left: dimens.$gutter
+    padding-right: dimens.$gutter
+    display: flex
+    
+a, h3, h2
+    font-family: 'Bree Serif', serif
+
+a
+    text-decoration: none
+
+.add-project
+    border-radius: 4px
+    height: 30vh
+    align-items: center
+    justify-content: center
+    display: flex
+    padding: 1em
+    background-color: #f0f0f0
+    flex-direction: column
+    opacity: .5
+    &:hover
+        opacity: 1
+        cursor: pointer
+
+.form-project
+    border-radius: 4px
+    align-items: stretch
+    display: flex
+    flex-direction: column
+    color: white
+    align-items: stretch
+    textarea
+        padding: 1em
+        width: 100%
+        height: 24vh
+        resize: none
+        border-radius: .5em
+        box-decoration: none
+    input
+        margin: 1em 0
+        padding: 1em
+        width: 100%
+
+.project-item
+    border-radius: 4px
+    height: 30vh
+    align-items: flex-start
+    justify-content: flex-start
+    display: flex
+    padding: 1em
+    background-color: #f0f0f0
+    flex-direction: column
+    button
+        background-color: colors.$primaryDarkColor
+        border: none
+        border-radius: 4px
+        padding: .8em
+        font-weight: bold
+        align-self: end
+        color: colors.$white
+        opacity: .75
+        &:hover
+            opacity: 1
+            cursor: pointer
+    .title
+        font-weight: 600
+        font-family: 'Bree Serif', serif
+    .description
+        height: 10vh
+        overflow: auto
+
+#main
+    background-image: url("../img/kanban.svg")
+    background-repeat: no-repeat
+    background-size: auto 40vh
+    flex-direction: column
+    background-position: right bottom
+    overflow: auto
+    height: 100vh    
+    .navbar
+        padding: 0 2em
+        display: flex
+        justify-content: space-between
+        align-items: center
+        color: colors.$white
+        .logo
+            display: flex
+            flex-direction: row
+            img
+                width: 6em
+                height: auto
+                padding: 1em
+        a
+            text-decoration: none
+            font-weight: 500
+            font-size: 1.2em
+            color: colors.$white
+    h2
+        text-align: center
+        color: colors.$white
+    h3
+        text-align: center
+
+#project
+    .project-list
+        display: flex
+        justify-content: center
+        padding: 2em
+        overflow: auto
+
+.row
+    margin-left: -#{dimens.$gutter}
+    margin-right: -#{dimens.$gutter}
+    display: flex
+
+
+[class^="col-"]
+    position: relative
+    float: left
+  
+
+#kanban
+    display: flex
+    height: 100vh
+    overflow: hidden
+    flex-direction: column
+    padding: 0 .75em
+    .board
+        max-height: 82vh
+        min-height: 20vh
+        margin: .2em
+        background: colors.$secondaryColor
+        border: .15em solid black
+        display: flex
+        justify-content: flex-start
+        flex-direction: column
+        overflow: auto
+        h3
+            text-align: center
+            padding: .5em 0
+            background-color: colors.$white
+        .task-container
+            margin: .2em 0
+            .task
+                padding: .5em
+                display: flex
+                flex-direction: column
+                background-color: colors.$white
+                border: .1em solid #000
+                border-radius: .5em
+                textarea
+                    padding: .5em
+                    border-radius: .4em
+                    border: 1px solid #ddd
+                    background-color: colors.$white
+                    font-size: 1.2em
+                    box-decoration: none
+                    resize: none
+                    color: colors.$primaryTextColor
+                .action
+                    display: flex
+                    justify-content: flex-end
+                    align-items: center
+                    padding: 0.2em
+                    a
+                        margin: 0 .5em
+
+.project-name
+    width: 100vw
+    height: 15vh
+    color: colors.$white
+    text-align: center
+    display: flex
+    justify-content: space-evenly
+    align-items: center
+    a
+        color: white
+
+
+.add-task
+    text-align: center
+    padding: 1em
+
+#auth-page
+    display: flex
+    overflow: hidden
+    padding: 0 4em
+    flex-direction: column
+    background-image: url("../img/kanban.svg")
+    background-size: 50vw
+    background-position: left center
+    background-repeat: no-repeat
+    #login
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: stretch
+        height: 100vh
+        .btn
+            background-color: black
+            font-weight: bold
+            letter-spacing: .2em
+            color: colors.$white
+            opacity: .75
+            box-decoration: none
+            &:hover
+                opacity: 1
+        input
+            padding: 1em 2em
+            margin: .5em 0
+            box-decoration: none
+            border: none
+            background-color: #ddd
+            border-radius: 2em
+.btn-project
+    background-color: black
+    font-weight: bold
+    color: colors.$white
+    opacity: .75
+    padding: .5em
+    border-radius: .2em
+    box-decoration: none
+    &:hover
+        opacity: 1
+        cursor: pointer
+
+.btn-add-project
+    background-color: black
+    font-weight: bold
+    letter-spacing: .2em
+    color: colors.$white
+    opacity: .75
+    border-radius: .5em
+    box-decoration: none
+    &:hover
+        opacity: 1
+        cursor: pointer
+
+.close
+    color: white
+
+.top-form-add-project
+    display: flex
+    justify-content: space-between
+    align-items: center
+    span
+        font-weight: bold
+        font-family: 'Bree Serif', serif
+        font-size: 1.2em
+
+@media (min-width: 240px)
+    @for $i from 1 through 12
+        .#{dimens.$col-xs}-#{$i}
+            +colWidth($i)
+            padding-left: dimens.$gutter
+            padding-right: dimens.$gutter
+  
+@media (min-width: 768px)
+    @for $i from 1 through 12
+        .#{dimens.$col-sm}-#{$i}
+            +colWidth($i)
+            padding-left: dimens.$gutter
+            padding-right: dimens.$gutter
+  
+@media (min-width: 992px)
+    @for $i from 1 through 12
+        .#{dimens.$col-md}-#{$i}
+            +colWidth($i)
+            padding-left: dimens.$gutter
+            padding-right: dimens.$gutter
