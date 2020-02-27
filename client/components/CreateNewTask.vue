@@ -74,6 +74,8 @@ export default {
         data : value  
         })
       .then(response => {
+        this.form.title = ''
+        this.form.description = ''
         this.boardList[0].Tasks.push(response.data)
       })
       .catch(err => {

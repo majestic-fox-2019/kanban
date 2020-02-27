@@ -3,7 +3,7 @@ import App from './App.vue';
 import VueSocketIOExt from 'vue-socket.io-extended';
 import io from 'socket.io-client';
  
-const socket = io('https://dawet-kanban.herokuapp.com');
+const socket = io('https://localhost:3000');
  
 Vue.use(VueSocketIOExt, socket);
 

@@ -39,7 +39,7 @@ export default {
   },
   methods : {
     updateForm(params){
-      this.$parent.updateForm(params)
+      this.$parent.$parent.updateForm(params)
     },
     updateTask(id){
       const value = {
@@ -55,8 +55,8 @@ export default {
         data : value
       })
       .then(response => {
-        this.$parent.updateData(response.data, this.keys)
-        this.$parent.updateForm(null)
+        this.$parent.$parent.updateData(response.data, this.keys)
+        this.$parent.$parent.updateForm(null)
       })
       .catch(err => {
         console.log(err)
