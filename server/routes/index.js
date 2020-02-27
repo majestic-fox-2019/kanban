@@ -4,7 +4,6 @@ const task  = require('./taskRoutes');
 const authorizer = require('../middlewares/authorizer');
 
 router.use('/user',user)
-router.use(authorizer)
-router.use('/task',task)
+router.use('/task',authorizer ,task)
 
 module.exports = router
