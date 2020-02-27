@@ -1,0 +1,306 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.bg {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/bg.9ae62e7b.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.cover {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.loginDiv, .registerDiv {
+    position: relative;
+    width: 500px;
+    height: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px 0px;
+}
+.login, .register {
+    position: relative;
+    width: 80%;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    border-radius: 20px;
+    padding: 20px;
+}
+.login h2, .register h2 {
+    text-align: center;
+    color: white;
+    font-family: 'Exo', sans-serif;
+}
+.login h3 {
+    color: white;
+    text-align: center;
+    font-family: 'Muli', sans-serif;
+}
+.login p, .register p {
+    padding: 0px 5%;
+    color: white;
+    font-family: 'Muli', sans-serif;
+    line-height: 25px;
+}
+.login button {
+    position:relative;
+    left:50%;
+    transform:translateX(-50%);
+    background-color:transparent;
+    padding:10px 15px;
+    border:4px solid white;
+    border-radius:8px;
+    color:white;
+    font-family: 'Exo', sans-serif;
+    cursor: pointer;
+}
+.login button:hover {
+    background-color: white;
+    color: black;
+}
+.login a, .register a {
+    color: blue;
+}
+.content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.navbar {
+    position: fixed;
+    top: 0%;
+    width: 100%;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0px 2%;
+}
+.logo {
+    position: relative;
+    width: 50px;
+    height: 100%;
+    float: left;
+}
+.logo img {
+    position: relative;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.akun {
+    position: relative;
+    width: auto;
+    height: 100%;
+    float: right;
+    right: 2%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 0px 25px;
+    cursor: pointer;
+}
+.akun h4 {
+    color: white;
+    font-family: 'Exo', sans-serif;
+}
+main {
+    position: relative;
+    width: 100%;
+    height: 83%;
+    top: 100%;
+    transform: translateY(-100%);
+    white-space: nowrap;
+    overflow: hidden;
+    overflow-x: auto;
+}
+.cardDiv, .cardDiv2 {
+    position: relative;
+    width: auto;
+    height: auto;
+    background-color: white;
+    margin: 0px 20px;
+    display: inline-block;
+    padding: 30px 20px;
+    opacity: 0.9;
+    vertical-align: top;
+    white-space: normal;
+}
+.cardDiv2 {
+    opacity: 0.6;
+}
+.card {
+    position: relative;
+    width: 400px;
+    height: 100%;
+    background-color: black;
+    border-radius: 20px;
+    padding: 10px 15px;
+    display: inline-block;
+}
+.card h2 {
+    color: white;
+    font-family: 'Exo', sans-serif;
+}
+.editForm {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 30px;
+}
+.editForm input {
+    position: relative;
+    width: 95%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 25px;
+    font-family: 'Exo', sans-serif;
+    padding: 10px 5px;
+}
+.button {
+    position: relative;
+    margin-top: 20px;
+}
+.line {
+    position: relative;
+    width: 20px;
+    height: 3px;
+    margin-top: -10px;
+    background-color: white;
+}
+.taskDiv {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    height: auto;
+    max-height: 45vh;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.task {
+    position: relative;
+    width: 90%;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 10px;
+}
+.task p {
+    color: white;
+    font-family: 'Muli', sans-serif;
+    line-height: 25px;
+    letter-spacing: 1px;
+}
+.task textarea {
+    position: relative;
+    width: 90%;
+    font-family: 'Muli', sans-serif;
+    line-height: 25px;
+    letter-spacing: 1px;
+    padding: 20px 15px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    resize: none;
+    margin-bottom: 10px;
+}
+.right, .left {
+    float: right;
+    color: white;
+}
+.left {
+    float: left;
+}
+.right a {
+    margin-left: 5px;
+    cursor: pointer;
+}
+.right button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+.formAdd {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.formAdd input {
+    position: relative;
+    color: white;
+    font-family: 'Muli', sans-serif;
+    padding-bottom: 5px;
+    font-size: 17px;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.formAdd button {
+    position: relative;
+    padding: 7px 15px;
+    background-color: transparent;
+    border: 4px solid white;
+    color: white;
+    border-radius: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Exo', sans-serif;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.formAdd button:hover {
+    background-color: white;
+    color: black;
+}
+.inputDiv {
+    position: relative;
+    margin: 20px 0px;
+}
+.button {
+    position: absolute;
+    float: right;
+    right: 0;
+    color: white;
+    top: 40px;
+    right: 15px;
+    font-size: 20px;
+}
+a {
+    margin-left: 5px;
+    cursor: pointer;
+}
+.dropdown {
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    right: 0;
+    top: 70px;
+    background-color: white;
+    text-align: center;
+    padding-top: 10px;
+    font-family: 'Exo', sans-serif;
+}
+
+/*# sourceMappingURL=/app.af6012d0.css.map */

@@ -1,0 +1,202 @@
+body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	background-image: url("../images/bg.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	overflow: hidden;
+}
+.akunDiv1, .akunDiv2 {
+	position: absolute;
+	width: 500px;
+	height: auto;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 40px 30px;
+	opacity: 1;
+	z-index: 2;
+}
+.loginDiv, .registerDiv {
+	position: relative;
+	width: 100%;
+	height: 380px;
+	background-color: #e8e8e8;
+	border-radius: 10px;
+	padding: 30px 15px;
+}
+.registerDiv {
+	height: 430px;
+}
+.loginDiv h3, .registerDiv h3 {
+	text-align: center;
+	font-family: 'Montserrat', sans-serif;
+	color: rgba(0, 0, 0, 0.8);
+}
+.loginDiv p, .registerDiv p {
+	margin-top: 30px;
+	font-family: 'Muli', sans-serif;
+}
+.login, .register {
+	position: relative;
+	width: 100%;
+	height: auto;
+	padding-top: 30px;
+}
+.login input, .register input {
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 0;
+}
+.login input:focus, .register input:focus {
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	outline: none;
+	box-shadow: none;
+}	
+.login button, .register button {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 20px;
+	background-color: rgba(255, 255, 255, 0.8);
+	color: rgba(0, 0, 0, 0.7);
+	font-weight: 600;
+	letter-spacing: 1px;
+}
+.login button:hover, .register button:hover {
+	background-color: rgba(255, 255, 255, 1);
+	color: rgba(0, 0, 0, 1);
+}
+.cover {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(30,50,49, .3);
+}
+
+.fade {
+	opacity: 0;
+	transition: 1200ms ease-in-out;
+	transition-delay: 1s;
+}
+.fade button {
+	transition: 200ms ease-in-out;
+}
+
+nav {
+	position: absolute;
+	top: 0;
+	background-color: #1e3231;
+}
+main {
+	position: relative;
+	height: 90vh;
+	top: 100%;
+	transform: translateY(-100%);
+	padding: 0px 2%;
+	padding-bottom: 10%;
+	white-space: nowrap;
+	overflow-x: scroll;
+}
+.categoryDiv {
+	position: relative;
+	width: 350px;
+	height: auto;
+	max-height: 90vh;
+	opacity: 0.9;
+	vertical-align: top;
+	background-color: white;
+	margin: 0px 15px;
+	display: inline-block;
+	white-space: normal;
+	padding: 20px 15px;
+	padding-bottom: 5px;
+}
+.categoryDiv h5 {
+	color: rgba(0, 0, 0, 0.65);
+	font-family: 'Montserrat', sans-serif;
+}
+.line {
+	position: relative;
+	width: 20px;
+	height: 3px;
+	background-color: rgba(0, 0, 0, 0.5);;
+}
+.addCategory {
+	background-color: rgba(255, 255, 255, 0.5);
+}
+.addCategory input {
+	border: none;
+	border-radius: 0;
+	background-color: transparent;
+	border-bottom: 1px solid rgba(30,50,49, .2);
+}
+.addCategory input:focus{
+	border: none;
+	background-color: transparent;
+	border-bottom: 1px solid rgba(30,50,49, .2);
+	box-shadow: none;
+}
+.todoDiv {
+	position: relative;
+	width: 100%;
+	height: auto;
+	max-height: 50vh;
+	margin-top: 25px;
+	overflow-y: auto;
+}
+.todo {
+	position: relative;
+	width: 95%;
+	left: 50%;
+	transform: translateX(-50%);
+	height: auto;
+	background-color: #dff3e4;
+	margin-bottom: 10px;
+	padding: 10px 15px;
+	border-radius: 5px;
+}
+.todo h6 {
+	font-size: 14px;
+	letter-spacing: 1px;
+	line-height: 20px;
+	font-family: 'Muli', sans-serif;
+}
+.addTask {
+	position: relative;
+	margin-top: 20px;
+}
+.addTask input {
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid rgba(30,50,49, .2);
+}
+.addTask input:focus{
+	border: none;
+	border-bottom: 1px solid rgba(30,50,49, .2);
+	box-shadow: none;
+}
+.right {
+	position: relative;
+	float: right;
+}
+.formDiv {
+	position: relative;
+	top: 10px;
+	display: none;
+}
+.edit {
+	background-color: transparent;
+	border: none;
+}
+.formDiv textarea {
+	resize: none;
+}
