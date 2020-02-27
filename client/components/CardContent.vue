@@ -1,7 +1,7 @@
 <template>
     <div>
       <div :key="i" v-for="(task, i) in tasks" class="item">
-        <TaskContent :task="task" :i="i" :host="host" :update_form="update_form" taskActive="taskActive" />
+        <TaskContent :task="task" :i="i" :user_id="user_id" :host="host" :update_form="update_form" taskActive="taskActive" />
       </div>
     </div>  
 </template>
@@ -18,7 +18,8 @@ export default {
   data () {
     return {
       taskActice : null,
-      update_form : null
+      update_form : null,
+      user_id: ''
     }
   },
   created() {

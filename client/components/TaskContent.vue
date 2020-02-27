@@ -4,7 +4,8 @@
       <div>
         <p class="text-muted">{{ task.title }}</p>
       </div>
-      <div>
+      <div v-if="task.UserId == user_id">
+        <small class="text-muted">your task </small>
         <a v-if="task.CategoryId !== 1" @click.prevent="backStatus(task.id)" href="#" class="badge badge-secondary" style="text-decoration:none">Back</a> 
         <a v-if="task.CategoryId !== 4" @click.prevent="updateStatus(task.id)" href="#" class="badge badge-success" style="text-decoration:none">Next</a> 
         <a href="#" @click.prevent="updateForm(task.id)" class="badge badge-warning">Update</a> 
@@ -29,7 +30,7 @@ import Description from './Description';
 
 export default {
   name: 'TaskContent',
-  props: ['host','task','update_form','taskActive', 'i'],
+  props: ['host','task','update_form','taskActive', 'i', 'user_id'],
   components:{
     Description
   },
