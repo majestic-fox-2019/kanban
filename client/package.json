@@ -1,0 +1,30 @@
+{
+  "name": "vuetify-parcel-example",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel index.html",
+    "watch": "parcel watch index.html",
+    "build": "parcel build index.html"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "3.1.1",
+    "parcel-bundler": "1.12.4",
+    "sass": "1.25.0",
+    "vue-hot-reload-api": "2.3.4",
+    "vue-template-compiler": "2.6.11"
+  },
+  "dependencies": {
+    "@mdi/font": "4.9.95",
+    "@mdi/js": "^4.9.95",
+    "axios": "0.19.2",
+    "firebase": "^7.8.1",
+    "sweetalert2": "^9.7.2",
+    "vue": "2.6.11",
+    "vue-google-signin-button": "^1.0.4",
+    "vue-router": "3.1.5",
+    "vuedraggable": "^2.23.2",
+    "vuetify": "2.2.11",
+    "vuex": "3.1.2"
+  }
+}
