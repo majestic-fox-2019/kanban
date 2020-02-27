@@ -1,0 +1,32 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "npx parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.4.0",
+    "firebase": "^7.8.1",
+    "vue": "^2.6.11",
+    "vue-alertify": "^1.1.0",
+    "vue-bootstrap-typeahead": "^0.2.6",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-socket.io": "^3.0.7"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.1.1",
+    "cssnano": "^4.1.10",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "posthtml": {
+    "recognizeSelfClosing": true
+  }
+}

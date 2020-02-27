@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "kanban",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "vhxlxhndgsfmai",
+    "password": "fb2552a43a60c217b441caf9a3ef41a24b72cbfff2d946c4760a4461e7de8f8a",
+    "database": "dfqt8jmsd99q4p",
+    "host": "ec2-3-234-109-123.compute-1.amazonaws.com",
+    "dialect": "postgres"
+  }
+}
