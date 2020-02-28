@@ -5,8 +5,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+    <meta name="google-signin-client_id" content="92257054271-92ajadq0mo9k5941ooe5b512k0hscjms.apps.googleusercontent.com">
+
     <!-- Bootstrap CSS -->
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -31,6 +33,8 @@
             <input v-model="email" type="text" id="login" class="fadeIn second" name="login" placeholder="login">
             <input v-model="password" type="password" id="password" class="fadeIn third" name="login" placeholder="password">
             <input @click="login" type="button" class="fadeIn fourth" value="Log In">
+            <input @click="register" type="button" class="fadeIn fourth" value="Register">
+            <div id="google-signin-btn"></div>
           </form>
       
           <!-- Remind Passowrd -->
@@ -45,6 +49,7 @@
       <div v-if="logged" id="kanban-body">
         <div class="text-center" >
           <button @click="showForm" class="btn btn-dark">Add task</button>
+          <button @click="logout" class="btn btn-dark">Logout</button>
         </div>
 
         <!-- task form section -->
@@ -144,7 +149,9 @@
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    
+
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -1,3 +1,22 @@
+// function onSignIn(googleUser) {
+//     console.log('masuk on sign in')
+//     console.log(googleUser)
+//     let id_token = googleUser.getAuthResponse().id_token;
+//     axios({
+//         url : 'https://kanban-jovi.herokuapp.com/user/google',
+//         method : 'post',
+//         data : {
+//             id_token
+//         }
+//     })
+//     .then(({data}) => {
+//         localStorage.token = data
+//     })
+//     .catch(err => {
+//         console.log(err.response)
+//     })
+// }
+
 let app = new Vue({
     el : '#app',
     data : {
@@ -16,14 +35,37 @@ let app = new Vue({
         editButton : false,
         id : ''
     },
+    mounted() {
+        gapi.signin2.render('google-signin-btn', { // this is the button "id"
+            onsuccess: this.onSignIn // note, no "()" here
+        })
+    },
     methods : {
+        onSignIn (googleUser){
+            let id_token = googleUser.getAuthResponse().id_token
+            axios({
+                url : 'https://kanban-jovi.herokuapp.com/user/google',
+                method : 'post',
+                data : {
+                    id_token
+                }
+            })
+            .then(({data}) => {
+                localStorage.token = data
+                this.logged = true
+                this.getTasks
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+        },
         login : function(){
             let body = {
                 email : this.email,
                 password : this.password
             }
             axios({
-                url : 'http://localhost:3000/user/login',
+                url : 'https://kanban-jovi.herokuapp.com/user/login',
                 method : 'post',
                 data : body 
             })
@@ -31,10 +73,37 @@ let app = new Vue({
                 console.log(data)
                 localStorage.token = data
                 this.logged = true
+                this.getTasks()
             })
             .catch(({response})=>{
-                console.log(response)
+                Swal.fire(response.data.msg)
+                console.log(response.data.msg)
             })
+        },
+        register : function(){
+            let body = {
+                email : this.email,
+                password : this.password
+            }
+            axios({
+                url : 'https://kanban-jovi.herokuapp.com/user/register',
+                method : 'post',
+                data : body 
+            })
+            .then(({data})=>{
+                console.log(data)
+                localStorage.token = data
+                this.logged = true
+                this.getTasks()
+            })
+            .catch(({response})=>{
+                Swal.fire(response.data.msg)
+                console.log(response.data.msg)
+            })
+        },
+        logout : function(){
+            localStorage.clear()
+            this.logged = false
         },
         showForm : function () {
             this.displayForm = true
@@ -54,7 +123,7 @@ let app = new Vue({
             }
             console.log(body)
             axios({
-                url : 'http://localhost:3000/task/',
+                url : 'https://kanban-jovi.herokuapp.com/task/',
                 method : 'post',
                 headers : {
                     token : localStorage.token
@@ -71,12 +140,12 @@ let app = new Vue({
                 this.updateButton = true
             })
             .catch(err => {
-                console.log(err)
+                console.log(err.response)
             })
         },
         getTasks : function(){
             axios({
-                url : 'http://localhost:3000/task/',
+                url : 'https://kanban-jovi.herokuapp.com/task/',
                 method : 'get',
                 headers : {
                     token : localStorage.token
@@ -110,7 +179,7 @@ let app = new Vue({
         deleteTask(id){
             console.log('masuk delete')
             axios({
-                url : 'http://localhost:3000/task/'+id,
+                url : 'https://kanban-jovi.herokuapp.com/task/'+id,
                 method : 'delete',
                 headers : {
                     token : localStorage.token
@@ -126,12 +195,12 @@ let app = new Vue({
                 }
             })
             .catch(err => {
-                console.log(err)
+                console.log(err.response)
             })
         },
         showEditForm(id){
             axios({
-                url : 'http://localhost:3000/task/'+id,
+                url : 'https://kanban-jovi.herokuapp.com/task/'+id,
                 method : 'get',
                 headers : {
                     token : localStorage.token
@@ -147,7 +216,7 @@ let app = new Vue({
                 this.editButton = true
             })
             .catch(err => {
-                console.log(err)
+                console.log(err.response)
             })
         },
         editTask : function (){
@@ -158,7 +227,7 @@ let app = new Vue({
             }
             console.log(body)
             axios({
-                url : 'http://localhost:3000/task/'+this.id,
+                url : 'https://kanban-jovi.herokuapp.com/task/'+this.id,
                 method : 'put',
                 headers : {
                     token : localStorage.token
@@ -175,12 +244,12 @@ let app = new Vue({
                 this.updateButton = true
             })
             .catch(err => {
-                console.log(err)
+                console.log(err.response)
             })
         },
         goLeft(id){
             axios({
-                url : 'http://localhost:3000/task/'+id,
+                url : 'https://kanban-jovi.herokuapp.com/task/'+id,
                 method : 'get',
                 headers : {
                     token : localStorage.token
@@ -197,7 +266,7 @@ let app = new Vue({
                         console.log('masuk done')
                         data.status = 'backlog'
                         axios({
-                            url : 'http://localhost:3000/task/'+data.id,
+                            url : 'https://kanban-jovi.herokuapp.com/task/'+data.id,
                             method : 'put',
                             headers : {
                                 token : localStorage.token
@@ -208,14 +277,14 @@ let app = new Vue({
                             this.getTasks()
                         })
                         .catch(err => {
-                            console.log(err)
+                            console.log(err.response)
                         })
                         break
                     case "doing" : 
                         console.log('masuk done')
                         data.status = 'todo'
                         axios({
-                            url : 'http://localhost:3000/task/'+data.id,
+                            url : 'https://kanban-jovi.herokuapp.com/task/'+data.id,
                             method : 'put',
                             headers : {
                                 token : localStorage.token
@@ -226,14 +295,14 @@ let app = new Vue({
                             this.getTasks()
                         })
                         .catch(err => {
-                            console.log(err)
+                            console.log(err.response)
                         })
                         break
                     case "done" : 
                         console.log('masuk done')
                         data.status = 'doing'
                         axios({
-                            url : 'http://localhost:3000/task/'+data.id,
+                            url : 'https://kanban-jovi.herokuapp.com/task/'+data.id,
                             method : 'put',
                             headers : {
                                 token : localStorage.token
@@ -244,7 +313,7 @@ let app = new Vue({
                             this.getTasks()
                         })
                         .catch(err => {
-                            console.log(err)
+                            console.log(err.response)
                         })
                         break
                 }
@@ -252,7 +321,7 @@ let app = new Vue({
         },
         goRight(id){
             axios({
-                url : 'http://localhost:3000/task/'+id,
+                url : 'https://kanban-jovi.herokuapp.com/task/'+id,
                 method : 'get',
                 headers : {
                     token : localStorage.token
@@ -265,7 +334,7 @@ let app = new Vue({
                     case "backlog" : 
                         data.status = 'todo'
                         axios({
-                            url : 'http://localhost:3000/task/'+data.id,
+                            url : 'https://kanban-jovi.herokuapp.com/task/'+data.id,
                             method : 'put',
                             headers : {
                                 token : localStorage.token
@@ -276,14 +345,14 @@ let app = new Vue({
                             this.getTasks()
                         })
                         .catch(err => {
-                            console.log(err)
+                            console.log(err.response)
                         })
                         break
                     case "todo" : 
                         console.log('masuk done')
                         data.status = 'doing'
                         axios({
-                            url : 'http://localhost:3000/task/'+data.id,
+                            url : 'https://kanban-jovi.herokuapp.com/task/'+data.id,
                             method : 'put',
                             headers : {
                                 token : localStorage.token
@@ -294,14 +363,14 @@ let app = new Vue({
                             this.getTasks()
                         })
                         .catch(err => {
-                            console.log(err)
+                            console.log(err.response)
                         })
                         break
                     case "doing" : 
                         console.log('masuk done')
                         data.status = 'done'
                         axios({
-                            url : 'http://localhost:3000/task/'+data.id,
+                            url : 'https://kanban-jovi.herokuapp.com/task/'+data.id,
                             method : 'put',
                             headers : {
                                 token : localStorage.token
@@ -312,7 +381,7 @@ let app = new Vue({
                             this.getTasks()
                         })
                         .catch(err => {
-                            console.log(err)
+                            console.log(err.response)
                         })
                         break
                     case "done" : 
@@ -324,7 +393,6 @@ let app = new Vue({
         },
     },
     created(){
-        this.getTasks()
         if(localStorage.token){
             this.logged = true
         }
