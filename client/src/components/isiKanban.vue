@@ -56,7 +56,7 @@ export default {
         .then(remove => {
           if (remove.value) {
             axios({
-              url: `https://my-kanban-cool.herokuapp.com/kanbans/${id}`,
+              url: `http://localhost:3000/kanbans/${id}`,
               method: "DELETE",
               headers: {
                 token: localStorage.getItem("token")
@@ -94,7 +94,7 @@ export default {
         backHeader = "to-do";
       }
       axios({
-        url: `https://my-kanban-cool.herokuapp.com/kanbans/${id}`,
+        url: `http://localhost:3000/kanbans/${id}`,
         method: "PUT",
         headers: {
           token: localStorage.getItem("token")
@@ -127,7 +127,7 @@ export default {
         nextHeader = "lenyap";
       }
       axios({
-        url: `https://my-kanban-cool.herokuapp.com/kanbans/${id}`,
+        url: `http://localhost:3000/kanbans/${id}`,
         method: "PUT",
         headers: {
           token: localStorage.getItem("token")
@@ -150,7 +150,7 @@ export default {
     },
     checkKanban(id) {
       axios({
-        url: `https://my-kanban-cool.herokuapp.com/kanbans/${id}`,
+        url: `http://localhost:3000/kanbans/${id}`,
         method: "GET",
         headers: {
           token: localStorage.getItem("token")

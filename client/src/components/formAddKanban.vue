@@ -71,7 +71,7 @@ export default {
   methods: {
     addKanban() {
       axios({
-        url: "https://my-kanban-cool.herokuapp.com/kanbans",
+        url: "http://localhost:3000/kanbans",
         method: "POST",
         data: {
           title: this.addTitle,

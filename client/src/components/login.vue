@@ -76,10 +76,9 @@ export default {
         .then(function(result) {
           return axios({
             method: "post",
-            url: "https://my-kanban-cool.herokuapp.com/users/login/fb",
+            url: "http://localhost:3000/users/login/fb",
             data: {
-              email: result.user.email,
-              name: result.user.displayName
+              uid: result.user.uid
             }
           });
         })
@@ -105,25 +104,20 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(function(result) {
-          this.isLoading = true;
           return axios({
             method: "post",
-            url: "https://my-kanban-cool.herokuapp.com/users/login/github",
+            url: "http://localhost:3000/users/login/github",
             data: {
-              email: result.user.email,
-              name: result.user.displayName
+              uid: result.user.uid
             }
           });
         })
-        .then(result => {
-          setTimeout(() => {
-            this.isLoading = false;
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("id", data.user.id);
-            localStorage.setItem("name", data.user.name);
-            this.$root.nama = data.user.name;
-            this.$emit("statusLoginTrue");
-          }, 1000);
+        .then(({ data }) => {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("id", data.user.id);
+          localStorage.setItem("name", data.user.name);
+          this.$root.nama = data.user.name;
+          this.$emit("statusLoginTrue");
         })
         .catch(function(error) {
           const errorMessage = error.message;
@@ -140,7 +134,7 @@ export default {
         const idToken = GoogleUser.getAuthResponse().id_token;
         return axios({
           method: "post",
-          url: "https://my-kanban-cool.herokuapp.com/users/login/google",
+          url: "http://localhost:3000/users/login/google",
           data: { idToken: idToken }
         })
           .then(({ data }) => {
@@ -165,7 +159,7 @@ export default {
     signin() {
       this.isLoading = true;
       axios({
-        url: "https://my-kanban-cool.herokuapp.com/users/login",
+        url: "http://localhost:3000/users/login",
         method: "post",
         data: {
           email: this.email,

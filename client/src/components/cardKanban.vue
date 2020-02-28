@@ -59,7 +59,7 @@ export default {
       const id = evt.item.attributes.id.value;
       const value = evt.to.attributes.class.value;
       return axios({
-        url: `https://my-kanban-cool.herokuapp.com/kanbans/${id}`,
+        url: `http://localhost:3000/kanbans/${id}`,
         method: "PUT",
         headers: {
           token: localStorage.getItem("token")

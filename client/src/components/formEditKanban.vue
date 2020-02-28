@@ -89,7 +89,7 @@ export default {
       this.editAssignTo = this.kanbanToEdit.assignTo;
       this.idEdit = this.kanbanToEdit.id;
       axios({
-        url: `https://my-kanban-cool.herokuapp.com/kanbans/${this.idEdit}`,
+        url: `http://localhost:3000/kanbans/${this.idEdit}`,
         method: "PUT",
         headers: {
           token: localStorage.getItem("token")

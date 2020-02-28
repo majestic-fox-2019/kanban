@@ -6,6 +6,14 @@ const { checkPassword } = require("../helpers/bcrypt")
 const createError = require("http-errors")
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.CLIENT_ID_GOOGLE);
+const admin = require('firebase-admin');
+
+const serviceAccount = require("../kanban-cool-firebase-adminsdk-uibkj-8dfbe38a5f.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://kanban-cool.firebaseio.com"
+});
 
 class UserController {
     static register(req, res, next) {
@@ -77,21 +85,24 @@ class UserController {
             .catch(next);
     }
     static loginGithub(req, res, next) {
-        const { name, email } = req.body
-        User.findOne({
-            where: {
-                email: email
-            }
-        })
+        const { uid } = req.body
+        admin.auth().getUser(uid)
+            .then((userRecord) => {
+                return User.findOne({
+                    where: {
+                        email: userRecord.email
+                    }
+                })
+            })
             .then((user) => {
                 if (user) {
                     let token = createToken(user)
                     res.status(200).json({ user, token })
                 } else {
                     User.create({
-                        email: email,
+                        email: userRecord.email,
                         password: "bebasaja",
-                        name: name,
+                        name: userRecord.name
                     })
                         .then((user) => {
                             let token = createToken(user)
@@ -102,21 +113,24 @@ class UserController {
             .catch(next);
     }
     static loginFb(req, res, next) {
-        const { name, email } = req.body
-        User.findOne({
-            where: {
-                email: email
-            }
-        })
+        const { uid } = req.body
+        admin.auth().getUser(uid)
+            .then((userRecord) => {
+                return User.findOne({
+                    where: {
+                        email: userRecord.email
+                    }
+                })
+            })
             .then((user) => {
                 if (user) {
                     let token = createToken(user)
                     res.status(200).json({ user, token })
                 } else {
                     User.create({
-                        email: email,
+                        email: userRecord.email,
                         password: "bebasaja",
-                        name: name,
+                        name: userRecord.name
                     })
                         .then((user) => {
                             let token = createToken(user)

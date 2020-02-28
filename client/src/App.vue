@@ -104,7 +104,7 @@ export default {
         }
       ];
       axios({
-        url: "https://my-kanban-cool.herokuapp.com/kanbans",
+        url: "http://localhost:3000/kanbans",
         method: "GET",
         headers: {
           token: localStorage.getItem("token")

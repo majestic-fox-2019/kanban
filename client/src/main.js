@@ -17,7 +17,7 @@ Vue.use(GAuth, gauthOption)
 const firebaseConfig = require("../src/firebase/config")
 firebase.initializeApp(firebaseConfig)
 Vue.use(firebase)
-Vue.prototype.$socket = io("https://my-kanban-cool.herokuapp.com")
+Vue.prototype.$socket = io("http://localhost:3000")
 Vue.use(VAnimateCss);
 new Vue({
     render: h => h(App),
