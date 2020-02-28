@@ -30,13 +30,14 @@ class taskController {
     }
 
     static update (req, res, next) {
+        console.log(req.params.id)
         Task.update({
             title: req.body.title,
             category: req.body.category
         },
         {
             where: {
-                userId: req.id
+                id: req.params.id
             }
         })
         .then(result => {
