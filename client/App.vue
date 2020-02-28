@@ -131,7 +131,6 @@ export default Vue.extend({
       });
     },
     setLogin: function(){
-      console.log('masok')
       this.showLogin = false
       this.showHomePage = true
       this.load()
@@ -192,6 +191,7 @@ export default Vue.extend({
         });
     },
     load: function(){
+      console.log('load')
       axios.get(`${url}/task`, {
         headers: {token: localStorage.token}
         })

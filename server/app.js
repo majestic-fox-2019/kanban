@@ -23,9 +23,6 @@ app.use(errorhandling)
 
 server.listen(port);
 
-// app.listen(port,()=>{
-//   console.log(`Connected to port: ${port}`)
-// })
 io.on('connection', function (socket) {
   socket.on('my other event', function (data) {
     console.log(data);

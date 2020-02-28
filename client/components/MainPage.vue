@@ -61,7 +61,8 @@ import draggable from 'vuedraggable';
 import Swal from "sweetalert2";
 import axios from "axios";
 import moment from "moment";
-var url = `http://localhost:3000`
+// var url = `http://localhost:3000`
+var url = `https://sleepy-bastion-70749.herokuapp.com`
 
 export default {
   data(){
@@ -80,10 +81,6 @@ export default {
         return he.decode(str);
     },
     moving(event){
-      // console.log(event)
-      console.log(event.to.id)
-      console.log(event.item)
-      console.log(event.item.id)
       axios({
         url:`${url}/task/${event.item.id}`, 
         method:'PATCH',

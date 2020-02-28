@@ -48,7 +48,6 @@ class TaskController {
       returning: true
     })
     .then(task=>{
-      console.log(req.body,req.params,'<<<<')
         req.io.emit('check', { message: 'task moved' })
         res.status(201).json(task)
       })
@@ -107,7 +106,6 @@ class TaskController {
           newCategory = category[i+1]
         }
       }
-      // console.log(task.category)
       return Task.update({category: newCategory},{
         where: {
           id: req.params.id

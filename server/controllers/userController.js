@@ -20,11 +20,15 @@ class UserController {
       }
     })
     .then(user=>{
-      console.log(`success register`)
-      res.status(201).json(user)
+      let objUser = {
+        id: user.dataValues.id,
+        username: user.dataValues.username,
+        email: user.dataValues.email
+      }
+      let token = generateToken(objUser)
+      res.status(201).json({token: token, email:user.dataValues.email})
     })
     .catch(err=>{
-      console.log(`fail register`)
       next(err)
     })
   }
@@ -38,15 +42,12 @@ class UserController {
     })
     .then(user=>{
       if(user !== null){
-        console.log(email,'<<<<<<')
-        // console.log(user)
         let objUser = {
           id: user.id,
           username: user.username,
           email: user.email
         }
         let token = generateToken(objUser)
-        // console.log(token)
         res.status(200).json({token: token, email:user.email})
       }else{
         return User.create({username,email,password: 'facebook'})
@@ -67,7 +68,6 @@ class UserController {
   }
 
   static googleLogin(req,res,next){
-    console.log(req.body)
     const {username, email} = req.body
     User.findOne({
       where: {
@@ -87,7 +87,6 @@ class UserController {
           res.status(200).json({token: token, email:createduser.email})
         })
         .catch(err=>{
-          // console.log(`fail login google`)
           next(err)
         })
       }else{
@@ -121,14 +120,12 @@ class UserController {
           let token = generateToken(objUser)
           res.status(200).json({token: token, email:user.email})
         }else{
-          console.log(`username/password is wrong`)
           throw {
             status: 404,
             message: `username/password is wrong`
           }
         }
       }else{
-        console.log(`username/password is wrong`)
         throw {
           status: 404,
           message: `username/password is wrong`
@@ -136,7 +133,6 @@ class UserController {
       }
     })
     .catch(err=>{
-      console.log(`fail login`)
       next(err)
     })
   }

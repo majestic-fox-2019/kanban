@@ -9,6 +9,7 @@ module.exports = (req,res,next)=>{
           console.log('ini')
           next()
         }else{
+          req.io.emit('check', { message: 'task moved' })
           next({
             status: 401,
             message: `don't have access`
