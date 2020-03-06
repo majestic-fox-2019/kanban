@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-signin-client_id" content="92257054271-92ajadq0mo9k5941ooe5b512k0hscjms.apps.googleusercontent.com">
+
+    <!-- Bootstrap CSS -->
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body class="p-5">
+    
+    <div id="app">
+
+      <!-- login section -->
+
+      <div v-if="!logged" class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+      
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <img style="width: 50px; height: 50px; margin-top: 50px; margin-bottom: 50px;" src="https://images.squarespace-cdn.com/content/v1/5ca2c75ca09a7e6e7ed13c3a/1558446669614-RGKLEB0HC3GDDRP0H7AF/ke17ZwdGBToddI8pDm48kIliYyNv09UgZ-B9Qw5YW55Zw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFepgAAFtb1cjyWAtC3XAC3XRR8uQ9QCGv_XATOYuSpPaQvevUbj177dmcMs1F0H-0/solo-k.png" id="icon" alt="User Icon" />
+          </div>
+      
+          <!-- Login Form -->
+          <form>
+            <input v-model="email" type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+            <input v-model="password" type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+            <input @click="login" type="button" class="fadeIn fourth" value="Log In">
+            <input @click="register" type="button" class="fadeIn fourth" value="Register">
+            <div id="google-signin-btn"></div>
+          </form>
+      
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+          </div>
+      
+        </div>
+      </div>    
+
+      <!-- div body -->
+      <div v-if="logged" id="kanban-body">
+        <div class="text-center" >
+          <button @click="showForm" class="btn btn-dark">Add task</button>
+          <button @click="logout" class="btn btn-dark">Logout</button>
+        </div>
+
+        <!-- task form section -->
+        <div v-if="displayForm" class="container mt-5 pl-5 pr-5">
+          <div class="form-group">
+            <label for="">Title</label>
+            <input v-model="title" type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="">Category</label>
+            <input v-model="category" type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="">Status</label>
+            <select v-model="status" class="form-control" name="status" id="status">
+              <option>backlog</option>
+              <option>todo</option>
+              <option>doing</option>
+              <option>done</option>
+            </select>
+          </div>
+          <div class="row pl-5 pr-5 justify-content-center">
+            <button @click="cancelForm" class="btn btn-dark m-2">Cancel</button>
+            <button v-if="!editButton" @click="submitTask" class="btn btn-dark m-2">Submit</button>
+            <button v-if="editButton" @click="editTask" class="btn btn-dark m-2">Edit</button>
+          </div>
+        </div>
+
+        <!-- tasks section -->
+          <div class="container-flow m-5">
+            <div class="row">
+              <div id="backlog" class="col-3">
+                <h1 class="m-4">Backlog</h1>
+                <div v-for="backlog in backlogs" :id="backlog.id">
+                  <div class="card m-4" style="width: 100%;">
+                    <div class="card-body">
+                      <p class="card-text ">{{backlog.category}}</p>
+                      <h3 class="card-title mb-4">{{backlog.title}}</h3>
+                      <button @click="goLeft(backlog.id)" class="btn btn-dark"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></button>
+                      <button @click="deleteTask(backlog.id)" class="btn btn-dark">Delete</button>
+                      <button @click="showEditForm(backlog.id)" class="btn btn-dark">Edit</button>
+                      <button @click="goRight(backlog.id)" class="btn btn-dark"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="todo" class="col-3">
+                <h1 class="m-4">Todo</h1>
+                <div v-for="todo in todos">
+                  <div class="card m-4" style="width: 100%;">
+                    <div class="card-body">
+                      <p class="card-text ">{{todo.category}}</p>
+                      <h3 class="card-title mb-4">{{todo.title}}</h3>
+                      <button @click="goLeft(todo.id)" class="btn btn-dark"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></button>
+                      <button @click="deleteTask(todo.id)" class="btn btn-dark">Delete</button>
+                      <button @click="showEditForm(todo.id)" class="btn btn-dark">Edit</button>
+                      <button @click="goRight(todo.id)" class="btn btn-dark"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="doing" class="col-3">
+                <h1 class="m-4">Doing</h1>
+                <div v-for="doing in doings">
+                  <div class="card m-4" style="width: 100%;">
+                    <div class="card-body">
+                      <p class="card-text ">{{doing.category}}</p>
+                      <h3 class="card-title mb-4">{{doing.title}}</h3>
+                      <button @click="goLeft(doing.id)" class="btn btn-dark"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></button>
+                      <button @click="deleteTask(doing.id)" class="btn btn-dark">Delete</button>
+                      <button @click="showEditForm(doing.id)" class="btn btn-dark">Edit</button>
+                      <button @click="goRight(doing.id)" class="btn btn-dark"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="done" class="col-3">
+                <h1 class="m-4">Done</h1>
+                <div v-for="done in dones">
+                  <div class="card m-4" style="width: 100%;">
+                    <div class="card-body">
+                      <p class="card-text ">{{done.category}}</p>
+                      <h3 class="card-title mb-4">{{done.title}}</h3>
+                      <button @click="goLeft(done.id)" class="btn btn-dark"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></button>
+                      <button @click="deleteTask(done.id)" class="btn btn-dark">Delete</button>
+                      <button @click="showEditForm(done.id)" class="btn btn-dark">Edit</button>
+                      <button @click="goRight(done.id)" class="btn btn-dark"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  
+    </div>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
