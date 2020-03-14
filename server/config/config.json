@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "asd134679",
+    "database": "kamvan",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "kidwzketkuhynd",
+    "password": "7f777adbf4b9d049d7097e720caed92deecb203a5f2f4108faf4e8917925330c",
+    "database": "d5iissuci5d3oa",
+    "host": "ec2-18-213-176-229.compute-1.amazonaws.com",
+    "dialect": "postgres"
+  }
+}
