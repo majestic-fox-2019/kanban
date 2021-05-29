@@ -84,7 +84,7 @@ export default {
     showedit(task){
      this.form = !this.form
      this.selected = task
-    // this.$emit('data-edit',task)
+     this.$emit('data-edit',task)
     },
 
     getedit(newData){

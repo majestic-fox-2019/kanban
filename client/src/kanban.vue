@@ -96,7 +96,6 @@ export default {
 
     getEdited(newData){
       this.$parent.editData(newData)
-     
     }
     // readData(){
     //   console.log('from emit')
@@ -132,7 +131,6 @@ export default {
     //   .catch(err=>{
     //     console.log(err)
     //   })
-     
     // },
 
     // postData(title){

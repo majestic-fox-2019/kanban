@@ -8546,7 +8546,7 @@ if (inBrowser) {
 
 var _default = Vue;
 exports.default = _default;
-},{}],"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -8578,7 +8578,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -8613,7 +8613,7 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/vue-hot-reload-api/dist/index.js":[function(require,module,exports) {
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/vue-hot-reload-api/dist/index.js":[function(require,module,exports) {
 var Vue // late bind
 var version
 var map = Object.create(null)
@@ -8927,14 +8927,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $9691ac = exports.default || module.exports;
+        var $b0c2b2 = exports.default || module.exports;
       
-      if (typeof $9691ac === 'function') {
-        $9691ac = $9691ac.options;
+      if (typeof $b0c2b2 === 'function') {
+        $b0c2b2 = $b0c2b2.options;
       }
     
         /* template */
-        Object.assign($9691ac, (function () {
+        Object.assign($b0c2b2, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -8989,7 +8989,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-9691ac",
+            _scopeId: "data-v-b0c2b2",
             functional: undefined
           };
         })());
@@ -9002,9 +9002,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$9691ac', $9691ac);
+            api.createRecord('$b0c2b2', $b0c2b2);
           } else {
-            api.reload('$9691ac', $9691ac);
+            api.reload('$b0c2b2', $b0c2b2);
           }
         }
 
@@ -9015,7 +9015,7 @@ render._withStripped = true
       
       }
     })();
-},{"./../img/logo.png":[["logo.cecc779a.png","img/logo.png"],"img/logo.png"],"_css_loader":"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{"./../img/logo.png":[["logo.cecc779a.png","img/logo.png"],"img/logo.png"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -10051,7 +10051,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"./../utils":"node_modules/axios/lib/utils.js","./../core/settle":"node_modules/axios/lib/core/settle.js","./../helpers/buildURL":"node_modules/axios/lib/helpers/buildURL.js","../core/buildFullPath":"node_modules/axios/lib/core/buildFullPath.js","./../helpers/parseHeaders":"node_modules/axios/lib/helpers/parseHeaders.js","./../helpers/isURLSameOrigin":"node_modules/axios/lib/helpers/isURLSameOrigin.js","../core/createError":"node_modules/axios/lib/core/createError.js","./../helpers/cookies":"node_modules/axios/lib/helpers/cookies.js"}],"../../../../../../../usr/lib/node_modules/parcel-bundler/node_modules/process/browser.js":[function(require,module,exports) {
+},{"./../utils":"node_modules/axios/lib/utils.js","./../core/settle":"node_modules/axios/lib/core/settle.js","./../helpers/buildURL":"node_modules/axios/lib/helpers/buildURL.js","../core/buildFullPath":"node_modules/axios/lib/core/buildFullPath.js","./../helpers/parseHeaders":"node_modules/axios/lib/helpers/parseHeaders.js","./../helpers/isURLSameOrigin":"node_modules/axios/lib/helpers/isURLSameOrigin.js","../core/createError":"node_modules/axios/lib/core/createError.js","./../helpers/cookies":"node_modules/axios/lib/helpers/cookies.js"}],"node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -10360,7 +10360,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-},{"./utils":"node_modules/axios/lib/utils.js","./helpers/normalizeHeaderName":"node_modules/axios/lib/helpers/normalizeHeaderName.js","./adapters/xhr":"node_modules/axios/lib/adapters/xhr.js","./adapters/http":"node_modules/axios/lib/adapters/xhr.js","process":"../../../../../../../usr/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"node_modules/axios/lib/core/dispatchRequest.js":[function(require,module,exports) {
+},{"./utils":"node_modules/axios/lib/utils.js","./helpers/normalizeHeaderName":"node_modules/axios/lib/helpers/normalizeHeaderName.js","./adapters/xhr":"node_modules/axios/lib/adapters/xhr.js","./adapters/http":"node_modules/axios/lib/adapters/xhr.js","process":"node_modules/process/browser.js"}],"node_modules/axios/lib/core/dispatchRequest.js":[function(require,module,exports) {
 'use strict';
 
 var utils = require('./../utils');
@@ -10854,14 +10854,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $0bd411 = exports.default || module.exports;
+        var $cde842 = exports.default || module.exports;
       
-      if (typeof $0bd411 === 'function') {
-        $0bd411 = $0bd411.options;
+      if (typeof $cde842 === 'function') {
+        $cde842 = $cde842.options;
       }
     
         /* template */
-        Object.assign($0bd411, (function () {
+        Object.assign($cde842, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -10978,7 +10978,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-0bd411",
+            _scopeId: "data-v-cde842",
             functional: undefined
           };
         })());
@@ -10991,9 +10991,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$0bd411', $0bd411);
+            api.createRecord('$cde842', $cde842);
           } else {
-            api.reload('$0bd411', $0bd411);
+            api.reload('$cde842', $cde842);
           }
         }
 
@@ -11004,7 +11004,7 @@ render._withStripped = true
       
       }
     })();
-},{"axios":"node_modules/axios/index.js","./../img/plus.png":[["plus.ab46ef01.png","img/plus.png"],"img/plus.png"],"_css_loader":"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/formedit.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","./../img/plus.png":[["plus.ab46ef01.png","img/plus.png"],"img/plus.png"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/formedit.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11061,14 +11061,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $11bc50 = exports.default || module.exports;
+        var $326f48 = exports.default || module.exports;
       
-      if (typeof $11bc50 === 'function') {
-        $11bc50 = $11bc50.options;
+      if (typeof $326f48 === 'function') {
+        $326f48 = $326f48.options;
       }
     
         /* template */
-        Object.assign($11bc50, (function () {
+        Object.assign($326f48, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -11146,7 +11146,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-11bc50",
+            _scopeId: "data-v-326f48",
             functional: undefined
           };
         })());
@@ -11159,9 +11159,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$11bc50', $11bc50);
+            api.createRecord('$326f48', $326f48);
           } else {
-            api.reload('$11bc50', $11bc50);
+            api.reload('$326f48', $326f48);
           }
         }
 
@@ -11172,7 +11172,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/tasks.vue":[function(require,module,exports) {
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/tasks.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11261,7 +11261,8 @@ var _default = {
     },
     showedit: function showedit(task) {
       this.form = !this.form;
-      this.selected = task; // this.$emit('data-edit',task)
+      this.selected = task;
+      this.$emit('data-edit', task);
     },
     getedit: function getedit(newData) {
       this.$parent.getEdited(newData);
@@ -11272,14 +11273,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $0d9e7f = exports.default || module.exports;
+        var $6dcd17 = exports.default || module.exports;
       
-      if (typeof $0d9e7f === 'function') {
-        $0d9e7f = $0d9e7f.options;
+      if (typeof $6dcd17 === 'function') {
+        $6dcd17 = $6dcd17.options;
       }
     
         /* template */
-        Object.assign($0d9e7f, (function () {
+        Object.assign($6dcd17, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -11526,7 +11527,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-0d9e7f",
+            _scopeId: "data-v-6dcd17",
             functional: undefined
           };
         })());
@@ -11539,9 +11540,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$0d9e7f', $0d9e7f);
+            api.createRecord('$6dcd17', $6dcd17);
           } else {
-            api.reload('$0d9e7f', $0d9e7f);
+            api.reload('$6dcd17', $6dcd17);
           }
         }
 
@@ -11552,7 +11553,12 @@ render._withStripped = true
       
       }
     })();
-},{"axios":"node_modules/axios/index.js","./formedit":"src/formedit.vue","_css_loader":"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/login.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","./formedit":"src/formedit.vue","_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/vue-google-login/dist/vue-google-login.min.js":[function(require,module,exports) {
+var define;
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e((t=t||self)["vue-google-login"]={})}(this,function(t){"use strict";var e,n,o=function(t){return e?Promise.resolve(e):(n||(n=function(t){return new Promise(function(n,o){window.onGapiLoad=function(){window.gapi.load("auth2",function(){try{e=window.gapi.auth2.init(Object.assign({},t))}catch(t){o({err:"client_id missing or is incorrect, or if you added extra params maybe they are written incorrectly, did you add it to the component or plugin?"})}n(e)})}})}(t)),n)},i=function(t,e){if(t)return t[e]();return Promise.reject({err:"Script not loaded correctly, did you added the plugin or the client_id to the component?"})},r={load:function(t){return Promise.all([o(t),new Promise(function(t,e){if(!document.getElementById("auth2_script_id")){var n=document.createElement("script");n.setAttribute("src","https://apis.google.com/js/platform.js?onload=onGapiLoad"),n.setAttribute("async",!0),n.setAttribute("defer","defer"),n.setAttribute("id","auth2_script_id"),document.head.appendChild(n)}t()})]).then(function(t){return t[0]})},signIn:function(){return i(e,"signIn")},signOut:function(){return i(e,"signOut")}},s=0;var d=function(t,e,n,o,i,r,s,d,u,a){"boolean"!=typeof s&&(u=d,d=s,s=!1);var c,l="function"==typeof n?n.options:n;if(t&&t.render&&(l.render=t.render,l.staticRenderFns=t.staticRenderFns,l._compiled=!0,i&&(l.functional=!0)),o&&(l._scopeId=o),r?(c=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),e&&e.call(this,u(t)),t&&t._registeredComponents&&t._registeredComponents.add(r)},l._ssrRegister=c):e&&(c=s?function(){e.call(this,a(this.$root.$options.shadowRoot))}:function(t){e.call(this,d(t))}),c)if(l.functional){var f=l.render;l.render=function(t,e){return c.call(e),f(t,e)}}else{var h=l.beforeCreate;l.beforeCreate=h?[].concat(h,c):[c]}return n}({render:function(){var t=this.$createElement,e=this._self._c||t;return this.renderParams&&!this.logoutButton?e("div",{attrs:{id:this.id},on:{click:this.handleClick}}):e("button",{attrs:{id:this.id},on:{click:this.handleClick}},[this._t("default")],2)},staticRenderFns:[]},void 0,{name:"GoogleLogin",props:{params:{type:Object,required:!0},onSuccess:{type:Function,default:function(){}},onFailure:{type:Function,default:function(){}},logoutButton:{type:Boolean,default:!1},renderParams:{type:Object,required:!1}},beforeCreate:function(){this.id="google-signin-btn-".concat(s++)},methods:{handleClick:function(){var t=this,e=this.logoutButton?"signOut":"signIn";r[e]().then(function(e){return t.onSuccess(e)}).catch(function(e){return t.onFailure(e)})}},mounted:function(){var t=this;r.load(this.params).then(function(){t.renderParams&&!1===t.logoutButton&&window.gapi.signin2.render(t.id,t.renderParams)}).catch(function(t){console.log(t)})}},void 0,!1,void 0,void 0,void 0),u={install:function(t,e){t.GoogleAuth=r.load(e)}};t.GoogleLogin=d,t.LoaderPlugin=u,t.default=d,Object.defineProperty(t,"__esModule",{value:!0})});
+
+
+},{}],"src/login.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11561,6 +11567,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _vueGoogleLogin = _interopRequireDefault(require("vue-google-login"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11608,8 +11616,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 var _default = {
   name: "login",
+  components: {
+    GoogleLogin: _vueGoogleLogin.default
+  },
   props: ['loginstatus', 'registerstatus', 'local'],
   data: function data() {
     return {
@@ -11621,7 +11634,16 @@ var _default = {
       passreg: "",
       login: true,
       register: false,
-      page: true
+      page: true,
+      params: {
+        client_id: "741564389418-p9gtoe8kh1m167etvr3e4lv1om2rsndi.apps.googleusercontent.com"
+      },
+      // only needed if you want to render the button with the google ui
+      renderParams: {
+        width: 250,
+        height: 100,
+        longtitle: true
+      }
     };
   },
   watch: {
@@ -11659,6 +11681,11 @@ var _default = {
         password: this.passreg
       };
       this.$emit('data-register', dataregister);
+    },
+    onSuccess: function onSuccess(googleUser) {
+      console.log(googleUser); // This only gets the user information: id, name, imageUrl and email
+
+      console.log(googleUser.getBasicProfile());
     }
   }
 }; //   checkLogin(){
@@ -11697,14 +11724,14 @@ var _default = {
 //   }
 
 exports.default = _default;
-        var $a59274 = exports.default || module.exports;
+        var $ea8e31 = exports.default || module.exports;
       
-      if (typeof $a59274 === 'function') {
-        $a59274 = $a59274.options;
+      if (typeof $ea8e31 === 'function') {
+        $ea8e31 = $ea8e31.options;
       }
     
         /* template */
-        Object.assign($a59274, (function () {
+        Object.assign($ea8e31, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -11713,105 +11740,120 @@ exports.default = _default;
     ? _c("div", { staticClass: "contain" }, [
         _c("div", { staticClass: "login-board" }, [
           _vm.login
-            ? _c("div", { staticClass: "form" }, [
-                _c("h1", { staticStyle: { color: "black" } }, [
-                  _vm._v("Login")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "form",
-                  {
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.sendLogin($event)
-                      }
-                    }
-                  },
-                  [
-                    _c("label", { attrs: { for: "fname" } }, [
-                      _vm._v("email ")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.email,
-                          expression: "email"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "email",
-                        name: "email",
-                        placeholder: "Your email.."
-                      },
-                      domProps: { value: _vm.email },
+            ? _c(
+                "div",
+                { staticClass: "form" },
+                [
+                  _c("h1", { staticStyle: { color: "black" } }, [
+                    _vm._v("Login")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
                       on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.email = $event.target.value
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.sendLogin($event)
                         }
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("label", { attrs: { for: "password" } }, [
-                      _vm._v("Password")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.password,
-                          expression: "password"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "password",
-                        name: "pasword",
-                        placeholder: "Your password.."
-                      },
-                      domProps: { value: _vm.password },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.password = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("input", { attrs: { type: "submit", value: "Submit" } }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "linkregister" }, [
-                      _c("p", [
-                        _vm._v("haven't account ?? "),
-                        _c(
-                          "a",
+                    },
+                    [
+                      _c("label", { attrs: { for: "fname" } }, [
+                        _vm._v("email ")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
                           {
-                            attrs: { href: "" },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.hideshow($event)
-                              }
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.email,
+                            expression: "email"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          id: "email",
+                          name: "email",
+                          placeholder: "Your email.."
+                        },
+                        domProps: { value: _vm.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
                             }
-                          },
-                          [_vm._v("register")]
-                        )
+                            _vm.email = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "password" } }, [
+                        _vm._v("Password")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.password,
+                            expression: "password"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          id: "password",
+                          name: "pasword",
+                          placeholder: "Your password.."
+                        },
+                        domProps: { value: _vm.password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.password = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: { type: "submit", value: "Submit" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "linkregister" }, [
+                        _c("p", [
+                          _vm._v("haven't account ?? "),
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.hideshow($event)
+                                }
+                              }
+                            },
+                            [_vm._v("register")]
+                          )
+                        ])
                       ])
-                    ])
-                  ]
-                )
-              ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("GoogleLogin", {
+                    attrs: {
+                      params: _vm.params,
+                      renderParams: _vm.renderParams,
+                      onSuccess: _vm.onSuccess
+                    }
+                  })
+                ],
+                1
+              )
             : _vm._e(),
           _vm._v(" "),
           _vm.register
@@ -11953,7 +11995,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-a59274",
+            _scopeId: "data-v-ea8e31",
             functional: undefined
           };
         })());
@@ -11966,9 +12008,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$a59274', $a59274);
+            api.createRecord('$ea8e31', $ea8e31);
           } else {
-            api.reload('$a59274', $a59274);
+            api.reload('$ea8e31', $ea8e31);
           }
         }
 
@@ -11979,7 +12021,7 @@ render._withStripped = true
       
       }
     })();
-},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/kanban.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","vue-google-login":"node_modules/vue-google-login/dist/vue-google-login.min.js","_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/kanban.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12151,14 +12193,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $354ca7 = exports.default || module.exports;
+        var $1c0f0e = exports.default || module.exports;
       
-      if (typeof $354ca7 === 'function') {
-        $354ca7 = $354ca7.options;
+      if (typeof $1c0f0e === 'function') {
+        $1c0f0e = $1c0f0e.options;
       }
     
         /* template */
-        Object.assign($354ca7, (function () {
+        Object.assign($1c0f0e, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -12213,7 +12255,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-354ca7",
+            _scopeId: "data-v-1c0f0e",
             functional: undefined
           };
         })());
@@ -12226,9 +12268,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$354ca7', $354ca7);
+            api.createRecord('$1c0f0e', $1c0f0e);
           } else {
-            api.reload('$354ca7', $354ca7);
+            api.reload('$1c0f0e', $1c0f0e);
           }
         }
 
@@ -12239,7 +12281,7 @@ render._withStripped = true
       
       }
     })();
-},{"axios":"node_modules/axios/index.js","./tasks":"src/tasks.vue","./barcontrol":"src/barcontrol.vue","./formedit":"src/formedit.vue","./login":"src/login.vue","_css_loader":"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/App.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","./tasks":"src/tasks.vue","./barcontrol":"src/barcontrol.vue","./formedit":"src/formedit.vue","./login":"src/login.vue","_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/App.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12283,6 +12325,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 var _default = {
   components: {
     login: _login.default,
@@ -12293,7 +12336,8 @@ var _default = {
   },
   data: function data() {
     return {
-      baseUrl: "https://secure-sea-05063.herokuapp.com",
+      // baseUrl: `https://secure-sea-05063.herokuapp.com`,
+      baseUrl: 'http://localhost:3000',
       loginstatus: false,
       registerstatus: false,
       logoutstatus: true,
@@ -12302,8 +12346,16 @@ var _default = {
       selectedTask: ""
     };
   },
-  created: function created() {
+  // created(){
+  //     this.readData()
+  // },
+  mounted: function mounted() {
     this.readData();
+
+    if (localStorage.getItem("token")) {
+      this.loginstatus = true;
+      this.logoutstatus = false;
+    }
   },
   methods: {
     checklogin: function checklogin(datalogin) {
@@ -12322,6 +12374,9 @@ var _default = {
         _this.loginstatus = true;
         _this.logoutstatus = false;
         localStorage.setItem("token", result.data.token);
+
+        _this.readData();
+
         var timerInterval;
         Swal.fire({
           title: 'Succes Login',
@@ -12372,7 +12427,7 @@ var _default = {
     },
     logoutStatus: function logoutStatus(status) {
       this.logoutstatus = true;
-      this.loginstatus = false;
+      this.loginstatus = false; // console.log(this.loginstatus, this.logoutstatus)
     },
     readData: function readData() {
       var _this3 = this;
@@ -12498,14 +12553,14 @@ var _default = {
 //   },
 
 exports.default = _default;
-        var $1416f9 = exports.default || module.exports;
+        var $ab5d24 = exports.default || module.exports;
       
-      if (typeof $1416f9 === 'function') {
-        $1416f9 = $1416f9.options;
+      if (typeof $ab5d24 === 'function') {
+        $ab5d24 = $ab5d24.options;
       }
     
         /* template */
-        Object.assign($1416f9, (function () {
+        Object.assign($ab5d24, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -12531,10 +12586,12 @@ exports.default = _default;
       _vm._v(" "),
       _c("barcontrol", { on: { "add-data": _vm.addData } }),
       _vm._v(" "),
-      _c("kanban", {
-        attrs: { datakanban: _vm.datakanban },
-        on: { movedata: _vm.movedata, toDelete: _vm.destroyData }
-      })
+      _vm.loginstatus
+        ? _c("kanban", {
+            attrs: { datakanban: _vm.datakanban },
+            on: { movedata: _vm.movedata, toDelete: _vm.destroyData }
+          })
+        : _vm._e()
     ],
     1
   )
@@ -12546,7 +12603,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-1416f9",
+            _scopeId: "data-v-ab5d24",
             functional: undefined
           };
         })());
@@ -12559,9 +12616,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$1416f9', $1416f9);
+            api.createRecord('$ab5d24', $ab5d24);
           } else {
-            api.reload('$1416f9', $1416f9);
+            api.reload('$ab5d24', $ab5d24);
           }
         }
 
@@ -12572,7 +12629,7 @@ render._withStripped = true
       
       }
     })();
-},{"./navbar":"src/navbar.vue","./barcontrol":"src/barcontrol.vue","./formedit":"src/formedit.vue","./kanban":"src/kanban.vue","./login":"src/login.vue","axios":"node_modules/axios/index.js","_css_loader":"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"main.js":[function(require,module,exports) {
+},{"./navbar":"src/navbar.vue","./barcontrol":"src/barcontrol.vue","./formedit":"src/formedit.vue","./kanban":"src/kanban.vue","./login":"src/login.vue","axios":"node_modules/axios/index.js","_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -12586,7 +12643,7 @@ new _vue.default({
     return ele(_App.default);
   }
 }).$mount('#app');
-},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","./src/App.vue":"src/App.vue"}],"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","./src/App.vue":"src/App.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -12614,7 +12671,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45899" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35285" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -12790,5 +12847,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","main.js"], null)
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","main.js"], null)
 //# sourceMappingURL=/main.1f19ae8e.js.map

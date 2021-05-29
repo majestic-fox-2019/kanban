@@ -19,6 +19,7 @@
     "tasks": "0.0.3",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
+    "vue-google-login": "^2.0.3",
     "vue-hot-reload-api": "^2.3.4"
   },
   "devDependencies": {

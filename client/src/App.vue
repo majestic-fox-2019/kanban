@@ -13,6 +13,7 @@
   :datakanban="datakanban" 
   @movedata="movedata"
   @toDelete="destroyData"
+  v-if="loginstatus"
 
   
   ></kanban>
@@ -43,7 +44,8 @@
 
     data(){
       return {
-          baseUrl: `https://secure-sea-05063.herokuapp.com`,
+          // baseUrl: `https://secure-sea-05063.herokuapp.com`,
+          baseUrl: 'http://localhost:3000',
           loginstatus: false,
           registerstatus : false,
           logoutstatus : true,
@@ -53,15 +55,16 @@
         
       }
     },
-
-    created(){
-       
-        this.readData()
-      
+    // created(){
+    //     this.readData()
+    // },
+    mounted(){
+       this.readData()
+       if(localStorage.getItem("token")){
+          this.loginstatus = true
+          this.logoutstatus = false
+       }
     },
-
-   
-
     methods:{
       checklogin(datalogin){
         let data = {
@@ -78,7 +81,7 @@
           this.loginstatus = true
           this.logoutstatus = false
           localStorage.setItem("token", result.data.token)
-
+          this.readData()
           let timerInterval
            Swal.fire({
              title: 'Succes Login',
@@ -138,6 +141,8 @@
       logoutStatus(status){
         this.logoutstatus = true
         this.loginstatus = false
+        // console.log(this.loginstatus, this.logoutstatus)
+
       },
 
       readData(){

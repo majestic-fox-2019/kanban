@@ -4,6 +4,7 @@
 
         <div class="form" v-if="login" >
            <h1 style="color: black;">Login</h1>
+
               <form @submit.prevent="sendLogin">
                 <label for="fname">email </label>
                 <input type="text" v-model="email" id="email" name="email" placeholder="Your email..">
@@ -17,6 +18,7 @@
                     <p>haven't account ?? <a href="" @click.prevent="hideshow">register</a></p>
                 </div>
                 </form>
+            <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" ></GoogleLogin>
         </div>
 
         <div class="form" v-if="register" >
@@ -44,8 +46,13 @@
 </template>
 <script>
 import axios from 'axios'
+import GoogleLogin from 'vue-google-login';
+
 export default {
   name : "login",
+  components: {
+    GoogleLogin,
+  },
   props : ['loginstatus', 'registerstatus','local'],
   data(){
     return {
@@ -58,7 +65,18 @@ export default {
       login: true,
       register : false,
       page: true,
-    }
+      params: {
+            client_id: "741564389418-p9gtoe8kh1m167etvr3e4lv1om2rsndi.apps.googleusercontent.com"
+        },
+        // only needed if you want to render the button with the google ui
+      renderParams: {
+            width: 250,
+            height: 100,
+            longtitle: true
+        }
+      }
+    
+    
   },
 
   watch : {
@@ -105,6 +123,13 @@ export default {
       }
 
       this.$emit('data-register', dataregister)
+    },
+
+    onSuccess(googleUser) {
+            console.log(googleUser);
+ 
+            // This only gets the user information: id, name, imageUrl and email
+            console.log(googleUser.getBasicProfile());
     }
 
   }
